@@ -1,7 +1,7 @@
 ---
 layout: post
-date: 2015-10-22 15:59:00-0400
+date: 2023-01-01 15:59:00-0400
 inline: true
 ---
 
-A simple inline announcement.
+Accepted as an Incoming Microsoft Research Intern to be advised by Dr. Jina Suh and Dr. Koustuv Saha :clap
