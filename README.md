@@ -1,25 +1,26 @@
-# al-folio
+# eal-folio
+
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[maintainers]: https://img.shields.io/badge/maintainers-4-success.svg 'Number of maintainers'
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![deploy](https://github.com/alshedivat/al-folio/actions/workflows/deploy.yml/badge.svg)](https://github.com/alshedivat/al-folio/actions/workflows/deploy.yml)
 [![demo](https://img.shields.io/badge/theme-demo-brightgreen.svg)](https://alshedivat.github.io/al-folio/)
 [![GitHub contributors](https://img.shields.io/github/contributors/alshedivat/al-folio.svg)](https://github.com/alshedivat/al-folio/graphs/contributors/)
 [![Maintainers][maintainers]](#maintainers)
-[![GitHub release](https://img.shields.io/github/v/release/alshedivat/al-folio)](https://github.com/alshedivat/al-folio/releases/latest)
-[![GitHub license](https://img.shields.io/github/license/alshedivat/al-folio?color=blue)](https://github.com/alshedivat/al-folio/blob/master/LICENSE)
-[![GitHub stars](https://img.shields.io/github/stars/alshedivat/al-folio)](https://github.com/alshedivat/al-folio)
-[![GitHub forks](https://img.shields.io/github/forks/alshedivat/al-folio)](https://github.com/alshedivat/al-folio/fork)
+[GitHub release](https://github.com/alshedivat/al-folio/releases/latest)
+[GitHub license](https://github.com/alshedivat/al-folio/blob/master/LICENSE)
+[GitHub stars](https://github.com/alshedivat/al-folio)
+[GitHub forks](https://github.com/alshedivat/al-folio/fork)
 
-[![Docker Image Version](https://img.shields.io/docker/v/amirpourmand/al-folio?sort=semver&label=docker%20image&color=blueviolet)](https://hub.docker.com/r/amirpourmand/al-folio)
-[![Docker Image Size](https://img.shields.io/docker/image-size/amirpourmand/al-folio?sort=date&label=docker%20image%20size&color=blueviolet)](https://hub.docker.com/r/amirpourmand/al-folio)
-[![Docker Pulls](https://img.shields.io/docker/pulls/amirpourmand/al-folio?color=blueviolet)](https://hub.docker.com/r/amirpourmand/al-folio)
+[Docker Image Version](https://hub.docker.com/r/amirpourmand/al-folio)
+[Docker Image Size](https://hub.docker.com/r/amirpourmand/al-folio)
+[Docker Pulls](https://hub.docker.com/r/amirpourmand/al-folio)
 
 A simple, clean, and responsive [Jekyll](https://jekyllrb.com/) theme for academics.
 If you like the theme, give it a star!
 
-[![Preview](https://raw.githubusercontent.com/alshedivat/al-folio/master/assets/img/al-folio-preview.png)](https://alshedivat.github.io/al-folio/)
+[Preview](https://alshedivat.github.io/al-folio/)
 
 ## User community
 
@@ -153,41 +154,42 @@ Medical Robotics Junior Faculty Forum (ISMR: <a href="https://junior-forum-ismr.
 
 ## Lighthouse PageSpeed Insights
 
-[![Google PageSpeed](https://raw.githubusercontent.com/alshedivat/al-folio/master/assets/img/pagespeed.svg)](https://pagespeed.web.dev/report?url=https%3A%2F%2Falshedivat.github.io%2Fal-folio%2F&form_factor=desktop)
+[Google PageSpeed](https://pagespeed.web.dev/report?url=https%3A%2F%2Falshedivat.github.io%2Fal-folio%2F&form_factor=desktop)
 
 ## Table Of Contents
 
-  * [User community](#user-community)
-  * [Lighthouse PageSpeed Insights](#lighthouse-pagespeed-insights)
-  * [Table Of Contents](#table-of-contents)
-  * [Getting started](#getting-started)
-    - [Installation](#installation)
-      - [Local setup using Docker (Recommended)](#local-setup-using-docker-recommended)
-      - [Local Setup (Legacy)](#local-setup-legacy)
-      - [Deployment](#deployment)
-      - [Upgrading from a previous version](#upgrading-from-a-previous-version)
-    - [FAQ](#faq)
-  - [Features](#features)
-    - [Publications](#publications)
-    - [Collections](#collections)
-    - [Layouts](#layouts)
-      - [The iconic style of Distill](#the-iconic-style-of-distill)
-      - [Full support for math \& code](#full-support-for-math--code)
-      - [Photos](#photos)
-    - [Other features](#other-features)
-      - [GitHub's repositories and user stats](#githubs-repositories-and-user-stats)
-      - [Theming](#theming)
-      - [Social media previews](#social-media-previews)
-      - [Atom (RSS-like) Feed](#atom-rss-like-feed)
-      - [Related posts](#related-posts)
-  - [Contributing](#contributing)
-    - [Maintainers](#maintainers)
-  - [License](#license)
+* [User community](#user-community)
+* [Lighthouse PageSpeed Insights](#lighthouse-pagespeed-insights)
+* [Table Of Contents](#table-of-contents)
+* [Getting started](#getting-started)
+  - [Installation](#installation)
+    - [Local setup using Docker (Recommended)](#local-setup-using-docker-recommended)
+    - [Local Setup (Legacy)](#local-setup-legacy)
+    - [Deployment](#deployment)
+    - [Upgrading from a previous version](#upgrading-from-a-previous-version)
+  - [FAQ](#faq)
+
+- [Features](#features)
+  - [Publications](#publications)
+  - [Collections](#collections)
+  - [Layouts](#layouts)
+    - [The iconic style of Distill](#the-iconic-style-of-distill)
+    - [Full support for math \& code](#full-support-for-math--code)
+    - [Photos](#photos)
+  - [Other features](#other-features)
+    - [GitHub&#39;s repositories and user stats](#githubs-repositories-and-user-stats)
+    - [Theming](#theming)
+    - [Social media previews](#social-media-previews)
+    - [Atom (RSS-like) Feed](#atom-rss-like-feed)
+    - [Related posts](#related-posts)
+- [Contributing](#contributing)
+  - [Maintainers](#maintainers)
+- [License](#license)
 
 ## Getting started
 
 Want to learn more about Jekyll? Check out [this tutorial](https://www.taniarascia.com/make-a-static-website-with-jekyll/).
-Why Jekyll? Read [Andrej Karpathy's blog post](https://karpathy.github.io/2014/07/01/switching-to-jekyll/)!
+Why Jekyll? Read [Andrej Karpathy&#39;s blog post](https://karpathy.github.io/2014/07/01/switching-to-jekyll/)!
 
 ### Installation
 
@@ -206,6 +208,7 @@ $ cd <your-repo-name>
 ---
 
 #### Local setup using Docker (Recommended)
+
 Using Docker to install Jekyll and Ruby dependencies is the easiest way.
 
 You need to take the following steps to get `al-folio` up and running on your local machine:
@@ -217,7 +220,7 @@ You need to take the following steps to get `al-folio` up and running on your lo
 $ docker-compose up
 ```
 
-Note that when you run it for the first time, it will download a docker image of size 400MB or so. 
+Note that when you run it for the first time, it will download a docker image of size 400MB or so.
 
 Now, feel free to customize the theme however you like (don't forget to change the name!). After you are done, you can use the same command (`docker-compose up`) to render the webpage with all you changes. Also, make sure to commit your final changes.
 
@@ -258,7 +261,7 @@ After you are done, **commit** your final changes.
 #### Deployment
 
 Deploying your website to [GitHub Pages](https://pages.github.com/) is the most popular option.
-Starting version [v0.3.5](https://github.com/alshedivat/al-folio/releases/tag/v0.3.5), **al-folio** will automatically re-deploy your webpage each time you push new changes to your repository! :sparkles:
+Starting version [v0.3.5](https://github.com/alshedivat/al-folio/releases/tag/v0.3.5), **al-folio** will automatically re-deploy your webpage each time you push new changes to your repository! ✨
 
 **For personal and organization webpages:**
 
@@ -397,43 +400,38 @@ Here are some frequently asked questions.
 If you have a different question, please ask using [Discussions](https://github.com/alshedivat/al-folio/discussions/categories/q-a).
 
 1. **Q:** After I create a new repository from this template and setup the repo, I get a deployment error.
-   Isn't the website supposed to correctly deploy automatically? <br>
+   Isn't the website supposed to correctly deploy automatically? `<br>`
    **A:** Yes, if you are using release `v0.3.5` or later, the website will automatically and correctly re-deploy right after your first commit.
    Please make some changes (e.g., change your website info in `_config.yml`), commit, and push.
    Make sure to follow [deployment instructions](https://github.com/alshedivat/al-folio#deployment) in the previous section.
    (Relevant issue: [209](https://github.com/alshedivat/al-folio/issues/209#issuecomment-798849211).)
-
 2. **Q:** I am using a custom domain (e.g., `foo.com`).
    My custom domain becomes blank in the repository settings after each deployment.
-   How do I fix that? <br>
+   How do I fix that? `<br>`
    **A:** You need to add `CNAME` file to the `master` or `source` branch of your repository.
    The file should contain your custom domain name.
    (Relevant issue: [130](https://github.com/alshedivat/al-folio/issues/130).)
-
 3. **Q:** My webpage works locally.
-    But after deploying, it fails to build and throws `Unknown tag 'toc'`.
-    How do I fix that? <br>
+   But after deploying, it fails to build and throws `Unknown tag 'toc'`.
+   How do I fix that? `<br>`
    **A:** Make sure you followed through the [deployment instructions](#deployment) in the previous section.
    You should have set the deployment branch to `gh-pages`.
    (Related issue: [1438](https://github.com/alshedivat/al-folio/issues/1438).)
-
 4. **Q:** My webpage works locally.
-    But after deploying, it is not displayed correctly (CSS and JS is not loaded properly).
-    How do I fix that? <br>
+   But after deploying, it is not displayed correctly (CSS and JS is not loaded properly).
+   How do I fix that? `<br>`
    **A:** Make sure to correctly specify the `url` and `baseurl` paths in `_config.yml`.
    Set `url` to `https://<your-github-username>.github.io` or to `https://<your.custom.domain>` if you are using a custom domain.
    If you are deploying a personal or organization website, leave `baseurl` blank.
    If you are deploying a project page, set `baseurl: /<your-project-name>/`.
    If all previous steps were done correctly, all is missing is
    [for your browser to fetch again the site stylesheet](https://github.com/alshedivat/al-folio/issues/1398#issuecomment-1609518404).
-
 5. **Q:** Atom feed doesn't work. Why?
-   <br>
+   `<br>`
    **A:** Make sure to correctly specify the `url` and `baseurl` paths in `_config.yml`.
-  RSS Feed plugin works with these correctly set up fields: `title`, `url`, `description` and `author`.
-  Make sure to fill them in an appropriate way and try again.
-
-6. **Q:** My site doesn't work when I enable `related_blog_posts`. Why? <br>
+   RSS Feed plugin works with these correctly set up fields: `title`, `url`, `description` and `author`.
+   Make sure to fill them in an appropriate way and try again.
+6. **Q:** My site doesn't work when I enable `related_blog_posts`. Why? `<br>`
    **A:** This is probably due to the [classifier reborn](https://github.com/jekyll/classifier-reborn) plugin, which is used to calculate
    related posts. If the error states `Liquid Exception: Zero vectors can not be normalized...`, it means that it could not calculate related
    posts for a specific post. This is usually caused by [empty or minimal blog posts](https://github.com/jekyll/classifier-reborn/issues/64)
@@ -553,7 +551,7 @@ For more details on how to create distill-styled posts using `<d-*>` tags, pleas
 
 #### Photos
 
-Photo formatting is made simple using [Bootstrap's grid system](https://getbootstrap.com/docs/4.4/layout/grid/).
+Photo formatting is made simple using [Bootstrap&#39;s grid system](https://getbootstrap.com/docs/4.4/layout/grid/).
 Easily create beautiful grids within your blog posts and project pages:
 
 <p align="center">
@@ -655,8 +653,11 @@ Our most active contributors are welcome to join the maintainers team.
 If you are interested, please reach out!
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+
 <!-- prettier-ignore-start -->
+
 <!-- markdownlint-disable -->
+
 <table>
   <tbody>
     <tr>
@@ -669,6 +670,7 @@ If you are interested, please reach out!
 </table>
 
 <!-- markdownlint-restore -->
+
 <!-- prettier-ignore-end -->
 
 <!-- ALL-CONTRIBUTORS-LIST:END -->
@@ -687,3 +689,5 @@ The theme is available as open source under the terms of the [MIT License](https
 
 Originally, **al-folio** was based on the [\*folio theme](https://github.com/bogoli/-folio) (published by [Lia Bogoev](https://liabogoev.com) and under the MIT license).
 Since then, it got a full re-write of the styles and many additional cool features.
+
+[maintainers]: https://img.shields.io/badge/maintainers-4-success.svg
