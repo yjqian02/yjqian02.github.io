@@ -6,7 +6,7 @@ title: # the website title (if blank, full name will be used instead)
 first_name: Alice
 middle_name: Qian
 last_name: Zhang
-email: zhan6698@umn.edu
+email: aqzhang@andrew.cmu.edu
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Alice Qian Zhang's Personal Website
 footer_text: >
@@ -425,4 +425,4 @@ jsonresume:
   - skills
   - languages
   - interests
-  - references
+  - references`
