@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='https://www.hcii.cmu.edu/people/alice-qian-zhang'>Carnegie Mellon University</a>. Prev. Microsoft, and University of Minnesota
+subtitle: <a href='https://www.hcii.cmu.edu/people/alice-qian-zhang'>Carnegie Mellon University</a>. Prev. Microsoft and University of Minnesota
 
 profile:
   align: right
