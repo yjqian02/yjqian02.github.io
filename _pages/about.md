@@ -2,15 +2,15 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Moto. Etc.
+subtitle: <a href='https://www.hcii.cmu.edu/people/alice-qian-zhang'>Carnegie Mellon University</a>. Prev. Microsoft, and University of Minnesota
 
 profile:
   align: right
   image: profile_white.jpg
-  image_circular: false # crops the image to make it circular
+  image_circular: true # crops the image to make it circular
   address: >
-    <p>5000 Forbes Ave</p>
-    <p>Pittsburgh, PA 15213</p>
+     <p>5000 Forbes Ave</p>
+     <p>Pittsburgh, PA 15213</p>
 
 news: true  # includes a list of news items
 latest_posts: true  # includes a list of the newest posts
