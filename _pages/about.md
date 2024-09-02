@@ -9,8 +9,8 @@ profile:
   image: profile_white.jpg
   image_circular: true # crops the image to make it circular
   address: >
-     <p>5000 Forbes Ave</p>
-     <p>Pittsburgh, PA 15213</p>
+     <p>Alice Qian Zhang</p>
+     <p>pronounced (aa-lis chee-en z-aang</p>
 
 news: true  # includes a list of news items
 latest_posts: true  # includes a list of the newest posts
