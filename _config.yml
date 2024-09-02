@@ -277,7 +277,7 @@ scholar:
   last_name: [Qian Zhang]]
   first_name: [Alice]
 
-  style: acm-sigchi-proceedings
+  style: apa #acm-sigchi-proceedings.csl
   locale: en
 
   source: /_bibliography/
