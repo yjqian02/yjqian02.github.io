@@ -1,309 +1,97 @@
-# research_interests:
-#   - Responsible Artificial Intelligence (RAI)
-#   - Content Moderation
-#   - Mental Health
-#   - Marginalized Populations
-#   - Social Computing
+- title: General Information
+  type: map
+  contents:
+    - name: Full Name
+      value: Albert Einstein
+    - name: Date of Birth
+      value: 14th March 1879
+    - name: Languages
+      value: English, German
 
-# education:
-#   - university: "Carnegie Mellon University"
-#     location: "Pittsburgh, PA, USA"
-#     duration: "August 2024 - In Progress"
-#     degree: "Doctor of Philosophy"
-#   - university: "University of Minnesota"
-#     location: "Minneapolis, MN, USA"
-#     duration: "September 2020 | May 2024"
-#     degree: "Bachelor of Science in Computer Science"
-#     gpa: "3.867/4.00"
+- title: Education
+  type: time_table
+  contents:
+    - title: PhD
+      institution: University of Zurich, Zurich, Switzerland
+      year: 1905
+      description:
+        - Description 1.
+        - Description 2.
+        - title: Description 3.
+          contents:
+            - Sub-description 1.
+            - Sub-description 2.
+    - title: Federal teaching diploma
+      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
+      year: 1900
+      description:
+        - Description 1.
+        - Description 2.
 
-# research_experience:
-#   - title: "Research Assistant"
-#     advisors: 
-#       - Dr. Stevie Chancellor
-#       - Dr. Jina Suh
-#     location: "Minneapolis, Minnesota"
-#     institution: "University of Minnesota"
-#     duration: "September 2023 | Present"
-#     project: "Responsible AI Crowdworker Support: Co-designing Risk Disclosure"
-#     responsibilities:
-#       - "Manually scraped 1000 Amazon Mechanical Turk Human Intelligence Tasks (HITs)"
-#       - "Qualitatively coded and labeled HITs based on the type of psychological risk disclosed (i.e. profanity, violence)"
-#   - title: "Research Assistant"
-#     advisor: Dr. Stevie Chancellor
-#     location: "Minneapolis, Minnesota"
-#     institution: "University of Minnesota"
-#     duration: "September 2022 | Present"
-#     project: "#Pragmatic or #Clinical: Analyzing TikTok Mental Health Videos"
-#     responsibilities:
-#       - "Adapted unofficial TikTok API to source video and metadata from 19,000+ TikTok posts on mental health by altering Python module code"
-#       - "Cleaned TikTok post metadata accounting for consistency with encoding, hashtags, and video descriptions"
-#       - "Conducted feature analysis on 169 hand-labeled videos on descriptive features (i.e. video, textual, creator and author features) and engagement features (i.e. number of likes, plays, shares, and comments)"
-#   - title: "Research Intern"
-#     advisors: 
-#       - Dr. Jina Suh
-#       - Dr. Judith Amores
-#     location: "Redmond, Washington"
-#     institution: "Microsoft"
-#     duration: "May 2023 | September 2023"
-#     project: "AURA: Amplifying Understanding, Resilience, and Awareness for Responsible AI Content Workers and Red Teamers"
-#     responsibilities:
-#       - "Conducted and analyzed survey of 67 responses and semi-structured interviews with 22 content moderators, data labelers, and red teamers from various organizations to understand challenges content workers face in Responsible AI"
-#       - "Developed a set of 8 evidence-based recommendations on holistic support for the wellness of content workers in the responsible artificial intelligence space"
-#       - "Planned and conducted workshops with 14 participants to validate and iterate on recommendations"
-#   - title: "Research Assistant"
-#     advisor: Dr. Shagun Jhaver
-#     location: "New Brunswick, New Jersey"
-#     institution: "Rutgers University"
-#     duration: "January 2023 | July 2023"
-#     project: "Cleaning Up the Streets: Understanding Motivations, Mental Models, and Concerns of Users Flagging Social Media Posts"
-#     responsibilities:
-#       - "Conducted 22 semi-structured qualitative interviews with active social media users to examine user experiences with social media flagging interfaces"
-#       - "Applied interpretative qualitative analysis through open-coding interviews with multiple iterative rounds"
-#   - title: "Research Assistant"
-#     advisors: 
-#       - Dr. Amy Zhang
-#       - Dr. Shagun Jhaver
-#     location: "Seattle, Washington"
-#     institution: "University of Washington"
-#     duration: "June 2021 | September 2021"
-#     project: "Personalizing Content Moderation on Social Media: User Perspectives on Moderation Choices, Interface Design"
-#     responsibilities:
-#       - "Implemented Python scripts to source 160,000+ Twitter posts from JSON and CSV files"
-#       - "Created mock social media user interface with slider, toggle, and word filter features"
-#       - "Conducted and analyzed 24 semi-structured qualitative interviews to understand end-user preferences for and mental models of personalized content moderation"
-#   - title: "Youth Studies Research Assistant"
-#     advisor: Dr. Ross VeLure Roholt
-#     location: "Minneapolis, Minnesota"
-#     institution: "University of Minnesota"
-#     duration: "September 2020 | May 2022"
-#     project: "Exploring Equitable and Community-Building Practices for Youth Leadership in Nonprofit Spaces"
-#     responsibilities:
-#       - "Examined the skills and experiences necessary for peer facilitators and created a curriculum for youth facilitators"
-#       - "Published reflections about online education practices in youth programming and university settings"
+- title: Experience
+  type: time_table
+  contents:
+    - title: Professor of Theoretical Physics
+      institution: Institute for Advanced Study, Princeton University
+      year: 1933 - 1955
+      description:
+        - Description 1.
+        - Description 2.
+        - title: Description 3.
+          contents:
+            - Sub-description 1.
+            - Sub-description 2.
+    - title: Visiting Professor
+      institution: California Institute of Technology, Pasadena, California, US
+      year: 1933
+      description:
+        - Description 1.
+        - Description 2.
 
-# grants_awards_and_honors:
-#   - name: "Hopper-Dean Scholarship"
-#     year: 2023
-#     amount: "$6,250"
-#   - name: "College of Science and Engineering Alumni Society Scholarship"
-#     year: 2023-2024
-#     amount: "$5,000"
-#   - name: "Optum Scholarship"
-#     year: 2022-2023
-#     amount: "$5,000"
-#   - name: "Iron Range Scholarship"
-#     year: 2020-2024
-#     amount: "$10,618"
-#   - name: "Lee S Whitson Scholarship"
-#     year: 2020-2024
-#     amount: "$10,000"
-#   - name: "John and Isabel Campbell Scholarship"
-#     year: 2020-2024
-#     amount: "$8,000"
-#   - name: "Morton S Katz Scholarship"
-#     year: 2020-2024
-#     amount: "$4,000"
-#   - name: "U Promise Scholarship"
-#     year: 2020-2024
-#     amount: "$2,134"
-#   - name: "Rotary Scholarship"
-#     year: 2020-2021
-#     amount: "$3,000"
-#   - name: "Northfield Lion's Club Scholarship"
-#     year: 2020-2021
-#     amount: "$1,000"
-#   - name: "Academic Dean's List Honors"
-#     year: 2020-2024
+    - title: Director
+      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
+      year: 1917-1933
 
-# industry_experience:
-#   - title: "Software Engineer Intern"
-#     location: "Charlotte, North Carolina"
-#     company: "Teachers Insurance and Annuity Association of America"
-#     duration: "June 2022 | August 2022"
-#     responsibilities:
-#       - "Developed advanced site functionality and conceptualized next generation user interface prototypes with Angular to automate 80% of client experience with changing investment lineups"
-#       - "Shared development responsibilities of development with agile team following Scaled Agile Framework"
-#   - title: "IT Infrastructure Specialist"
-#     location: "Minneapolis, Minnesota"
-#     company: "University of Minnesota"
-#     duration: "March 2021 | May 2022"
-#     responsibilities:
-#       - "Led initiative to upgrade 18 research virtual machines for Grouplens research group"
-#       - "Coordinated software and security upgrade for 255 University Integrated Dell Remote Access Controller (iDRAC) servers"
-#       - "Coordinated reboot of 100+ university machines"
-#       - "Configured automated management of 250+ Linux virtual machines using infrastructure tool Foreman and writing Puppet software for academic and research uses"
-#       - "Documented university approved processes for decommissioning and managing virtual machines"
-#   - title: "Growth Marketing Intern"
-#     location: "San Francisco, California"
-#     company: "Candor"
-#     duration: "February 2021 | September 2021"
-#     responsibilities:
-#       - "Researched and wrote 6 articles on the technology industry with 100% acceptance rate"
-#       - "Utilized Search Engine Optimization (SEO) tool Clearscope to obtain A+ SEO grade on all articles written"
+    - title: Professor of Theoretical Physics
+      institution: Karl-Ferdinand University, Prague, Czechoslovakia
+      year: 1911 - 1917
+      description:
 
-# teaching_experience:
-#   - title: "Introduction to Undergraduate Research in Computer Science"
-#     location: "University of Minnesota"
-#     role: "Teaching Assistant"
-#     duration: "January 2023 | May 2023"
-#     responsibilities:
-#       - "Facilitated 30+ students' weekly explorations of research career pathways through providing assistance in drafting emails to faculty and structuring research proposals"
-#   - title: "Exploring Algorithms and Data Structures"
-#     location: "University of Minnesota"
-#     role: "Teaching Assistant"
-#     duration: "September 2022 | December 2022"
-#     responsibilities:
-#       - "Assisted class of 30+ students in weekly problem solving activities involving Java basics, classes and inheritance, data structures, search, and sorting"
-#   - title: "Introduction to Algorithms and Data Structures"
-#     location: "University of Minnesota"
-#     role: "Teaching Assistant"
-#     duration: "January 2022 | May 2022"
-#     responsibilities:
-#       - "Designed 14 weeks of curriculum teaching object-oriented program principles and data structures in Java"
-#       - "Supervised 35+ student lab sections, conducted weekly office hours for 230+ student courses, and graded using JUnit automated testing"
-#   - title: "Introduction to Computing and Programming Concepts"
-#     location: "University of Minnesota"
-#     role: "Teaching Assistant"
-#     duration: "January 2021 | May 2021"
-#     responsibilities:
-#       - "Designed 14 weeks of curriculum teaching core programming concepts such as loops, classes, and inheritance in Python"
-#       - "Supervised 35+ student lab sections, conducted weekly office hours for 150+ student courses, and graded Gradescope"
-#   - title: "Teaching Assistant Training"
-#     location: "University of Minnesota"
-#     role: "Computer Science Department Facilitator"
-#     duration: "May 2022 | August 2022"
-#     responsibilities:
-#       - "Led virtual learning community training for 25+ prospective teaching assistants in a 3-day format on conducting discussions, grading, and course materials"
+    - title: Associate Professor of Theoretical Physics
+      institution: University of Zurich, Zurich, Switzerland
+      year: 1909 - 1911
 
-# skills:
-#   tools:
-#     - "Python"
-#     - "R"
-#     - "PyTorch"
-#     - "Jupyter"
-#     - "TensorFlow"
-#     - "Keras"
-#     - "Pandas"
-#     - "NumPy"
-#     - "Scikit-learn"
-#     - "NLP"
-#     - "Machine Learning"
-#     - "Qualitative Coding"
-#     - "LaTeX"
-#     - "Adobe Creative Suite"
-#     - "Tableau"
-#     - "Figma"
-#   infrastructure:
-#     - "iDRAC Servers"
-#     - "Puppet"
-#     - "Foreman"
-#     - "Git"
-#   development:
-#     - "Angular"
-#     - "Java"
-#     - "JavaScript"
-#     - "HTML"
-#     - "CSS"
-#     - "Django"
-#     - "Agile Development"
-#     - "MySQL"
-#     - "SEO"
+- title: Open Source Projects
+  type: time_table
+  contents:
+    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
+      year: 2015-now
+      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
 
+- title: Honors and Awards
+  type: time_table
+  contents:
+    - year: 1921
+      items: 
+        - Nobel Prize in Physics 
+        - Matteucci Medal
+    - year: 2029
+      items: 
+        - Max Planck Medal
 
-# - title: General Information
-#   type: map
-#   contents:
-#     - name: Full Name
-#       value: Albert Einstein
-#     - name: Date of Birth
-#       value: 14th March 1879
-#     - name: Languages
-#       value: English, German
+- title: Academic Interests
+  type: nested_list
+  contents:
+    - title: Topic 1.
+      items: 
+        - Description 1.
+        - Description 2.
+    - title: Topic 2.
+      items:
+        - Description 1.
+        - Description 2.
 
-# - title: Education
-#   type: time_table
-#   contents:
-#     - title: PhD
-#       institution: University of Zurich, Zurich, Switzerland
-#       year: 1905
-#       description:
-#         - Description 1.
-#         - Description 2.
-#         - title: Description 3.
-#           contents:
-#             - Sub-description 1.
-#             - Sub-description 2.
-#     - title: Federal teaching diploma
-#       institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-#       year: 1900
-#       description:
-#         - Description 1.
-#         - Description 2.
-
-# - title: Experience
-#   type: time_table
-#   contents:
-#     - title: Professor of Theoretical Physics
-#       institution: Institute for Advanced Study, Princeton University
-#       year: 1933 - 1955
-#       description:
-#         - Description 1.
-#         - Description 2.
-#         - title: Description 3.
-#           contents:
-#             - Sub-description 1.
-#             - Sub-description 2.
-#     - title: Visiting Professor
-#       institution: California Institute of Technology, Pasadena, California, US
-#       year: 1933
-#       description:
-#         - Description 1.
-#         - Description 2.
-
-#     - title: Director
-#       institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
-#       year: 1917-1933
-
-#     - title: Professor of Theoretical Physics
-#       institution: Karl-Ferdinand University, Prague, Czechoslovakia
-#       year: 1911 - 1917
-#       description:
-
-#     - title: Associate Professor of Theoretical Physics
-#       institution: University of Zurich, Zurich, Switzerland
-#       year: 1909 - 1911
-
-# - title: Open Source Projects
-#   type: time_table
-#   contents:
-#     - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-#       year: 2015-now
-#       description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
-
-# - title: Honors and Awards
-#   type: time_table
-#   contents:
-#     - year: 1921
-#       items: 
-#         - Nobel Prize in Physics 
-#         - Matteucci Medal
-#     - year: 2029
-#       items: 
-#         - Max Planck Medal
-
-# - title: Academic Interests
-#   type: nested_list
-#   contents:
-#     - title: Topic 1.
-#       items: 
-#         - Description 1.
-#         - Description 2.
-#     - title: Topic 2.
-#       items:
-#         - Description 1.
-#         - Description 2.
-
-# - title: Other Interests
-#   type: list
-#   contents:
-#     - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+- title: Other Interests
+  type: list
+  contents:
+    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
