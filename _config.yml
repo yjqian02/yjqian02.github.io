@@ -125,7 +125,7 @@ bing_site_verification:  # out your bing-site-verification ID (Bing Webmaster)
 
 blog_name: Alice Qian # blog_name will be displayed in your blog page
 blog_nav_title: blog # your blog must have a title for it to be displayed in the nav bar
-blog_description: discussions about projects and ideas
+blog_description: discussions about projects and ideas (in progress as of September 2024, apologies!)
 permalink: /blog/:year/:title/
 
 # Pagination
