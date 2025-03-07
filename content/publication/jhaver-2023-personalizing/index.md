@@ -15,5 +15,5 @@ publication_types:
 publication: '*Proceedings of the ACM on Human-Computer Interaction*'
 links:
 - name: URL
-  url: http://example.org
+  url: https://dl.acm.org/doi/abs/10.1145/3610080
 ---
