@@ -12,5 +12,8 @@ date: '2023-01-01'
 publishDate: '2025-03-07T05:46:09.264129Z'
 publication_types:
 - article-journal
-publication: '*Proceedings of the ACM on Human-Computer Interaction*
+publication: '*Proceedings of the ACM on Human-Computer Interaction*'
+links:
+- name: URL
+  url: http://example.org
 ---
