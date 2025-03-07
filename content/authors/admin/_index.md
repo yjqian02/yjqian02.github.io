@@ -42,7 +42,7 @@ profiles:
   - icon: brands/linkedin
     url: https://www.linkedin.com/in/alice-qian-zhang-2775431b6/
   - icon: academicons/google-scholar
-    url: https://scholar.google.com/citations?user=EdGuEJsAAAAJ&hl=en&oi=ao
+    url: https://scholar.google.com/citations?hl=en&user=9EeaJAkAAAAJ
   - icon: academicons/orcid
     url: https://orcid.org/0009-0005-6407-6981
 
