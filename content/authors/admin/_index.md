@@ -1,13 +1,13 @@
 ---
 # Display name
-title: Alice Qian Zhang
+title: Alice (Junru) Qian
 
 # Name pronunciation (optional)
 name_pronunciation: 
 
 # Full name (for SEO)
-first_name: Alice
-last_name: Qian Zhang
+first_name: Alice (Junru)
+last_name: Qian
 
 # Status emoji
 # status:
