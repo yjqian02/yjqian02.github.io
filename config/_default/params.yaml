@@ -14,8 +14,8 @@ marketing:
     site_type: Person
     local_business_type: ''
     org_name: ''
-    description: 'Alice Qian Zhang portfolio website.'
-    twitter: 'Alice Qian Zhang'
+    description: 'Alice Qian portfolio website.'
+    twitter: 'Alice Qian'
   analytics:
     google_analytics: ''
     baidu_tongji: ''
@@ -35,13 +35,13 @@ header:
     show_search: false
     show_theme_chooser: true
     logo:
-      text: "Alice Qian Zhang"
+      text: "Alice Qian"
       filename: girl-with-cat-original.jpg
 
 # Site footer
 footer:
   copyright:
-    notice: '©2025 Alice Qian Zhang.'
+    notice: '©2025 Alice Qian.'
     license:
       enable: true
       allow_derivatives: false
