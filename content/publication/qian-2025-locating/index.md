@@ -1,5 +1,5 @@
 ---
-title: Locating Risk: Task Designers and the Challenge of Risk Disclosure in Crowdsourced RAI Content Work
+title: 'Locating Risk: Task Designers and the Challenge of Risk Disclosure in Crowdsourced RAI Content Work'
 authors:
 - Alice Qian
 - Ryland Shaw

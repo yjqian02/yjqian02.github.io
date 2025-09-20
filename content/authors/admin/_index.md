@@ -34,13 +34,13 @@ profiles:
     url: 'mailto:aqzhang@andrew.cmu.edu'
     label: E-mail Me
   - icon: brands/x
-    url: https://twitter.com/AliceQianZhang
+    url: https://twitter.com/https://x.com/AliceJRQian
   # - icon: brands/instagram
   #   url: https://www.instagram.com/
   - icon: brands/github
     url: https://github.com/yjqian02
   - icon: brands/linkedin
-    url: https://www.linkedin.com/in/alice-qian-zhang-2775431b6/
+    url: https://www.linkedin.com/in/alice-qian-2775431b6/
   - icon: academicons/google-scholar
     url: https://scholar.google.com/citations?hl=en&user=9EeaJAkAAAAJ
   - icon: academicons/orcid
