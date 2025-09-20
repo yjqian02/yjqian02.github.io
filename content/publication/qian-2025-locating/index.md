@@ -11,5 +11,5 @@ publication_types:
 - manuscript
 links:
 - name: URL
-  url: https://arxiv.org/abs/2505.24246
+  url_pdf: https://arxiv.org/abs/2505.24246
 ---
