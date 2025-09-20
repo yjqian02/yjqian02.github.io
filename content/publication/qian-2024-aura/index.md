@@ -13,5 +13,5 @@ publishDate: '2025-03-07T15:47:39.551113Z'
 publication_types:
 - article-journal
 publication: '*Proceedings of the ACM on Human-Computer Interaction*'
-url_pdf: /aura.pdf
+url_pdf: /content/publication/qian-2024-aura/aura.pdf
 ---
