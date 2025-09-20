@@ -47,9 +47,9 @@ profiles:
     url: https://orcid.org/0009-0005-6407-6981
 
 interests:
-  - responsible AI ❣️ 
+  - human infrastructure for AI 👩🏻 
+  - AI evaluation ✅
   - future of work 👩🏻‍💻
-  - workplace well-being 🌱
   - social computing 🌐
 
 education:
@@ -58,7 +58,7 @@ education:
     date_start: 2024-09-01
     # date_end: 2020-12-31
     summary: |
-      Focus on building tools and methods to support the human infrastructure behind AI development. Advised by [Dr. Hong Shen](https://www.andrew.cmu.edu/user/hongs/) and [Dr. Laura Dabbish](http://www.lauradabbish.com/).
+      Focus on building tools and methods to support the human infrastructure behind AI development and evaluation. Advised by [Dr. Hong Shen](https://www.andrew.cmu.edu/user/hongs/) and [Dr. Laura Dabbish](http://www.lauradabbish.com/).
     button:
       text: 'Carnegie Mellon Website'
       url: 'https://hcii.cmu.edu/people/alice-qian-zhang'
@@ -168,11 +168,11 @@ education:
 
 <!-- ## Bio -->
 
-Hi! I am a first-year Ph.D. student in the Human-Computer Interaction Institute (HCII) at Carnegie Mellon University advised by [Hong Shen](https://www.hcii.cmu.edu/people/hong-shen) and [Laura Dabbish](https://www.lauradabbish.com/). I collaborated with [Jina Suh](https://www.jinasuh.com/), [Mary L. Gray](https://marylgray.org/), and [Mary Czerwinski](https://ischool.uw.edu/people/faculty/profile/marycz) at Microsoft Research on research focused on identifying and addressing AI harms through red teaming. 
+Hi! I am a Ph.D. student in the Human-Computer Interaction Institute (HCII) at Carnegie Mellon University advised by [Hong Shen](https://www.hcii.cmu.edu/people/hong-shen) and [Laura Dabbish](https://www.lauradabbish.com/). I collaborated with [Jina Suh](https://www.jinasuh.com/), [Mary L. Gray](https://marylgray.org/), and [Mary Czerwinski](https://ischool.uw.edu/people/faculty/profile/marycz) at Microsoft Research on research focused on identifying and addressing AI harms through red teaming. 
 
 Prior to the start of my Ph.D., I was fortunate to have the opportunity to explore human-centered research across a few different institutions. At the University of Minnesota, I worked with [Stevie Chancellor](https://steviechancellor.com/) on mental health content moderation. At the University of Washington, I collaborated with [Amy X. Zhang](https://homes.cs.washington.edu/~axz/) to study personalized content moderation. And, at Rutgers University, I worked with [Shagun Jhaver](https://shagunjhaver.com/) examining user perspectives on content moderation.
 
-Broadly, my research interests span the areas of AI safety, AI ethics, red teaming, content moderation, social computing, future of work, and responsible AI. I aim to **build processes and tools to support the human infrastructure within AI development, enabling safer AI systems through practices such as AI red teaming.** I am a recipient of the National Science Foundation (NSF) Graduate Research Fellowship Program (GRFP). 
+Broadly, my research interests span the areas of AI safety, AI ethics, red teaming, content moderation, social computing, future of work, and responsible AI. I aim to **build processes and tools to support the human infrastructure within AI development, enabling safer AI systems through practices such as AI red teaming.** I am a recipient of the National Science Foundation (NSF) Graduate Research Fellowship Program (GRFP). My research has since been supported by the [National Insitute of Standards and Technology (NIST)] (https://www.nist.gov/) and [Microsoft] (https://www.microsoft.com/en-us/research/academic-program/ai-society-fellows/fellows/)
 
 Outside of my work, I'm passionate about mentorship, encouraging broader participation in computing, and supporting students interested in doing research. I'm always happy to chat about potential collaborations or research 😊. 
 

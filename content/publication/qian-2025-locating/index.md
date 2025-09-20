@@ -9,7 +9,6 @@ authors:
 date: '2025-09-11'
 publication_types:
 - manuscript
-publication: ''
 links:
 - name: URL
   url: https://arxiv.org/abs/2505.24246
