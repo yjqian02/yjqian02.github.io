@@ -3,7 +3,7 @@ title: 'Personalizing content moderation on social media: User perspectives on m
   choices, interface design, and labor'
 authors:
 - Shagun Jhaver
-- Alice Qian Zhang
+- Alice Qian
 - Quan Ze Chen
 - Nikhila Natarajan
 - Ruotong Wang
