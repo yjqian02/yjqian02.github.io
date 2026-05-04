@@ -1,0 +1,54 @@
+name: Sync Publications from Google Scholar
+
+on:
+  # Run on the 1st of every month at midnight UTC
+  schedule:
+    - cron: '0 0 1 * *'
+  # Allow manual trigger from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install scholarly academic==0.10.0
+
+      - name: Fetch publications from Google Scholar
+        id: fetch
+        run: python scripts/fetch_scholar.py
+        # scholarly may fail due to Google rate limiting; treat as non-fatal
+        continue-on-error: true
+
+      - name: Check if publications.bib changed
+        id: diff
+        run: |
+          git diff --quiet publications.bib && echo "changed=false" >> "$GITHUB_OUTPUT" || echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Convert BibTeX to Hugo Markdown
+        if: steps.fetch.outcome == 'success' && steps.diff.outputs.changed == 'true'
+        run: academic import publications.bib content/publication/ --compact
+
+      - name: Commit and push updated publications
+        if: steps.fetch.outcome == 'success' && steps.diff.outputs.changed == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add publications.bib content/publication/
+          git commit -m "chore: sync publications from Google Scholar"
+          git push origin ${{ github.ref_name }}
+
+      - name: Report skipped (no changes or fetch failed)
+        if: steps.fetch.outcome != 'success' || steps.diff.outputs.changed != 'true'
+        run: echo "No publication changes to commit (fetch outcome=${{ steps.fetch.outcome }}, changed=${{ steps.diff.outputs.changed }})."

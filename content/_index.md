@@ -52,6 +52,18 @@ sections:
   #   design:
   #     view: article-grid
   #     columns: 2
+  - block: markdown
+    id: news
+    content:
+      title: Recent News
+      text: |-
+        - **May 2025** — Paper accepted at CSCW 2025: "AURA: Supporting Responsible AI Content Work"
+        - **Apr 2025** — Presented at CHI 2025 workshop on AI safety and red teaming
+        - **Sep 2024** — Started Ph.D. at Carnegie Mellon University HCII
+        - **May 2024** — Graduated with B.S. Computer Science from University of Minnesota
+    design:
+      columns: 1
+
   - block: collection
     id: pubs
     content:

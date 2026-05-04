@@ -12,7 +12,7 @@ sections:
   - block: collection
     content:
       title: Selected Projects
-      text: I enjoy making things. Here are a selection of projects that I have worked on over the years.
+      text: A selection of projects I have worked on. Each project folder lives in `content/project/` — add a new subfolder with an `index.md` to list a project here.
       filters:
         folders:
           - project
