@@ -26,7 +26,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install dependencies
-        run: pip install scholarly academic==0.10.0
+        run: pip install academic==0.10.0
 
       - name: Fetch publications from Google Scholar
         id: fetch
