@@ -1,0 +1,76 @@
+---
+title: 'Impact of Initiating Biologics in Patients With Severe Asthma on Long-Term
+  Oral Corticosteroids or Frequent Rescue Steroids (GLITTER): Data From the International
+  Severe Asthma Registry'
+authors:
+- PhD Wenjia Chen
+- MD PhD Trung N. Tran
+- MD PhD Mohsen Sadatsafavi
+- PhD Ruth Murray
+- Nigel Chong
+- B. Wong
+- PhD Nasloon Ali
+- MSc Con Ariti
+- Mph Lakmini Bulathsinhala
+- M. García Gil
+- M. F. G. J. Mark FitzGerald
+- MD PhD Marianna Alacqua
+- M. F. I. Mona Al-Ahmad
+- MD PhD Alan Altraja
+- MD Frcpc Riyad Al-Lehebi
+- M. F. M. Mohit Bhutani
+- MD PhD n Leif Bjermer
+- MD PhD Anne-Sofie Bjerrum
+- MD PhD p Arnaud Bourdin
+- MD PhD Anna von B ü low
+- PhD John Busby
+- MD Giorgio Walter Canonica
+- BSc Victoria Carter
+- MD George C. Christoff
+- M. PhD
+- MB Richard W. Costello
+- F. W. J. Ã. O. A. Md
+- M. F. Peter G. Gibson
+- MD PhD aa Kwang-Ha Yoo
+- MD bb Liam G. Heaney
+- MD PhD Enrico Heffler
+- Mbbs Mark Hew
+- Fracp ccdd Ole Hilberg PhD
+- DMSc ee Flavia Hoyte Md
+- gg Takashi Iwanaga MD ff
+- Priya M.D
+- MS R Mbbs
+- M. Koh
+- Mrcp Fccp llmm Piotr Kuna Mbbs
+- P. Md
+- Faaaai DistIntlFACAAI oo Sverre Lehmann Md
+- Priya Md
+- P. Md
+- MD ttuu Bassam Mahboub
+- PhD vvww Jorge Maspero
+- P. F. Andrew N. Menzies-Gow
+- PhD Anthony Newell
+- PhD yy Concetta Sirena
+- M. P. Nikolaos G. Papadopoulos
+- F. Z. A. I. PhD
+- P. Md
+- PhDHyunSunJeon Md
+- Parvej Md
+- Priya Md
+- P. H. C. M. P. Mrcp
+- PhDHyunSunJeon Md
+- PhDHyunSunJeon Md
+- PhDHyunSunJeon Md
+- PhDHyunSunJeon Md
+- PhDHyunSunJeon Md
+- MD ooo Carlos A. Torres-Duque
+- MD ppp Charlotte Ulrik
+- DMSc Fers qqq Seung-Won Ra Md
+- PhDHyunSunJeon Md
+- M. M. Md
+- M. S. Price
+date: '0000-01-01'
+publishDate: '2026-06-01T04:06:22.056491Z'
+publication_types:
+- article-journal
+---

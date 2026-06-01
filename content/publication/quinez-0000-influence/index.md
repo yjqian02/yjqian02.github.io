@@ -1,0 +1,78 @@
+---
+title: Influence of Cochlear Microanatomy on Hearing Preservation in Cochlear Implant
+  Recipients
+authors:
+- E. Quiñónez
+- BS Del Cid
+- BSc Ashley Micuda
+- AuD Margaret T. Dillon
+- P. Agrawal
+- MD Hanif M. Ladak
+- P. D. Brown
+- MD Carlos A. Perez-Heydrich
+- P. Selleck
+- Matthew M Dedmon
+- Patricio Thompson
+- MD Aseem Jain
+- Mse Nicholas George-Jones
+- MD Rachel Scheperle
+- PhD Joshua Pinzour
+- B. Hansen
+- M. Claussen
+- M. M. Jordan J. Varghese
+- MD Amit Walia
+- M. M. A. Shew
+- M. Ortmann
+- PhD Nedim Durakovic
+- M. J. Herzog
+- MD Craig A. Buchman
+- MD Adam Y. Xiao
+- Drew J. Montigny
+- MD Shinya Ohira
+- P. Lopez
+- P. Harary
+- M. Laufer
+- A. Ishiyama
+- MD Gregory P. Lekovic
+- PhD Akira Ishiyama
+- MD Diana M. Correa
+- MD Michael S. Castle
+- MD Rafael da Costa Monsanto
+- P. Hall
+- B. López
+- P. Slattery
+- MD Sebahattin Cureoglu
+- Meredith E. Adams
+- MD Alicia M. Quesnel
+- MD Maxwell Bergman
+- MD Nathan Kemper
+- C. Nikou
+- MD Zachary Urdang
+- M. Gantz
+- MD Pawina Jiramongkolchai
+- BS Senyue Hao
+- PhD Ratul Paul
+- PhD Chao Zhou
+- MD MSc David R. Friedmann
+- MD Shin-ichi Kanemaru
+- P. Yamaguchi
+- M. Kanai
+- MD Eriko Otonari
+- MD Maki Yamasoba
+- Misaki Fujii
+- M. Maetani
+- MD Daniel R. Romano
+- MD Song-Zhe Li
+- PhD Richard A. Chole
+- Priya Md
+- MD Sidharth V. Puram
+- Priya Md
+- BS Sammy Y. Gao
+- MD Warren B. Chun
+- MD Tyler M. Rist
+- Robert F. Labadie
+date: '0000-01-01'
+publishDate: '2026-06-01T04:06:22.086515Z'
+publication_types:
+- article-journal
+---

@@ -1,0 +1,97 @@
+---
+title: Preface for a Special Issue of AUDT with AI in Medical Ultrasound
+authors:
+- PhD Chengwen Zhang
+- MD Ligang Cui
+- MD Xing Yu
+- MD Yuxin Jiang
+- MD Jinrui Wang
+- PhD John Eisenbrey
+- MD Faium Ji-Bin Liu
+- PhD Zhifei Dai
+- PhD Dexing Kong
+- MD Xiaofang Lu
+- P. Sun
+- Priya Md
+- Priya Md
+- PhD Sang-Hwa Lee Md
+- Priya Md
+- P. Li
+- Pei Shi
+- P-H Wang
+- Pei-Ying Lin
+- MD Jin-Bao Li
+- PhD Meng Li
+- PhD Fan Yang
+- Peng Cheng
+- Mengyue Jin
+- M. Zhang
+- M. Sun
+- Pu Wei
+- Mei Yuan
+- Peng Zhao
+- MD Xi Liu
+- PhD. Chen
+- M. Shen
+- P. Hu
+- M. Wang
+- Peikai Zhao
+- Philip Li
+- P. W. Tang
+- PhD Xiaoyan Zhang
+- Priya Md
+- P. Chen
+- Ph Zhang
+- P. Han
+- MD Zhaojun Li
+- PhD Ms. Jennifer Md
+- F. Wilson
+- MD Yang Hai
+- Siyi Xun
+- Weiping Ke
+- Mingfu Jiang
+- Huachao Chen
+- Hao Chen
+- C. Lam
+- Tao Tan
+- Wenjia Guo
+- Shengli Li
+- H. Wen
+- Yingxuan Yuan
+- Xia Yang
+- Changyan Wang
+- Haobo Chen
+- Jieyi Liu
+- Changchun Li
+- Weiwei Jiao
+- Qihui Guo
+- Qi Zhang
+- E. Qu
+- Xinli Zhang
+- Tianxiang Li
+- Fei Ji
+- Ruina Zhao
+- Huazhen Liu
+- Meng Yang
+- Rui Chen
+- Fangqin Guo
+- Jia Guo
+- Jiaqi Zhao
+- C. Cui
+- Yanping Lin
+- Wenjun Zhang
+- Qingguo Mi Zhou
+- Lin Meng
+- Xin Zhang
+- Paul Liu
+- Dong Liu
+- ' Liu'
+- Tai-ping Zhang
+- Linxue Qian
+- MD Shujun Xia
+- MD Jianqiao Zhou
+date: '0000-01-01'
+publishDate: '2026-06-01T04:06:22.102738Z'
+publication_types:
+- article-journal
+---
