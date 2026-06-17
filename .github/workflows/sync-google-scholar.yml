@@ -39,6 +39,19 @@ jobs:
         run: |
           git diff --quiet publications.bib && echo "changed=false" >> "$GITHUB_OUTPUT" || echo "changed=true" >> "$GITHUB_OUTPUT"
 
+      - name: Clear stale publication folders
+        if: steps.fetch.outcome == 'success' && steps.diff.outputs.changed == 'true'
+        run: |
+          # Delete auto-generated publication folders, but skip any folder that
+          # contains a .keep file — those are manually managed entries.
+          find content/publication -mindepth 1 -maxdepth 1 -type d | while read -r dir; do
+            if [ ! -f "$dir/.keep" ]; then
+              rm -rf "$dir"
+            else
+              echo "Skipping manually managed entry: $dir"
+            fi
+          done
+
       - name: Convert BibTeX to Hugo Markdown
         if: steps.fetch.outcome == 'success' && steps.diff.outputs.changed == 'true'
         run: academic import publications.bib content/publication/ --compact
