@@ -1,13 +1,13 @@
 ---
 title: '# Pragmatic or# Clinical: Analyzing TikTok Mental Health Videos'
 authors:
-- Alice Qian
-- Ashlee Milton
-- Stevie Chancellor
+- A Qian
+- A Milton
+- S Chancellor
 date: '2023-01-01'
-publishDate: '2025-03-07T15:47:39.544769Z'
+publishDate: '2023-01-01'
 publication_types:
-- chapter
-publication: '*Computer Supported Cooperative Work and Social Computing*'
-url_pdf: https://dl.acm.org/doi/abs/10.1145/3584931.3607013
+- article-journal
+publication: '*Companion Publication of the*'
+featured: false
 ---

@@ -1,14 +1,13 @@
 ---
-title: 'Cleaning Up the Streets: Understanding Motivations, Mental Models, and Concerns
-  of Users Flagging Social Media Posts'
+title: 'Cleaning up the streets: Understanding motivations, mental models, and concerns of users flagging social media posts'
 authors:
-- Alice Qian
-- Kaitlin Montague
-- Shagun Jhaver
+- A Qian
+- K Montague
+- S Jhaver
 date: '2023-01-01'
-publishDate: '2025-03-07T15:47:39.538338Z'
+publishDate: '2023-01-01'
 publication_types:
 - article-journal
 publication: '*arXiv preprint arXiv:2309.06688*'
-url_pdf: https://arxiv.org/abs/2309.06688
+featured: false
 ---
