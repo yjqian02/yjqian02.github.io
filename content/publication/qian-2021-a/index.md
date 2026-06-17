@@ -10,4 +10,7 @@ publication: '*Youthprise*'
 links:
 - name: URL
   url: https://youthprise.org/blog/guest-blog-youthbank-online-collaboration/
+url_video: ''
+url_source: ''
+url_pdf: ''
 ---

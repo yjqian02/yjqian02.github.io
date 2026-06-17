@@ -11,4 +11,6 @@ publication_types:
 - article-journal
 publication: '*arXiv preprint arXiv:2309.06688*'
 url_pdf: https://arxiv.org/abs/2309.06688
+url_video: ''
+url_source: ''
 ---

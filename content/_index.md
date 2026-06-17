@@ -74,7 +74,7 @@ sections:
           - publication
         exclude_featured: false
     design:
-      view: citation
+      view: article-grid
   # - block: collection
   #   id: talks
   #   content:
