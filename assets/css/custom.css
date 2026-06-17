@@ -1,3 +1,103 @@
+/* ── Homepage bio info row ──────────────────────────────────────────────── */
+
+.bio-info-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 3rem;
+  max-width: 960px;
+}
+
+.bio-section-heading {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.45;
+  margin: 0 0 0.85rem;
+}
+
+/* News column */
+.bio-news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bio-news-list li {
+  font-size: 0.9rem;
+  line-height: 1.55;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.12);
+}
+
+.bio-news-list li:last-child {
+  border-bottom: none;
+}
+
+/* Right column: education + interests stacked */
+.bio-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.bio-right-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Education list */
+.bio-education-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.bio-education-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.bio-edu-degree {
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.bio-edu-institution {
+  font-size: 0.85rem;
+  opacity: 0.65;
+}
+
+.bio-edu-years {
+  font-size: 0.78rem;
+  opacity: 0.4;
+}
+
+/* Interests list */
+.bio-interests-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bio-interests-list li {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  padding: 0.2rem 0;
+}
+
+@media (max-width: 640px) {
+  .bio-info-row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
 /* ── Meanwhile page ─────────────────────────────────────────────────────── */
 
 .meanwhile-page {
