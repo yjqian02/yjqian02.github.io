@@ -1,5 +1,5 @@
 ---
 title: Meanwhile
-description: Things I do, make, and think about outside of research.
+description: what I'm working on outside of research...
 type: meanwhile
 ---
