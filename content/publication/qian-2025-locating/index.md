@@ -9,5 +9,6 @@ authors:
 date: '2025-09-11'
 publication_types:
 - manuscript
+publication: '*arXiv preprint arXiv:2505.24246*'
 url_pdf: https://arxiv.org/abs/2505.24246
 ---
