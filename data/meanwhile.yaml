@@ -4,11 +4,18 @@
 # Types:  text | image | link | video | project
 # Sizes:  small (1×1) | medium (2×1) | large (2×2) | hero (3×2)
 #
-# For images, place files in static/media/meanwhile/ and reference as /media/meanwhile/filename.jpg
-# For videos, use the embed URL (e.g. https://www.youtube.com/embed/VIDEO_ID)
+# Text cells accept a `color` field for the background (any CSS color):
+#   color: "#2a3a4f"   dark blue-grey
+#   color: "#3b2a2a"   dark wine
+#   color: "#1e2e1e"   dark forest
+#   color: "#2e2a1a"   dark ochre
+#
+# For images, place files in static/media/meanwhile/ and use /media/meanwhile/filename.jpg
+# For videos, use the embed URL: https://www.youtube.com/embed/VIDEO_ID
 
 - type: text
   text: "Outside of research, I care deeply about making computing more accessible and humane."
+  color: "#2a3a4f"
   size: small
 
 - type: image
@@ -26,6 +33,7 @@
 
 - type: text
   text: "The best ideas come when you're not trying to have them."
+  color: "#3b2a2a"
   size: small
 
 - type: video
