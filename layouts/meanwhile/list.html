@@ -1,0 +1,72 @@
+{{ define "main" }}
+<section class="meanwhile-page">
+
+  <div class="meanwhile-header">
+    <h1 class="meanwhile-title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="meanwhile-subtitle">{{ . }}</p>{{ end }}
+  </div>
+
+  <div class="meanwhile-grid">
+    {{ range site.Data.meanwhile }}
+
+    {{/* ── text ── */}}
+    {{ if eq .type "text" }}
+    <div class="meanwhile-cell type-text size-{{ .size | default "small" }}">
+      <blockquote>{{ .text }}</blockquote>
+      {{ with .attribution }}<cite>— {{ . }}</cite>{{ end }}
+    </div>
+
+    {{/* ── image ── */}}
+    {{ else if eq .type "image" }}
+    <div class="meanwhile-cell type-image size-{{ .size | default "large" }}">
+      <img src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">
+      {{ with .caption }}<div class="cell-caption">{{ . }}</div>{{ end }}
+    </div>
+
+    {{/* ── link ── */}}
+    {{ else if eq .type "link" }}
+    <a class="meanwhile-cell type-link size-{{ .size | default "medium" }}"
+       href="{{ .url }}" target="_blank" rel="noopener noreferrer">
+      {{ with .image }}<img src="{{ . }}" alt="" loading="lazy">{{ end }}
+      <div class="cell-link-body">
+        {{ with .source }}<span class="cell-source">{{ . }}</span>{{ end }}
+        <h3>{{ .title }}</h3>
+        {{ with .description }}<p>{{ . }}</p>{{ end }}
+      </div>
+      <span class="cell-arrow">↗</span>
+    </a>
+
+    {{/* ── video ── */}}
+    {{ else if eq .type "video" }}
+    <div class="meanwhile-cell type-video size-{{ .size | default "medium" }}">
+      <div class="cell-video-wrapper">
+        <iframe src="{{ .embed_url }}"
+                title="{{ .title | default "Video" }}"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                loading="lazy"></iframe>
+      </div>
+      {{ with .title }}<div class="cell-caption">{{ . }}</div>{{ end }}
+    </div>
+
+    {{/* ── project ── */}}
+    {{ else if eq .type "project" }}
+    <a class="meanwhile-cell type-project size-{{ .size | default "medium" }}"
+       href="{{ .url }}"
+       {{ if strings.HasPrefix .url "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
+      {{ with .image }}<img src="{{ . }}" alt="{{ $.title | default "" }}" loading="lazy">{{ end }}
+      <div class="cell-project-body">
+        {{ with .tag }}<span class="cell-tag">{{ . }}</span>{{ end }}
+        <h3>{{ .title }}</h3>
+        {{ with .description }}<p>{{ . }}</p>{{ end }}
+      </div>
+      <span class="cell-arrow">→</span>
+    </a>
+
+    {{ end }}
+    {{ end }}
+  </div>
+
+</section>
+{{ end }}
