@@ -46,11 +46,12 @@ profiles:
   - icon: academicons/orcid
     url: https://orcid.org/0009-0005-6407-6981
 
-interests:
-  - human infrastructure for AI 👩🏻 
-  - AI evaluation ✅
-  - future of work 👩🏻‍💻
-  - social computing 🌐
+# interests moved to the custom news+interests block in content/_index.md
+# interests:
+#   - human infrastructure for AI 👩🏻
+#   - AI evaluation ✅
+#   - future of work 👩🏻‍💻
+#   - social computing 🌐
 
 education:
   - area: Ph.D. Computer Science

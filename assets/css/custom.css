@@ -1,0 +1,55 @@
+/* ── News + Interests two-column row ─────────────────────────────────────── */
+
+.bio-info-row {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 3rem;
+  max-width: 960px;
+}
+
+.bio-section-heading {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.45;
+  margin: 0 0 0.85rem;
+}
+
+/* News list */
+.bio-news-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bio-news-list li {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.bio-news-list li:last-child {
+  border-bottom: none;
+}
+
+/* Interests list */
+.bio-interests-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bio-interests-list li {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  padding: 0.3rem 0;
+}
+
+@media (max-width: 640px) {
+  .bio-info-row {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
