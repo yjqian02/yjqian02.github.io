@@ -1,0 +1,49 @@
+# Meanwhile page content
+# Each item becomes a cell in the editorial grid.
+#
+# Types:  text | image | link | video | project
+# Sizes:  small (1×1) | medium (2×1) | large (2×2) | hero (3×2)
+#
+# Text cells accept a `color` field for the background (any CSS color):
+#   color: "#2a3a4f"   dark blue-grey
+#   color: "#3b2a2a"   dark wine
+#   color: "#1e2e1e"   dark forest
+#   color: "#2e2a1a"   dark ochre
+#
+# For images, place files in static/media/meanwhile/ and use /media/meanwhile/filename.jpg
+# For videos, use the embed URL: https://www.youtube.com/embed/VIDEO_ID
+
+- type: text
+  text: "Outside of research, I care deeply about making computing more accessible and humane."
+  color: "#2a3a4f"
+  size: small
+
+- type: image
+  src: /media/meanwhile/placeholder.jpg
+  caption: "Add a caption here"
+  alt: "Description of image"
+  size: large
+
+- type: link
+  title: "Add an article or news link here"
+  source: Source Name
+  url: https://example.com
+  description: "A short description of why this is interesting."
+  size: medium
+
+- type: text
+  text: "The best ideas come when you're not trying to have them."
+  color: "#3b2a2a"
+  size: small
+
+- type: video
+  embed_url: https://www.youtube.com/embed/dQw4w9WgXcQ
+  title: "Add a video title here"
+  size: medium
+
+- type: project
+  title: "Add a project here"
+  description: "A short description of the project."
+  tag: Community
+  url: /projects/
+  size: medium
