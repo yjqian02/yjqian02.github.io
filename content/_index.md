@@ -66,14 +66,31 @@ sections:
               <li><strong>May 2024</strong> — Graduated with B.S. Computer Science from University of Minnesota</li>
             </ul>
           </div>
-          <div class="bio-col bio-col-interests">
-            <h3 class="bio-section-heading">Interests</h3>
-            <ul class="bio-interests-list">
-              <li>human infrastructure for AI 👩🏻</li>
-              <li>AI evaluation ✅</li>
-              <li>future of work 👩🏻‍💻</li>
-              <li>social computing 🌐</li>
-            </ul>
+          <div class="bio-col bio-col-right">
+            <div class="bio-right-section">
+              <h3 class="bio-section-heading">Education</h3>
+              <ul class="bio-education-list">
+                <li>
+                  <span class="bio-edu-degree">Ph.D. Computer Science</span>
+                  <span class="bio-edu-institution">Carnegie Mellon University</span>
+                  <span class="bio-edu-years">2024 – present</span>
+                </li>
+                <li>
+                  <span class="bio-edu-degree">B.S. Computer Science</span>
+                  <span class="bio-edu-institution">University of Minnesota</span>
+                  <span class="bio-edu-years">2020 – 2024</span>
+                </li>
+              </ul>
+            </div>
+            <div class="bio-right-section">
+              <h3 class="bio-section-heading">Interests</h3>
+              <ul class="bio-interests-list">
+                <li>human infrastructure for AI 👩🏻</li>
+                <li>AI evaluation ✅</li>
+                <li>future of work 👩🏻‍💻</li>
+                <li>social computing 🌐</li>
+              </ul>
+            </div>
           </div>
         </div>
     design:
