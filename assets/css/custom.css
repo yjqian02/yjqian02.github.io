@@ -31,17 +31,16 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-flow: dense;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 /* ── Cell base ───────────────────────────────────────────────────────────── */
 
 .meanwhile-cell {
-  border-radius: 14px;
   overflow: hidden;
   position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
   min-height: 180px;
+  /* No universal border-radius — each type sets its own */
 }
 
 a.meanwhile-cell {
@@ -51,9 +50,12 @@ a.meanwhile-cell {
   flex-direction: column;
 }
 
+/* Hover: subtle opacity shift instead of lifting card */
+a.meanwhile-cell {
+  transition: opacity 0.15s ease;
+}
 a.meanwhile-cell:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  opacity: 0.88;
 }
 
 /* ── Sizes ───────────────────────────────────────────────────────────────── */
@@ -65,35 +67,37 @@ a.meanwhile-cell:hover {
 
 /* ── Text cell ───────────────────────────────────────────────────────────── */
 
+/* Default background if no color is set in YAML */
 .type-text {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 1.75rem;
+  background: #1c1c27;
+  border-radius: 6px;
+  padding: 1.75rem 1.75rem 1.5rem;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
 }
 
-.type-text blockquote {
-  font-size: 1.15rem;
-  line-height: 1.6;
-  font-style: italic;
-  margin: 0 0 0.75rem;
-  padding-left: 1rem;
-  border-left: 3px solid #ef4444;
+/* The text itself — large, confident, no decorative borders */
+.cell-text-body {
+  font-size: clamp(1.05rem, 1.6vw, 1.35rem);
+  line-height: 1.55;
+  font-weight: 500;
+  margin: 0 0 0.6rem;
+  color: rgba(255, 255, 255, 0.92);
 }
 
-.type-text cite {
-  font-size: 0.8rem;
+.cell-attribution {
+  font-size: 0.78rem;
   opacity: 0.45;
-  font-style: normal;
-  padding-left: 1rem;
+  font-style: italic;
 }
 
 /* ── Image cell ──────────────────────────────────────────────────────────── */
 
+/* Sharp corners — images feel raw and editorial without radius */
 .type-image {
   background: #111;
+  border-radius: 0;
 }
 
 .type-image img {
@@ -109,16 +113,17 @@ a.meanwhile-cell:hover {
   left: 0;
   right: 0;
   padding: 0.75rem 1rem;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.85);
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* ── Link cell ───────────────────────────────────────────────────────────── */
 
 .type-link {
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 6px;
 }
 
 .type-link > img {
@@ -126,10 +131,11 @@ a.meanwhile-cell:hover {
   height: 140px;
   object-fit: cover;
   flex-shrink: 0;
+  border-radius: 0; /* image inside goes edge-to-edge */
 }
 
 .cell-link-body {
-  padding: 1.25rem;
+  padding: 1.1rem 1.25rem 1.25rem;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -138,23 +144,23 @@ a.meanwhile-cell:hover {
 
 .cell-source {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  opacity: 0.45;
-  margin-bottom: 0.4rem;
+  letter-spacing: 0.12em;
+  opacity: 0.4;
+  margin-bottom: 0.45rem;
 }
 
 .cell-link-body h3 {
-  font-size: 1rem;
+  font-size: 0.97rem;
   font-weight: 600;
   line-height: 1.4;
   margin: 0 0 0.4rem;
 }
 
 .cell-link-body p {
-  font-size: 0.85rem;
-  opacity: 0.55;
+  font-size: 0.83rem;
+  opacity: 0.52;
   margin: 0;
   line-height: 1.5;
 }
@@ -163,6 +169,7 @@ a.meanwhile-cell:hover {
 
 .type-video {
   background: #000;
+  border-radius: 0; /* raw, like an image */
   display: flex;
   flex-direction: column;
 }
@@ -170,6 +177,7 @@ a.meanwhile-cell:hover {
 .cell-video-wrapper {
   flex: 1;
   position: relative;
+  min-height: 160px;
 }
 
 .cell-video-wrapper iframe {
@@ -181,10 +189,10 @@ a.meanwhile-cell:hover {
 }
 
 .cell-caption {
-  padding: 0.6rem 1rem;
-  font-size: 0.82rem;
-  opacity: 0.5;
-  background: rgba(0, 0, 0, 0.4);
+  padding: 0.55rem 1rem;
+  font-size: 0.8rem;
+  opacity: 0.45;
+  background: rgba(0, 0, 0, 0.5);
   flex-shrink: 0;
 }
 
@@ -192,7 +200,8 @@ a.meanwhile-cell:hover {
 
 .type-project {
   background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 6px;
 }
 
 .type-project > img {
@@ -200,10 +209,11 @@ a.meanwhile-cell:hover {
   height: 55%;
   object-fit: cover;
   flex-shrink: 0;
+  border-radius: 0;
 }
 
 .cell-project-body {
-  padding: 1.25rem;
+  padding: 1.1rem 1.25rem 1.25rem;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -212,23 +222,23 @@ a.meanwhile-cell:hover {
 
 .cell-tag {
   display: block;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: #ef4444;
-  margin-bottom: 0.4rem;
+  letter-spacing: 0.12em;
+  opacity: 0.55;
+  margin-bottom: 0.45rem;
 }
 
 .cell-project-body h3 {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 600;
   margin: 0 0 0.4rem;
   line-height: 1.3;
 }
 
 .cell-project-body p {
-  font-size: 0.85rem;
-  opacity: 0.55;
+  font-size: 0.83rem;
+  opacity: 0.52;
   margin: 0;
   line-height: 1.5;
 }
@@ -237,32 +247,26 @@ a.meanwhile-cell:hover {
 
 .cell-arrow {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  font-size: 1rem;
-  opacity: 0.35;
-  transition: opacity 0.2s, transform 0.2s;
+  top: 0.9rem;
+  right: 0.9rem;
+  font-size: 0.9rem;
+  opacity: 0.25;
+  transition: opacity 0.15s;
 }
 
 a.meanwhile-cell:hover .cell-arrow {
-  opacity: 0.9;
-  transform: translate(2px, -2px);
+  opacity: 0.7;
 }
 
 /* ── Responsive ──────────────────────────────────────────────────────────── */
 
 @media (max-width: 1200px) {
-  .meanwhile-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  .meanwhile-grid { grid-template-columns: repeat(3, 1fr); }
   .size-hero { grid-column: span 3; }
 }
 
 @media (max-width: 768px) {
-  .meanwhile-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.75rem;
-  }
+  .meanwhile-grid { grid-template-columns: repeat(2, 1fr); gap: 0.5rem; }
   .size-hero { grid-column: span 2; }
   .meanwhile-page { padding: 2rem 1rem 4rem; }
 }

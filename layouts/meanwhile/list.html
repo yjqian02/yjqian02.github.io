@@ -11,9 +11,10 @@
 
     {{/* ── text ── */}}
     {{ if eq .type "text" }}
-    <div class="meanwhile-cell type-text size-{{ .size | default "small" }}">
-      <blockquote>{{ .text }}</blockquote>
-      {{ with .attribution }}<cite>— {{ . }}</cite>{{ end }}
+    <div class="meanwhile-cell type-text size-{{ .size | default "small" }}"
+         {{ with .color }}style="background-color: {{ . }};"{{ end }}>
+      <p class="cell-text-body">{{ .text }}</p>
+      {{ with .attribution }}<span class="cell-attribution">— {{ . }}</span>{{ end }}
     </div>
 
     {{/* ── image ── */}}
