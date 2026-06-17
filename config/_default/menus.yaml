@@ -16,8 +16,8 @@ main:
   - name: Projects
     url: /projects/
     weight: 20
-  - name: Outside Research
-    url: /outside/
+  - name: Meanwhile
+    url: /meanwhile/
     weight: 30
   # - name: Talks
   #   url: /#talks
