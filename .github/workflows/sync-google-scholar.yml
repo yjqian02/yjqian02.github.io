@@ -39,6 +39,11 @@ jobs:
         run: |
           git diff --quiet publications.bib && echo "changed=false" >> "$GITHUB_OUTPUT" || echo "changed=true" >> "$GITHUB_OUTPUT"
 
+      - name: Clear stale publication folders
+        if: steps.fetch.outcome == 'success' && steps.diff.outputs.changed == 'true'
+        run: |
+          find content/publication -mindepth 1 -maxdepth 1 -type d -exec rm -rf {} +
+
       - name: Convert BibTeX to Hugo Markdown
         if: steps.fetch.outcome == 'success' && steps.diff.outputs.changed == 'true'
         run: academic import publications.bib content/publication/ --compact
