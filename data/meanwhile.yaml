@@ -15,7 +15,7 @@
 
 - type: text
   text: "Outside of research, I care deeply about making computing more accessible and humane."
-  color: "#2a3a4f"
+  color: "CB2957"
   size: small
 
 - type: image
@@ -37,7 +37,7 @@
   size: small
 
 - type: video
-  embed_url: https://www.youtube.com/embed/dQw4w9WgXcQ
+  embed_url: https://www.youtube.com/embed/
   title: "Add a video title here"
   size: medium
 
