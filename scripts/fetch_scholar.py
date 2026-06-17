@@ -1,8 +1,12 @@
 """
 Fetch publications from Semantic Scholar and write to publications.bib.
 
-Uses the Semantic Scholar public API (no key required, stdlib only).
-Run locally or via the sync-google-scholar GitHub Actions workflow.
+Strategy: rather than searching by author name (which can match the wrong
+person), we search for a known distinctive paper title to resolve the exact
+Semantic Scholar author ID for *this* Alice Qian, then pull all papers
+attributed to that specific ID.
+
+Uses only Python stdlib — no extra pip dependencies.
 
 Usage:
     python scripts/fetch_scholar.py
@@ -18,14 +22,24 @@ import urllib.request
 from pathlib import Path
 
 # ── Configuration ─────────────────────────────────────────────────────────────
-AUTHOR_NAME = "Alice Qian"
-# Keywords used to disambiguate if multiple authors share the name.
-# Checked against affiliation strings (case-insensitive).
-AFFILIATION_HINTS = ["carnegie mellon", "cmu", "hcii", "university of minnesota"]
 
+# Distinctive paper titles used to resolve Alice's S2 author ID.
+# We search for each in order and stop at the first hit where an author
+# named "Qian" appears.  Titles don't need to be exact — S2 is fuzzy.
+ANCHOR_PAPERS = [
+    "AURA Amplifying Understanding Resilience Awareness Responsible AI Content Work",
+    "Worker Discretion Crowdsourced Responsible AI Content Work",
+    "Human Factor AI Red Teaming Perspectives Social Collaborative Computing",
+    "Personalizing content moderation social media user perspectives",
+]
+
+AUTHOR_LAST_NAME = "qian"   # used to pick the right author from a paper's author list
+PAPER_FIELDS = (
+    "title,authors,year,venue,abstract,externalIds,publicationTypes,journal"
+)
 S2_BASE = "https://api.semanticscholar.org/graph/v1"
 OUTPUT_FILE = Path(__file__).parent.parent / "publications.bib"
-PAPER_FIELDS = "title,authors,year,venue,abstract,externalIds,publicationTypes,journal"
+
 # ──────────────────────────────────────────────────────────────────────────────
 
 
@@ -33,41 +47,49 @@ def s2_get(path: str, params: dict | None = None) -> dict:
     url = S2_BASE + path
     if params:
         url += "?" + urllib.parse.urlencode(params)
+    req = urllib.request.Request(url, headers={"User-Agent": "publications-sync/1.0"})
     try:
-        with urllib.request.urlopen(url, timeout=30) as resp:
+        with urllib.request.urlopen(req, timeout=30) as resp:
             return json.load(resp)
     except urllib.error.HTTPError as exc:
-        raise RuntimeError(f"S2 API error {exc.code} for {url}") from exc
+        raise RuntimeError(f"S2 API {exc.code} for {url}") from exc
 
 
-def find_author_id() -> str:
-    data = s2_get("/author/search", {
-        "query": AUTHOR_NAME,
-        "fields": "authorId,name,affiliations,paperCount",
-        "limit": 10,
-    })
-    candidates = data.get("data", [])
-    if not candidates:
-        raise RuntimeError(f"No Semantic Scholar authors found for '{AUTHOR_NAME}'")
+def resolve_author_id() -> str:
+    """
+    Search for each anchor paper in turn; return the S2 author ID of the
+    author whose last name matches AUTHOR_LAST_NAME.
+    """
+    for query in ANCHOR_PAPERS:
+        print(f"  Trying anchor: '{query[:60]}…'")
+        try:
+            data = s2_get("/paper/search", {
+                "query": query,
+                "fields": "title,authors",
+                "limit": 5,
+            })
+        except RuntimeError as exc:
+            print(f"    Warning: {exc}")
+            continue
 
-    # Prefer an author whose affiliation matches a known institution
-    for author in candidates:
-        affils = " ".join(
-            a.get("name", "").lower() for a in author.get("affiliations", [])
-        )
-        if any(hint in affils for hint in AFFILIATION_HINTS):
-            print(f"Matched author: {author['name']} (id={author['authorId']}, "
-                  f"papers={author.get('paperCount', '?')})")
-            return author["authorId"]
+        for paper in data.get("data", []):
+            for author in paper.get("authors", []):
+                name = author.get("name", "")
+                if AUTHOR_LAST_NAME in name.lower():
+                    author_id = author["authorId"]
+                    print(f"  Found: '{name}' → S2 author ID {author_id}")
+                    print(f"  (matched via paper: '{paper['title'][:70]}')")
+                    return author_id
 
-    # Fall back to highest paper count if no affiliation hint matched
-    best = max(candidates, key=lambda a: a.get("paperCount", 0))
-    print(f"No affiliation match; using highest-papercount result: "
-          f"{best['name']} (id={best['authorId']})")
-    return best["authorId"]
+        time.sleep(0.5)
+
+    raise RuntimeError(
+        "Could not resolve S2 author ID from any anchor paper. "
+        "Check that the papers are indexed on Semantic Scholar."
+    )
 
 
-def get_papers(author_id: str) -> list[dict]:
+def get_all_papers(author_id: str) -> list[dict]:
     all_papers: list[dict] = []
     offset = 0
     limit = 100
@@ -82,21 +104,18 @@ def get_papers(author_id: str) -> list[dict]:
         if len(batch) < limit:
             break
         offset += limit
-        time.sleep(0.5)
+        time.sleep(0.3)
     return all_papers
 
 
 def make_key(authors: list[dict], year: str, title: str) -> str:
-    """Generate a stable BibTeX key: firstauthorlastname + year + firsttitleword."""
+    last = "unknown"
     if authors:
-        full_name = authors[0].get("name", "unknown")
-        last = full_name.split()[-1].lower()
-        last = re.sub(r"[^a-z]", "", last)
-    else:
-        last = "unknown"
-    title_words = re.findall(r"[a-zA-Z]+", title)
-    first_word = title_words[0].lower() if title_words else "untitled"
-    return f"{last}{year}{first_word}"
+        full = authors[0].get("name", "")
+        last = re.sub(r"[^a-z]", "", full.split()[-1].lower())
+    words = re.findall(r"[a-zA-Z]+", title)
+    first = words[0].lower() if words else "untitled"
+    return f"{last}{year}{first}"
 
 
 def paper_to_bibtex(paper: dict) -> str:
@@ -106,7 +125,7 @@ def paper_to_bibtex(paper: dict) -> str:
     author_str = " and ".join(a.get("name", "") for a in authors)
 
     journal_info = paper.get("journal") or {}
-    journal_name = journal_info.get("name", "") or paper.get("venue", "") or ""
+    venue = journal_info.get("name") or paper.get("venue") or ""
     volume = journal_info.get("volume", "")
     pages = journal_info.get("pages", "")
 
@@ -114,30 +133,30 @@ def paper_to_bibtex(paper: dict) -> str:
     if len(abstract) > 600:
         abstract = abstract[:600] + "..."
 
-    doi = (paper.get("externalIds") or {}).get("DOI", "")
-    arxiv_id = (paper.get("externalIds") or {}).get("ArXiv", "")
+    ext_ids = paper.get("externalIds") or {}
+    doi = ext_ids.get("DOI", "")
+    arxiv_id = ext_ids.get("ArXiv", "")
 
     pub_types = [t.lower() for t in (paper.get("publicationTypes") or [])]
-    venue_lower = journal_name.lower()
+    venue_lower = venue.lower()
 
     if "journalarticle" in pub_types:
         entry_type = "article"
     elif "conference" in pub_types or any(
-        kw in venue_lower for kw in ["conference", "proceedings", "workshop", "cscw", "chi"]
+        kw in venue_lower for kw in ["conference", "proceedings", "workshop", "cscw", "chi", "acm"]
     ):
         entry_type = "inproceedings"
     else:
-        entry_type = "article"  # default for preprints / misc
+        entry_type = "article"
 
     key = make_key(authors, year, title)
     lines = [f"@{entry_type}{{{key},"]
     lines.append(f"  title     = {{{title}}},")
     lines.append(f"  author    = {{{author_str}}},")
     lines.append(f"  year      = {{{year}}},")
-
-    if journal_name:
+    if venue:
         field = "journal" if entry_type == "article" else "booktitle"
-        lines.append(f"  {field:<9} = {{{journal_name}}},")
+        lines.append(f"  {field:<9} = {{{venue}}},")
     if volume:
         lines.append(f"  volume    = {{{volume}}},")
     if pages:
@@ -148,37 +167,37 @@ def paper_to_bibtex(paper: dict) -> str:
         lines.append(f"  doi       = {{{doi}}},")
     if arxiv_id and not doi:
         lines.append(f"  url       = {{https://arxiv.org/abs/{arxiv_id}}},")
-
     lines.append("}")
     return "\n".join(lines)
 
 
 def main() -> None:
-    print(f"Looking up '{AUTHOR_NAME}' on Semantic Scholar...")
+    print("Resolving Semantic Scholar author ID from known papers...")
     try:
-        author_id = find_author_id()
+        author_id = resolve_author_id()
     except RuntimeError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         sys.exit(1)
 
-    print(f"Fetching papers for author id={author_id}...")
+    print(f"\nFetching all papers for author ID {author_id}...")
     try:
-        papers = get_papers(author_id)
+        papers = get_all_papers(author_id)
     except RuntimeError as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         sys.exit(1)
 
     if not papers:
-        print("No papers found. publications.bib not updated.")
+        print("No papers returned. publications.bib not updated.")
         sys.exit(1)
 
-    # Sort newest first
     papers.sort(key=lambda p: p.get("year") or 0, reverse=True)
-
     entries = [paper_to_bibtex(p) for p in papers]
+
     content = "\n\n".join(entries) + "\n"
     OUTPUT_FILE.write_text(content, encoding="utf-8")
-    print(f"Wrote {len(entries)} entries to {OUTPUT_FILE}")
+    print(f"\nWrote {len(entries)} entries to {OUTPUT_FILE}")
+    for p in papers:
+        print(f"  {p.get('year', '?')}  {(p.get('title') or '')[:70]}")
 
 
 if __name__ == "__main__":
