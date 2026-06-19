@@ -712,3 +712,222 @@ a.meanwhile-cell:hover .cell-arrow {
   .meanwhile-grid { grid-template-columns: 1fr; }
   .meanwhile-cell { grid-column: span 1 !important; grid-row: span 1 !important; }
 }
+
+/* ── Projects page ───────────────────────────────────────────────────────── */
+
+.projects-page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+.projects-header {
+  margin-bottom: 3.5rem;
+}
+
+.projects-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.5rem;
+}
+
+.projects-subtitle {
+  font-size: 1rem;
+  opacity: 0.55;
+  margin: 0;
+  max-width: 560px;
+}
+
+.projects-section {
+  margin-bottom: 4rem;
+}
+
+.projects-section-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  opacity: 0.4;
+  margin: 0 0 0.35rem;
+}
+
+.projects-section-desc {
+  font-size: 0.85rem;
+  opacity: 0.45;
+  margin: 0 0 1.75rem;
+}
+
+/* ── Active project cards ─────────────────────────────────────────────── */
+
+.projects-active-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.project-active-card {
+  position: relative;
+  border: 1px solid rgba(128,128,128,0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-card-image img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+}
+
+.project-card-body {
+  padding: 1.25rem 1.25rem 1.5rem;
+  flex: 1;
+}
+
+.project-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.project-tag {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  border: 1px solid rgba(128,128,128,0.25);
+  opacity: 0.65;
+}
+
+.project-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  line-height: 1.3;
+}
+
+.project-card-summary {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.project-status-badge {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  background: rgba(34, 197, 94, 0.15);
+  color: rgb(34, 197, 94);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+/* ── Research theme entries ───────────────────────────────────────────── */
+
+.projects-themes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.project-theme {
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(128,128,128,0.12);
+}
+
+.project-theme:first-child {
+  padding-top: 0;
+}
+
+.project-theme-header {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+
+.project-theme-image {
+  flex-shrink: 0;
+  width: 120px;
+}
+
+.project-theme-image img {
+  width: 120px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 6px;
+  display: block;
+}
+
+.project-theme-meta {
+  flex: 1;
+}
+
+.project-theme-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0.4rem 0 0.5rem;
+  line-height: 1.3;
+}
+
+.project-theme-summary {
+  font-size: 0.87rem;
+  line-height: 1.65;
+  opacity: 0.6;
+  margin: 0;
+}
+
+.project-theme-pubs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-left: 0;
+}
+
+.project-pub-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.6rem 0.85rem;
+  border-radius: 6px;
+  background: rgba(128,128,128,0.05);
+  border: 1px solid rgba(128,128,128,0.1);
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.project-pub-link:hover {
+  background: rgba(128,128,128,0.1);
+}
+
+.project-pub-title {
+  font-size: 0.85rem;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.project-pub-meta {
+  font-size: 0.75rem;
+  opacity: 0.4;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .projects-active-grid { grid-template-columns: 1fr; }
+  .project-theme-image { display: none; }
+  .project-pub-link { flex-direction: column; gap: 0.2rem; }
+  .project-pub-meta { white-space: normal; }
+}

@@ -1,0 +1,91 @@
+{{ define "main" }}
+<section class="projects-page">
+
+  <div class="projects-header">
+    <h1 class="projects-title">{{ .Title }}</h1>
+    {{ with .Description }}<p class="projects-subtitle">{{ . }}</p>{{ end }}
+  </div>
+
+  {{/* ── Current Work ───────────────────────────────────────────────────── */}}
+  {{ $active := where .Pages "Params.status" "active" }}
+  {{ if $active }}
+  <div class="projects-section">
+    <h2 class="projects-section-label">Current Work</h2>
+    <p class="projects-section-desc">In progress — no publication yet.</p>
+    <div class="projects-active-grid">
+      {{ range $active.ByDate.Reverse }}
+      <div class="project-active-card">
+        {{ with .Resources.GetMatch "featured*" }}
+        <div class="project-card-image">
+          <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+        </div>
+        {{ end }}
+        <div class="project-card-body">
+          <div class="project-card-tags">
+            {{ range .Params.tags }}<span class="project-tag">{{ . }}</span>{{ end }}
+          </div>
+          <h3 class="project-card-title">{{ .Title }}</h3>
+          <p class="project-card-summary">{{ .Params.summary }}</p>
+        </div>
+        <span class="project-status-badge">Active</span>
+      </div>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+
+  {{/* ── Research Themes ─────────────────────────────────────────────────── */}}
+  {{ $themes := where .Pages "Params.status" "theme" }}
+  {{ if $themes }}
+  <div class="projects-section">
+    <h2 class="projects-section-label">Research Themes</h2>
+    <p class="projects-section-desc">Lines of inquiry spanning multiple publications.</p>
+    <div class="projects-themes-list">
+      {{ range $themes.ByDate.Reverse }}
+      {{ $theme := . }}
+      <div class="project-theme">
+        <div class="project-theme-header">
+          {{ with .Resources.GetMatch "featured*" }}
+          <div class="project-theme-image">
+            <img src="{{ .RelPermalink }}" alt="{{ $theme.Title }}" loading="lazy">
+          </div>
+          {{ end }}
+          <div class="project-theme-meta">
+            <div class="project-card-tags">
+              {{ range .Params.tags }}<span class="project-tag">{{ . }}</span>{{ end }}
+            </div>
+            <h3 class="project-theme-title">{{ .Title }}</h3>
+            <p class="project-theme-summary">{{ .Params.summary }}</p>
+          </div>
+        </div>
+
+        {{/* Linked publications */}}
+        {{ with .Params.related_pubs }}
+        <div class="project-theme-pubs">
+          {{ range . }}
+          {{ $slug := . }}
+          {{ $pub := index (where site.RegularPages "File.Dir" (printf "publication/%s/" $slug)) 0 }}
+          {{ with $pub }}
+          <a class="project-pub-link" href="{{ .RelPermalink }}">
+            <span class="project-pub-title">{{ .Title }}</span>
+            <span class="project-pub-meta">
+              {{ with .Params.publication_types }}
+                {{ $t := index . 0 }}
+                {{ if eq $t "article-journal" }}Journal{{ else if eq $t "paper-conference" }}Conference{{ else if eq $t "chapter" }}Workshop{{ else if eq $t "manuscript" }}Preprint{{ end }}
+              {{ end }}
+              {{ if .Date }}· {{ .Date.Format "2006" }}{{ end }}
+            </span>
+          </a>
+          {{ end }}
+          {{ end }}
+        </div>
+        {{ end }}
+
+      </div>
+      {{ end }}
+    </div>
+  </div>
+  {{ end }}
+
+</section>
+{{ end }}

@@ -11,7 +11,7 @@ main:
     url: /publication/
     weight: 12
   - name: Projects
-    url: /projects/
+    url: /project/
     weight: 20
   - name: Meanwhile
     url: /meanwhile/
