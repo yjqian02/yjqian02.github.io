@@ -499,6 +499,82 @@ body {
   color: var(--teal);
 }
 
+/* ── Bio page: recent publications ──────────────────────────────────────── */
+
+.bio-recent-pubs {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+}
+
+.bio-pubs-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.bio-pubs-all {
+  font-size: 0.78rem;
+  color: var(--teal);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+
+.bio-pubs-all:hover { opacity: 1; }
+
+.bio-pubs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.bio-pub-entry {
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(128,128,128,0.1);
+}
+
+.bio-pub-entry:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.bio-pub-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.bio-pub-year {
+  font-size: 0.72rem;
+  color: var(--deep-purple);
+  opacity: 0.45;
+}
+
+.bio-pub-title {
+  font-size: 0.93rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 0.2rem;
+}
+
+.bio-pub-title a {
+  text-decoration: none;
+}
+
+.bio-pub-title a:hover {
+  color: var(--teal);
+}
+
+.bio-pub-venue {
+  font-size: 0.78rem;
+  font-style: italic;
+  opacity: 0.5;
+  margin: 0;
+}
+
 /* ── Projects page — two-column editorial ────────────────────────────────── */
 
 .projects-page {

@@ -1,0 +1,37 @@
+{{/* Recent publications block — shows 5 most recent pubs with type badge and year */}}
+{{ $pubs := where site.RegularPages "Section" "publication" }}
+{{ $pubs = where $pubs "Params.draft" "ne" true }}
+{{ $recent := first 5 ($pubs.ByDate.Reverse) }}
+
+<section class="bio-recent-pubs">
+  <div class="bio-pubs-header">
+    <h3 class="bio-section-heading">Recent Publications</h3>
+    <a href="/publication/" class="bio-pubs-all">All publications →</a>
+  </div>
+  <div class="bio-pubs-list">
+    {{ range $recent }}
+    {{ $typeLabel := "" }}
+    {{ $typeClass := "" }}
+    {{ with .Params.publication_types }}
+      {{ $t := index . 0 }}
+      {{ if eq $t "article-journal" }}
+        {{ $typeLabel = "Journal" }}{{ $typeClass = "badge-journal" }}
+      {{ else if eq $t "paper-conference" }}
+        {{ $typeLabel = "Conference" }}{{ $typeClass = "badge-conference" }}
+      {{ else if eq $t "chapter" }}
+        {{ $typeLabel = "Workshop" }}{{ $typeClass = "badge-workshop" }}
+      {{ else if eq $t "manuscript" }}
+        {{ $typeLabel = "Preprint" }}{{ $typeClass = "badge-preprint" }}
+      {{ end }}
+    {{ end }}
+    <div class="bio-pub-entry">
+      <div class="bio-pub-meta">
+        {{ if $typeLabel }}<span class="pub-badge {{ $typeClass }}">{{ $typeLabel }}</span>{{ end }}
+        <span class="bio-pub-year">{{ .Date.Format "2006" }}</span>
+      </div>
+      <h4 class="bio-pub-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+      {{ with .Params.publication }}<p class="bio-pub-venue">{{ . | markdownify }}</p>{{ end }}
+    </div>
+    {{ end }}
+  </div>
+</section>

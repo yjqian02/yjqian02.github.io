@@ -282,6 +282,28 @@ def write_hugo_folders(papers: list[dict]) -> None:
             continue
 
         folder_path.mkdir(exist_ok=True)
+
+        # Respect manual date override: if existing index.md has
+        # `date_manual: true`, preserve its date field.
+        existing_md = folder_path / "index.md"
+        if existing_md.exists():
+            import re as _re
+            existing_text = existing_md.read_text(encoding="utf-8")
+            if "date_manual: true" in existing_text:
+                m = _re.search(r"date: '([^']+)'", existing_text)
+                if m:
+                    content = _re.sub(
+                        r"(date: ')([^']+)(')",
+                        lambda x: x.group(1) + m.group(1) + x.group(3),
+                        content,
+                        count=1,
+                    )
+                    content = content.replace(
+                        "featured: false",
+                        "date_manual: true\nfeatured: false",
+                    )
+                    print(f"  Kept manual date for: {folder_name}")
+
         (folder_path / "index.md").write_text(content, encoding="utf-8")
 
     # Remove folders that are no longer in the scraped set,
