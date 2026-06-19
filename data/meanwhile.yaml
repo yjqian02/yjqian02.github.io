@@ -14,8 +14,8 @@
 # For videos, use the embed URL: https://www.youtube.com/embed/VIDEO_ID
 
 - type: text
-  text: "Outside of research, I care deeply about making computing more accessible and humane."
-  color: "#2a3a4f"
+  text: "Outside of research, I like to run and swim. I also like crafts like making plushies :))"
+  color: "#CB2957"
   size: small
 
 # To add an image: upload to static/media/meanwhile/ then uncomment:
@@ -25,26 +25,3 @@
 #   caption: "Optional caption"
 #   size: large
 
-- type: link
-  title: "Add an article or news link here"
-  source: Source Name
-  url: https://example.com
-  description: "A short description of why this is interesting."
-  size: medium
-
-- type: text
-  text: "The best ideas come when you're not trying to have them."
-  color: "#3b2a2a"
-  size: small
-
-- type: video
-  embed_url: https://www.youtube.com/embed/dQw4w9WgXcQ
-  title: "Add a video title here"
-  size: medium
-
-- type: project
-  title: "Add a project here"
-  description: "A short description of the project."
-  tag: Community
-  url: /projects/
-  size: medium

@@ -46,28 +46,27 @@ profiles:
   - icon: academicons/orcid
     url: https://orcid.org/0009-0005-6407-6981
 
-# interests moved to the custom news+interests block in content/_index.md
+# interests and education moved to the custom block in content/_index.md
 # interests:
 #   - human infrastructure for AI 👩🏻
 #   - AI evaluation ✅
 #   - future of work 👩🏻‍💻
 #   - social computing 🌐
 
-education:
-  - area: Ph.D. Computer Science
-    institution: Carnegie Mellon University
-    date_start: 2024-09-01
-    # date_end: 2020-12-31
-    summary: |
-      Focus on building tools and methods to support the human infrastructure behind AI development and evaluation. Advised by [Dr. Hong Shen](https://www.andrew.cmu.edu/user/hongs/) and [Dr. Laura Dabbish](http://www.lauradabbish.com/).
-    button:
-      text: 'Carnegie Mellon Website'
-      url: 'https://hcii.cmu.edu/people/alice-qian-zhang'
-  - area: Bachelor of Science Computer Science
-    institution: University of Minnesota
-    date_start: 2020-09-01
-    date_end: 2024-05-30
-    # summary: 
+# education:
+#   - area: Ph.D. Computer Science
+#     institution: Carnegie Mellon University
+#     date_start: 2024-09-01
+#     summary: |
+#       Focus on building tools and methods to support the human infrastructure behind AI development and evaluation. Advised by [Dr. Hong Shen](https://www.andrew.cmu.edu/user/hongs/) and [Dr. Laura Dabbish](http://www.lauradabbish.com/).
+#     button:
+#       text: 'Carnegie Mellon Website'
+#       url: 'https://hcii.cmu.edu/people/alice-qian-zhang'
+#   - area: Bachelor of Science Computer Science
+#     institution: University of Minnesota
+#     date_start: 2020-09-01
+#     date_end: 2024-05-30
+#     # summary:
       
 # work:
 #   - position: Director of Cloud Infrastructure
