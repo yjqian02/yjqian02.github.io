@@ -12,7 +12,7 @@ authors:
 date: '2026-01-01'
 publishDate: '2026-01-01'
 publication_types:
-- article-journal
-publication: '*ACM FAccT CRAFT 21*'
+- chapter
+publication: '*ACM FAccT CRAFT 2026*'
 featured: false
 ---

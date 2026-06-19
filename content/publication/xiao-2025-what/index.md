@@ -11,7 +11,7 @@ authors:
 date: '2025-01-01'
 publishDate: '2025-01-01'
 publication_types:
-- article-journal
+- manuscript
 publication: '*arXiv preprint arXiv:2506.05687*'
 featured: false
 ---
