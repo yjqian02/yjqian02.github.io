@@ -18,6 +18,13 @@
   color: "#CB2957"
   size: small
 
+
+- type: image
+  src: /media/meanwhile/mooncake_solo.jpg
+  alt: "Description"
+  caption: "Mooncake - Frog plushie"
+  size: large
+
 # To add an image: upload to static/media/meanwhile/ then uncomment:
 # - type: image
 #   src: /media/meanwhile/your-photo.jpg
