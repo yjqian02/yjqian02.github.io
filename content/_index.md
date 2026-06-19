@@ -84,15 +84,9 @@ sections:
       spacing:
         padding: ["0", "0", "0", "0"]
 
-  - block: collection
+  - block: recent-pubs
     id: pubs
-    content:
-      title: Publications
-      text: ""
-      filters:
-        folders:
-          - publication
-        exclude_featured: false
     design:
-      view: article-grid
+      spacing:
+        padding: ["0", "0", "3rem", "0"]
 ---

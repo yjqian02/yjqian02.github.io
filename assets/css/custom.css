@@ -1,9 +1,13 @@
-/* ── Brand colors ────────────────────────────────────────────────────────── */
+/* ── Color palette ───────────────────────────────────────────────────────── */
 :root {
-  --crimson: #C41E56;
-  --crimson-soft: rgba(196, 30, 86, 0.45);
-  --crimson-subtle: rgba(196, 30, 86, 0.1);
-  --pale-gray: #DCDCDC;
+  --bg:            #F2EDE4;          /* cream — page background              */
+  --teal:          #6DCBD5;          /* primary accent                       */
+  --teal-soft:     rgba(109,203,213,0.35);
+  --teal-subtle:   rgba(109,203,213,0.12);
+  --coral:         #E05A4E;          /* secondary accent / active            */
+  --coral-soft:    rgba(224,90,78,0.35);
+  --deep-purple:   #3C1A5B;          /* dark accent / section headers        */
+  --text:          #1a1a1a;          /* body text — near-black on cream      */
 }
 
 /* ── Typography: Lora only ───────────────────────────────────────────────── */
@@ -13,27 +17,34 @@ body, * {
   font-family: 'Lora', Georgia, serif;
 }
 
-/* ── Break Hugo Blox container max-width (remove constraint, not force width) */
-#bio > *, #bio > * > *,
-#info > *, #info > * > * {
-  max-width: none !important;
+body {
+  background-color: var(--bg);
+  color: var(--text);
 }
 
-/* ── Homepage hero (photo + bio) ────────────────────────────────────────── */
-/*
- * Controlled breakout: wider than Hugo Blox's article container but not
- * full-bleed. `left: 50% + translateX(-50%)` centers on the viewport.
- * `min(1000px, …)` caps width so it doesn't stretch on very wide screens.
- */
+/* ── Break Hugo Blox width constraints for bio/info sections ─────────────── */
+#bio,
+#info {
+  width: 100%;
+}
+
+#bio > *,
+#bio > * > *,
+#info > *,
+#info > * > * {
+  max-width: none !important;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+/* ── Homepage hero (photo + bio) ─────────────────────────────────────────── */
+
 .homepage-hero {
   display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 2.5rem;
+  grid-template-columns: 200px 1fr;
+  gap: 3rem;
   align-items: start;
-  width: min(1000px, calc(100vw - 4rem));
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 100%;
 }
 
 .hero-avatar {
@@ -108,6 +119,10 @@ body, * {
   border-color: var(--teal);
 }
 
+.hero-news {
+  margin-top: 0;
+}
+
 .hero-right {
   padding-top: 0.25rem;
 }
@@ -130,17 +145,13 @@ body, * {
   .hero-cv-btn { text-align: left; display: inline-block; }
 }
 
-/* ── Homepage info row (news | education | interests) ───────────────────── */
+/* ── Homepage info row (education + interests) ───────────────────────────── */
 
 .bio-info-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 2.5rem;
-  width: min(1000px, calc(100vw - 4rem));
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  padding-top: 0.5rem;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  width: 100%;
 }
 
 .bio-section-heading {
@@ -211,7 +222,7 @@ body, * {
   padding: 0.2rem 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .bio-info-row {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -221,9 +232,9 @@ body, * {
 /* ── Publications list page ──────────────────────────────────────────────── */
 
 .pub-list-page {
-  max-width: 1000px;
+  max-width: 860px;
   margin: 0 auto;
-  padding: 3rem clamp(1.5rem, 5vw, 3rem) 5rem;
+  padding: 3rem 1.5rem 5rem;
 }
 
 .pub-list-title {
@@ -294,22 +305,45 @@ body, * {
   flex-wrap: wrap;
 }
 
-/* Type badges */
+/* Type badges — colored, fully readable on cream background */
 .pub-badge {
   font-size: 0.65rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   flex-shrink: 0;
-  padding: 0;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
   background: none;
-  color: var(--crimson);
-  opacity: 0.7;
+  border: 1px solid transparent;
 }
 
-.badge-preprint, .badge-other {
-  color: var(--pale-gray);
-  opacity: 0.55;
+.badge-conference {
+  color: var(--teal);
+  border-color: var(--teal-soft);
+}
+
+.badge-journal {
+  color: var(--deep-purple);
+  border-color: rgba(60,26,91,0.3);
+}
+
+.badge-workshop {
+  color: var(--coral);
+  border-color: var(--coral-soft);
+}
+
+.badge-preprint {
+  color: var(--deep-purple);
+  border-color: rgba(60,26,91,0.35);
+  border-style: dashed;
+  opacity: 0.85;
+}
+
+.badge-other {
+  color: var(--text);
+  opacity: 0.4;
+  border-color: rgba(128,128,128,0.2);
 }
 
 .pub-venue {
@@ -360,9 +394,12 @@ body, * {
 
 .pub-btn:hover { opacity: 1; }
 
-.pub-btn-pdf   { border-color: var(--crimson-soft); }
-.pub-btn-video { border-color: var(--crimson-soft); }
-.pub-btn:hover { border-color: var(--crimson); opacity: 1; }
+.pub-btn-pdf   { border-color: var(--teal-soft); color: var(--teal); }
+.pub-btn-video { border-color: var(--coral-soft); color: var(--coral); }
+.pub-btn-cite  { border-color: rgba(128,128,128,0.25); }
+
+.pub-btn-pdf:hover   { border-color: var(--teal); }
+.pub-btn-video:hover { border-color: var(--coral); }
 
 @media (max-width: 600px) {
   .pub-entry.has-thumb {
@@ -462,6 +499,82 @@ body, * {
   color: var(--teal);
 }
 
+/* ── Bio page: recent publications ──────────────────────────────────────── */
+
+.bio-recent-pubs {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 1.5rem 2rem;
+}
+
+.bio-pubs-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.bio-pubs-all {
+  font-size: 0.78rem;
+  color: var(--teal);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.15s;
+}
+
+.bio-pubs-all:hover { opacity: 1; }
+
+.bio-pubs-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.bio-pub-entry {
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(128,128,128,0.1);
+}
+
+.bio-pub-entry:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.bio-pub-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.bio-pub-year {
+  font-size: 0.72rem;
+  color: var(--deep-purple);
+  opacity: 0.45;
+}
+
+.bio-pub-title {
+  font-size: 0.93rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0 0 0.2rem;
+}
+
+.bio-pub-title a {
+  text-decoration: none;
+}
+
+.bio-pub-title a:hover {
+  color: var(--teal);
+}
+
+.bio-pub-venue {
+  font-size: 0.78rem;
+  font-style: italic;
+  opacity: 0.5;
+  margin: 0;
+}
+
 /* ── Projects page — two-column editorial ────────────────────────────────── */
 
 .projects-page {
@@ -488,7 +601,7 @@ body, * {
   margin-bottom: 4rem;
 }
 
-/* Section label with crimson-rule left accent */
+/* Section label with teal rule */
 .projects-section-rule {
   display: flex;
   align-items: center;
@@ -657,11 +770,10 @@ body, * {
 
 /* ── Meanwhile — magazine format ─────────────────────────────────────────── */
 
-/* Strip default page padding so slides go edge-to-edge */
 .mag-outer {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 68px); /* approx nav height */
+  height: calc(100vh - 68px);
   overflow: hidden;
 }
 
@@ -804,11 +916,10 @@ body, * {
   font-size: 0.65rem;
   font-weight: 600;
   text-transform: uppercase;
-  padding: 0.2rem 0.55rem;
-  border-radius: 20px;
-  background: var(--crimson-subtle);
-  color: var(--crimson);
-  border: 1px solid var(--crimson-soft);
+  letter-spacing: 0.14em;
+  color: var(--teal);
+  display: block;
+  margin-bottom: 0.4rem;
 }
 
 .mag-travel-location {
@@ -913,7 +1024,7 @@ body, * {
   background: rgba(255,255,255,0.28);
 }
 
-/* For light slides (link/text on cream), use dark arrow */
+/* Light slides get a dark arrow */
 .slide-type-link .mag-arrow-btn {
   background: rgba(0,0,0,0.08);
   border-color: rgba(0,0,0,0.15);
