@@ -1,0 +1,73 @@
+{{ define "main" }}
+<article class="pub-single">
+
+  <div class="pub-single-header">
+    {{/* Type badge */}}
+    {{ $typeLabel := "" }}
+    {{ $typeClass := "" }}
+    {{ with .Params.publication_types }}
+      {{ $t := index . 0 }}
+      {{ if eq $t "article-journal" }}
+        {{ $typeLabel = "Journal" }}{{ $typeClass = "badge-journal" }}
+      {{ else if eq $t "paper-conference" }}
+        {{ $typeLabel = "Conference" }}{{ $typeClass = "badge-conference" }}
+      {{ else if eq $t "chapter" }}
+        {{ $typeLabel = "Workshop" }}{{ $typeClass = "badge-workshop" }}
+      {{ else if eq $t "manuscript" }}
+        {{ $typeLabel = "Preprint" }}{{ $typeClass = "badge-preprint" }}
+      {{ else }}
+        {{ $typeLabel = $t }}{{ $typeClass = "badge-other" }}
+      {{ end }}
+    {{ end }}
+
+    <div class="pub-single-meta">
+      {{ if $typeLabel }}
+      <span class="pub-badge {{ $typeClass }}">{{ $typeLabel }}</span>
+      {{ end }}
+      <span class="pub-single-date">{{ .Date.Format "2006" }}</span>
+    </div>
+
+    <h1 class="pub-single-title">{{ .Title }}</h1>
+
+    {{ with .Params.authors }}
+    <p class="pub-single-authors">{{ delimit . " · " }}</p>
+    {{ end }}
+
+    {{ with .Params.publication }}
+    <p class="pub-single-venue">{{ . | markdownify }}</p>
+    {{ end }}
+
+    <div class="pub-single-actions">
+      {{ with .Params.url_pdf }}{{ if . }}
+      <a href="{{ . }}" class="pub-btn pub-btn-pdf" target="_blank" rel="noopener">PDF</a>
+      {{ end }}{{ end }}
+      {{ with .Params.url_video }}{{ if . }}
+      <a href="{{ . }}" class="pub-btn pub-btn-video" target="_blank" rel="noopener">Video</a>
+      {{ end }}{{ end }}
+      {{ with .Params.url_source }}{{ if . }}
+      <a href="{{ . }}" class="pub-btn" target="_blank" rel="noopener">Source</a>
+      {{ end }}{{ end }}
+    </div>
+  </div>
+
+  {{/* Featured image */}}
+  {{ with .Resources.GetMatch "featured*" }}
+  <div class="pub-single-image">
+    <img src="{{ .RelPermalink }}" alt="{{ $.Title }}" loading="lazy">
+  </div>
+  {{ end }}
+
+  {{/* Abstract / body */}}
+  {{ if .Content }}
+  <div class="pub-single-abstract">
+    <h2 class="pub-single-section-label">Abstract</h2>
+    {{ .Content }}
+  </div>
+  {{ end }}
+
+  <div class="pub-single-back">
+    <a href="/publication/">← All Publications</a>
+  </div>
+
+</article>
+{{ end }}
