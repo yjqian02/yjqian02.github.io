@@ -1,43 +1,32 @@
-# Meanwhile page content
-# Each item becomes a cell in the editorial grid.
+# Meanwhile — magazine content
 #
-# Types:  text | image | link | video | project
-# Sizes:  small (1×1) | medium (2×1) | large (2×2) | hero (3×2)
+# Types:
+#   text    — colored full-page text block
+#   image   — full-bleed photo
+#   travel  — full-bleed photo with location/date overlay panel
+#   link    — article or link card
 #
-# Text cells accept a `color` field for the background (any CSS color):
-#   color: "#2a3a4f"   dark blue-grey
-#   color: "#3b2a2a"   dark wine
-#   color: "#1e2e1e"   dark forest
-#   color: "#2e2a1a"   dark ochre
-#
-# For images, place files in static/media/meanwhile/ and use /media/meanwhile/filename.jpg
-# For videos, use the embed URL: https://www.youtube.com/embed/VIDEO_ID
+# For images: place files in static/media/meanwhile/ and reference as /media/meanwhile/filename.jpg
+# For travel entries, add: location, date (string), text (optional), src (optional photo)
 
 - type: text
   text: "Outside of research, I like to run and swim. I also like crafts like making plushies :))"
-  color: "#CB2957"
-  size: small
-
+  color: "#4B1A6B"
 
 - type: image
   src: /media/meanwhile/mooncake_solo.jpg
-  alt: "green frog plush on couch"
-  caption: "Mooncake - Frog plushie made for the CoEx lab"
-  size: large
-
+  alt: "green frog plush"
+  caption: "Mooncake — frog plushie made for the CoEx lab"
 
 - type: image
   src: /media/meanwhile/couples_frog.jpg
   alt: "green and pink frog plush set"
   caption: "frog set :)"
-  size: large
 
-
-
-# To add an image: upload to static/media/meanwhile/ then uncomment:
-# - type: image
+# To add a travel entry:
+# - type: travel
 #   src: /media/meanwhile/your-photo.jpg
 #   alt: "Description"
-#   caption: "Optional caption"
-#   size: large
-
+#   location: "Tokyo, Japan"
+#   date: "March 2025"
+#   text: "Optional short caption or reflection."

@@ -1,75 +1,99 @@
 {{ define "main" }}
-<section class="meanwhile-page">
+<div class="mag-outer">
 
-  <div class="meanwhile-header">
-    <h1 class="meanwhile-title">{{ .Title }}</h1>
-    {{ with .Description }}<p class="meanwhile-subtitle">{{ . }}</p>{{ end }}
+  <div class="mag-topbar">
+    <h1 class="mag-page-title">{{ .Title }}</h1>
+    <div class="mag-view-toggle">
+      <button class="mag-toggle-btn is-active" id="btn-vertical" onclick="setMagView('vertical')">↕ Scroll</button>
+      <button class="mag-toggle-btn" id="btn-horizontal" onclick="setMagView('horizontal')">→ Swipe</button>
+    </div>
   </div>
 
-  <div class="meanwhile-grid">
-    {{ range site.Data.meanwhile }}
+  <div class="mag-slides mag-vertical" id="mag-slides">
+    {{ range $i, $item := site.Data.meanwhile }}
+    <div class="mag-slide slide-type-{{ .type | default "text" }}" id="mag-slide-{{ $i }}">
 
-    {{/* ── text ── */}}
-    {{ if eq .type "text" }}
-    <div class="meanwhile-cell type-text size-{{ .size | default "small" }}"
-         {{ with .color }}style="background-color: {{ . }};"{{ end }}>
-      <p class="cell-text-body">{{ .text }}</p>
-      {{ with .attribution }}<span class="cell-attribution">— {{ . }}</span>{{ end }}
-    </div>
-
-    {{/* ── image ── */}}
-    {{ else if eq .type "image" }}
-    {{ if .src }}
-    <div class="meanwhile-cell type-image size-{{ .size | default "large" }}">
-      <img src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">
-      {{ with .caption }}<div class="cell-caption">{{ . }}</div>{{ end }}
-    </div>
-    {{ end }}
-
-    {{/* ── link ── */}}
-    {{ else if eq .type "link" }}
-    <a class="meanwhile-cell type-link size-{{ .size | default "medium" }}"
-       href="{{ .url }}" target="_blank" rel="noopener noreferrer">
-      {{ with .image }}<img src="{{ . }}" alt="" loading="lazy">{{ end }}
-      <div class="cell-link-body">
-        {{ with .source }}<span class="cell-source">{{ . }}</span>{{ end }}
-        <h3>{{ .title }}</h3>
-        {{ with .description }}<p>{{ . }}</p>{{ end }}
+      {{/* ── full-bleed image ── */}}
+      {{ if eq .type "image" }}
+      {{ if .src }}
+      <img class="mag-full-img" src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">
+      <div class="mag-slide-overlay">
+        {{ with .caption }}<p class="mag-caption">{{ . }}</p>{{ end }}
       </div>
-      <span class="cell-arrow">↗</span>
-    </a>
+      {{ end }}
 
-    {{/* ── video ── */}}
-    {{ else if eq .type "video" }}
-    <div class="meanwhile-cell type-video size-{{ .size | default "medium" }}">
-      <div class="cell-video-wrapper">
-        <iframe src="{{ .embed_url }}"
-                title="{{ .title | default "Video" }}"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                loading="lazy"></iframe>
+      {{/* ── travel: full-bleed image + text panel ── */}}
+      {{ else if eq .type "travel" }}
+      {{ if .src }}
+      <img class="mag-full-img" src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">
+      {{ end }}
+      <div class="mag-travel-content">
+        <span class="mag-travel-label">Travel</span>
+        {{ with .location }}<h2 class="mag-travel-location">{{ . }}</h2>{{ end }}
+        {{ with .date }}<span class="mag-travel-date">{{ . }}</span>{{ end }}
+        {{ with .text }}<p class="mag-travel-text">{{ . }}</p>{{ end }}
       </div>
-      {{ with .title }}<div class="cell-caption">{{ . }}</div>{{ end }}
+
+      {{/* ── text block ── */}}
+      {{ else if eq .type "text" }}
+      <div class="mag-text-fill" {{ with .color }}style="background:{{ . }}"{{ end }}>
+        <p class="mag-text-body">{{ .text }}</p>
+        {{ with .attribution }}<span class="mag-attribution">— {{ . }}</span>{{ end }}
+      </div>
+
+      {{/* ── link / article ── */}}
+      {{ else if eq .type "link" }}
+      <div class="mag-link-fill">
+        {{ if .image }}<img class="mag-link-img" src="{{ .image }}" alt="">{{ end }}
+        <div class="mag-link-body">
+          {{ with .source }}<span class="mag-source-label">{{ . }}</span>{{ end }}
+          <h2 class="mag-link-title">{{ .title }}</h2>
+          {{ with .description }}<p class="mag-link-desc">{{ . }}</p>{{ end }}
+          <a class="mag-link-cta" href="{{ .url }}" target="_blank" rel="noopener">Read ↗</a>
+        </div>
+      </div>
+
+      {{ end }}
+
+      {{/* floating advance arrow */}}
+      {{ $total := len site.Data.meanwhile }}
+      {{ $next := add $i 1 }}
+      {{ if lt $next $total }}
+      <button class="mag-arrow-btn" onclick="magGoTo({{ $next }})" aria-label="Next">
+        <span class="mag-arrow-icon">↓</span>
+      </button>
+      {{ end }}
+
     </div>
-
-    {{/* ── project ── */}}
-    {{ else if eq .type "project" }}
-    <a class="meanwhile-cell type-project size-{{ .size | default "medium" }}"
-       href="{{ .url }}"
-       {{ if strings.HasPrefix .url "http" }}target="_blank" rel="noopener noreferrer"{{ end }}>
-      {{ with .image }}<img src="{{ . }}" alt="{{ $.title | default "" }}" loading="lazy">{{ end }}
-      <div class="cell-project-body">
-        {{ with .tag }}<span class="cell-tag">{{ . }}</span>{{ end }}
-        <h3>{{ .title }}</h3>
-        {{ with .description }}<p>{{ . }}</p>{{ end }}
-      </div>
-      <span class="cell-arrow">→</span>
-    </a>
-
-    {{ end }}
     {{ end }}
   </div>
 
-</section>
+</div>
+
+<script>
+(function () {
+  window.magGoTo = function (index) {
+    var slide = document.getElementById('mag-slide-' + index);
+    if (!slide) return;
+    var container = document.getElementById('mag-slides');
+    var isH = container.classList.contains('mag-horizontal');
+    slide.scrollIntoView({
+      behavior: 'smooth',
+      block: isH ? 'nearest' : 'start',
+      inline: isH ? 'start' : 'nearest'
+    });
+  };
+
+  window.setMagView = function (mode) {
+    var container = document.getElementById('mag-slides');
+    container.className = 'mag-slides mag-' + mode;
+    document.getElementById('btn-vertical').classList.toggle('is-active', mode === 'vertical');
+    document.getElementById('btn-horizontal').classList.toggle('is-active', mode === 'horizontal');
+    document.querySelectorAll('.mag-arrow-icon').forEach(function (el) {
+      el.textContent = mode === 'vertical' ? '↓' : '→';
+    });
+    magGoTo(0);
+  };
+})();
+</script>
 {{ end }}
