@@ -21,9 +21,18 @@
 
 - type: image
   src: /media/meanwhile/mooncake_solo.jpg
-  alt: "Description"
-  caption: "Mooncake - Frog plushie"
+  alt: "green frog plush on couch"
+  caption: "Mooncake - Frog plushie made for the CoEx lab"
   size: large
+
+
+- type: image
+  src: /media/meanwhile/couples_frog.jpg
+  alt: "green and pink frog plush set"
+  caption: "frog set :)"
+  size: large
+
+
 
 # To add an image: upload to static/media/meanwhile/ then uncomment:
 # - type: image
