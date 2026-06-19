@@ -31,10 +31,10 @@ sections:
             <div class="hero-news">
               <h3 class="bio-section-heading">Recent News</h3>
               <ul class="bio-news-list">
-                <li><strong>May 2025</strong> — Paper accepted at CSCW 2025: "AURA: Supporting Responsible AI Content Work"</li>
-                <li><strong>Apr 2025</strong> — Presented at CHI 2025 workshop on AI safety and red teaming</li>
-                <li><strong>Sep 2024</strong> — Started Ph.D. at Carnegie Mellon University HCII</li>
-                <li><strong>May 2024</strong> — Graduated with B.S. Computer Science from University of Minnesota</li>
+                <li><strong>May 2025.</strong> Paper accepted at CSCW 2025: "AURA: Supporting Responsible AI Content Work"</li>
+                <li><strong>Apr 2025.</strong> Presented at CHI 2025 workshop on AI safety and red teaming</li>
+                <li><strong>Sep 2024.</strong> Started Ph.D. at Carnegie Mellon University HCII</li>
+                <li><strong>May 2024.</strong> Graduated with B.S. Computer Science from University of Minnesota</li>
               </ul>
             </div>
           </div>
