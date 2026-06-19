@@ -28,15 +28,6 @@ sections:
               <a href="https://orcid.org/0009-0005-6407-6981">ORCID</a>
             </nav>
             <a href="/uploads/resume.pdf" class="hero-cv-btn">Download CV →</a>
-            <div class="hero-news">
-              <h3 class="bio-section-heading">Recent News</h3>
-              <ul class="bio-news-list">
-                <li><strong>May 2025</strong> — Paper accepted at CSCW 2025: "AURA: Supporting Responsible AI Content Work"</li>
-                <li><strong>Apr 2025</strong> — Presented at CHI 2025 workshop on AI safety and red teaming</li>
-                <li><strong>Sep 2024</strong> — Started Ph.D. at Carnegie Mellon University HCII</li>
-                <li><strong>May 2024</strong> — Graduated with B.S. Computer Science from University of Minnesota</li>
-              </ul>
-            </div>
           </div>
           <div class="hero-right">
             <p>Hi! I am a Ph.D. student in the Human-Computer Interaction Institute (HCII) at Carnegie Mellon University advised by <a href="https://www.hcii.cmu.edu/people/hong-shen">Hong Shen</a> and <a href="https://www.lauradabbish.com/">Laura Dabbish</a>. I collaborated with <a href="https://www.jinasuh.com/">Jina Suh</a>, <a href="https://marylgray.org/">Mary L. Gray</a>, and <a href="https://ischool.uw.edu/people/faculty/profile/marycz">Mary Czerwinski</a> at Microsoft Research on research focused on identifying and addressing AI harms through red teaming.</p>
@@ -55,6 +46,15 @@ sections:
       title: ""
       text: |-
         <div class="bio-info-row">
+          <div class="bio-col bio-col-news">
+            <h3 class="bio-section-heading">Recent News</h3>
+            <ul class="bio-news-list">
+              <li><strong>May 2025.</strong> Paper accepted at CSCW 2025: "AURA: Supporting Responsible AI Content Work"</li>
+              <li><strong>Apr 2025.</strong> Presented at CHI 2025 workshop on AI safety and red teaming</li>
+              <li><strong>Sep 2024.</strong> Started Ph.D. at Carnegie Mellon University HCII</li>
+              <li><strong>May 2024.</strong> Graduated with B.S. Computer Science from University of Minnesota</li>
+            </ul>
+          </div>
           <div class="bio-col bio-col-education">
             <h3 class="bio-section-heading">Education</h3>
             <ul class="bio-education-list">
