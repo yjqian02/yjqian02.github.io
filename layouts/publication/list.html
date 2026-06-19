@@ -3,62 +3,38 @@
 
   <h1 class="pub-list-title">Publications</h1>
 
-  {{/* Group publications by year, descending */}}
+  {{/* Group publications by year descending using Hugo's built-in GroupByDate */}}
   {{ $pubs := where site.RegularPages "Section" "publication" }}
   {{ $pubs = where $pubs "Params.draft" "ne" true }}
-  {{ $byYear := dict }}
-  {{ range $pubs }}
-    {{ $year := .Date.Format "2006" }}
-    {{ $existing := index $byYear $year | default slice }}
-    {{ $byYear = merge $byYear (dict $year (append $existing .)) }}
-  {{ end }}
 
-  {{ $years := slice }}
-  {{ range $year, $_ := $byYear }}
-    {{ $years = append $years $year }}
-  {{ end }}
-  {{ $years = sort $years "value" "desc" }}
-
-  {{ range $years }}
-  {{ $year := . }}
-  {{ $yearPubs := index $byYear $year }}
+  {{ range ($pubs.GroupByDate "2006").Reverse }}
   <div class="pub-year-group">
-    <h2 class="pub-year-label">{{ $year }}</h2>
+    <h2 class="pub-year-label">{{ .Key }}</h2>
     <div class="pub-year-list">
-      {{ range sort $yearPubs "Date" "desc" }}
-      {{ $pub := . }}
+      {{ range .Pages }}
 
-      {{/* Determine type badge label */}}
+      {{/* Determine type badge */}}
       {{ $typeLabel := "" }}
       {{ $typeClass := "" }}
       {{ with .Params.publication_types }}
         {{ $t := index . 0 }}
         {{ if eq $t "article-journal" }}
-          {{ $typeLabel = "Journal" }}
-          {{ $typeClass = "badge-journal" }}
+          {{ $typeLabel = "Journal" }}{{ $typeClass = "badge-journal" }}
         {{ else if eq $t "paper-conference" }}
-          {{ $typeLabel = "Conference" }}
-          {{ $typeClass = "badge-conference" }}
+          {{ $typeLabel = "Conference" }}{{ $typeClass = "badge-conference" }}
         {{ else if eq $t "chapter" }}
-          {{ $typeLabel = "Workshop" }}
-          {{ $typeClass = "badge-workshop" }}
+          {{ $typeLabel = "Workshop" }}{{ $typeClass = "badge-workshop" }}
         {{ else if eq $t "manuscript" }}
-          {{ $typeLabel = "Preprint" }}
-          {{ $typeClass = "badge-preprint" }}
+          {{ $typeLabel = "Preprint" }}{{ $typeClass = "badge-preprint" }}
         {{ else }}
-          {{ $typeLabel = $t }}
-          {{ $typeClass = "badge-other" }}
+          {{ $typeLabel = $t }}{{ $typeClass = "badge-other" }}
         {{ end }}
       {{ end }}
 
-      {{/* Thumbnail: page resource image or featured_image */}}
+      {{/* Thumbnail: page resource named featured.* */}}
       {{ $thumb := "" }}
       {{ with .Resources.GetMatch "featured*" }}
         {{ $thumb = .RelPermalink }}
-      {{ else }}
-        {{ with .Params.image }}
-          {{ $thumb = .filename | printf "/media/%s" }}
-        {{ end }}
       {{ end }}
 
       <article class="pub-entry{{ if $thumb }} has-thumb{{ end }}">
@@ -80,22 +56,16 @@
             <a href="{{ .RelPermalink }}">{{ .Title }}</a>
           </h3>
           <p class="pub-authors">
-            {{ with .Params.authors }}
-              {{ delimit . ", " }}
-            {{ end }}
+            {{ with .Params.authors }}{{ delimit . ", " }}{{ end }}
           </p>
           <div class="pub-actions">
-            {{ with .Params.url_pdf }}
-            {{ if . }}
+            {{ with .Params.url_pdf }}{{ if . }}
             <a href="{{ . }}" class="pub-btn pub-btn-pdf" target="_blank" rel="noopener">PDF</a>
-            {{ end }}
-            {{ end }}
-            {{ with .Params.url_video }}
-            {{ if . }}
+            {{ end }}{{ end }}
+            {{ with .Params.url_video }}{{ if . }}
             <a href="{{ . }}" class="pub-btn pub-btn-video" target="_blank" rel="noopener">Video</a>
-            {{ end }}
-            {{ end }}
-            <a href="{{ $pub.RelPermalink }}" class="pub-btn pub-btn-cite">Details</a>
+            {{ end }}{{ end }}
+            <a href="{{ .RelPermalink }}" class="pub-btn pub-btn-cite">Details</a>
           </div>
         </div>
       </article>
