@@ -1,3 +1,10 @@
+/* ── Break Hugo Blox prose width limits for bio blocks ──────────────────── */
+
+#bio .prose,
+#info .prose {
+  max-width: none;
+}
+
 /* ── Homepage hero (photo + bio) ────────────────────────────────────────── */
 
 .homepage-hero {
@@ -5,7 +12,7 @@
   grid-template-columns: 200px 1fr;
   gap: 3rem;
   align-items: start;
-  max-width: 960px;
+  width: 100%;
 }
 
 .hero-avatar {
@@ -106,7 +113,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3rem;
-  max-width: 960px;
+  width: 100%;
 }
 
 .bio-section-heading {
