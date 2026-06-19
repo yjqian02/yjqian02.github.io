@@ -1,0 +1,96 @@
+Meanwhile — Image & Slide Size Guide
+=====================================
+
+FULL-PAGE SLIDES
+----------------
+Types: image, travel, text, link
+
+Each slide fills the entire viewport (100% screen height × 100% screen width).
+Use these for a single strong photo or a full-color text moment.
+
+Recommended image dimensions:
+  • Landscape:  1920 × 1080 px  (16:9)  ← ideal for most screens
+  • Portrait:   1200 × 1600 px  (3:4)   works but crops on wide screens
+  • Minimum width: 1440 px to avoid blurriness on high-res displays
+  • File size: keep under 800 KB (JPEG quality 80–85)
+
+YAML example:
+  - type: image
+    src: /media/meanwhile/tokyo-night.jpg
+    alt: "Description for screen readers"
+    caption: "Optional caption shown at bottom"
+
+  - type: travel
+    src: /media/meanwhile/kyoto-temple.jpg
+    location: "Kyoto, Japan"
+    date: "March 2025"
+    text: "Optional short reflection."
+
+
+COLLAGE SLIDES
+--------------
+Type: collage
+
+Multiple items arranged in a grid, still filling the full viewport.
+Mix photos, text panels, or any combination.
+
+Default grid: 2 columns. Add `columns: 3` for three columns.
+
+Item span (how many columns an item takes):
+  • span: 1  →  occupies 1 column  (default)
+  • span: 2  →  occupies 2 columns (wide/banner)
+  • span: 3  →  full width in a 3-column grid
+
+Recommended image sizes per item (2-column grid):
+  • span 1:  800 × 600 px minimum  (4:3 aspect)
+  • span 2:  1600 × 600 px minimum (wide banner)
+
+Recommended image sizes per item (3-column grid):
+  • span 1:  600 × 500 px minimum
+  • span 2:  1200 × 500 px minimum
+  • span 3:  1800 × 500 px minimum
+
+Recommended max items per collage: 4–6
+(more than 6 gets crowded on phones)
+
+YAML example (2-column, 4 items):
+  - type: collage
+    columns: 2          # optional, default is 2
+    items:
+      - src: /media/meanwhile/photo-a.jpg
+        alt: "..."
+        caption: "optional"
+        span: 2         # this photo spans both columns
+      - src: /media/meanwhile/photo-b.jpg
+        alt: "..."
+      - src: /media/meanwhile/photo-c.jpg
+        alt: "..."
+      - type: text
+        text: "A little note about this trip."
+        color: "#4B1A6B"   # any CSS color for the background
+
+YAML example (3-column):
+  - type: collage
+    columns: 3
+    items:
+      - src: /media/meanwhile/photo-1.jpg
+        span: 2
+      - src: /media/meanwhile/photo-2.jpg
+        span: 1
+      - src: /media/meanwhile/photo-3.jpg
+        span: 1
+      - src: /media/meanwhile/photo-4.jpg
+        span: 1
+      - src: /media/meanwhile/photo-5.jpg
+        span: 1
+
+
+GENERAL TIPS
+------------
+• Format: JPEG for photos (.jpg), PNG only if you need transparency
+• Name files clearly: tokyo-2025-shibuya.jpg — not IMG_5342.jpg
+• Place all files in: static/media/meanwhile/
+• Reference in YAML as: /media/meanwhile/filename.jpg
+• The scroll/swipe toggle at the top of the page switches between
+  vertical scroll-snap (default) and horizontal carousel — both
+  layouts use the same full-page and collage slides.

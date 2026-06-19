@@ -334,9 +334,9 @@ body {
 }
 
 .badge-preprint {
-  color: var(--text);
-  opacity: 0.45;
-  border-color: rgba(128,128,128,0.25);
+  color: var(--teal);
+  border-color: var(--teal-soft);
+  border-style: dashed;
 }
 
 .badge-other {
@@ -957,4 +957,63 @@ body {
 
 .slide-type-link .mag-arrow-btn:hover {
   background: rgba(0,0,0,0.15);
+}
+
+/* ── Collage slide ───────────────────────────────────────────────────────── */
+
+.mag-collage-fill {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--collage-cols, 2), 1fr);
+  gap: 3px;
+}
+
+.mag-collage-item {
+  position: relative;
+  overflow: hidden;
+  background: var(--deep-purple);
+  min-height: 0;
+}
+
+.mag-collage-item.span-2 {
+  grid-column: span 2;
+}
+
+.mag-collage-item.span-3 {
+  grid-column: span 3;
+}
+
+.mag-collage-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.mag-collage-item.is-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 2rem;
+}
+
+.mag-collage-text {
+  font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+  color: rgba(255,255,255,0.9);
+  margin: 0;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.mag-collage-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.5rem 0.75rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.55));
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.82);
+  font-style: italic;
 }
