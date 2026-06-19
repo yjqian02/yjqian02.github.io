@@ -36,7 +36,7 @@ header:
     show_theme_chooser: true
     logo:
       text: "Alice Qian"
-      filename: girl-with-cat-original.jpg
+      filename: icon.png
 
 # Site footer
 footer:
