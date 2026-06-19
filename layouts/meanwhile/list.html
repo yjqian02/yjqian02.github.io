@@ -53,6 +53,23 @@
         </div>
       </div>
 
+      {{/* ── collage: multiple items in one slide ── */}}
+      {{ else if eq .type "collage" }}
+      <div class="mag-collage-fill"
+           {{ with .columns }}style="--collage-cols:{{ . }}"{{ end }}>
+        {{ range .items }}
+        <div class="mag-collage-item{{ if .span }} span-{{ .span }}{{ end }}{{ if eq .type "text" }} is-text{{ end }}"
+             {{ if and (eq .type "text") .color }}style="background:{{ .color }}"{{ end }}>
+          {{ if .src }}
+          <img src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">
+          {{ with .caption }}<div class="mag-collage-caption">{{ . }}</div>{{ end }}
+          {{ else if eq .type "text" }}
+          <p class="mag-collage-text">{{ .text }}</p>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+
       {{ end }}
 
       {{/* floating advance arrow */}}

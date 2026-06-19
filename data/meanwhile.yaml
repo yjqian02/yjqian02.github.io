@@ -1,32 +1,37 @@
 # Meanwhile — magazine content
 #
-# Types:
-#   text    — colored full-page text block
-#   image   — full-bleed photo
-#   travel  — full-bleed photo with location/date overlay panel
-#   link    — article or link card
+# Slide types:
+#   image    — full-page photo with optional caption
+#   travel   — full-page photo + location / date overlay
+#   text     — full-page colored text block
+#   link     — article or link with optional image
+#   collage  — multiple images/text in one viewport (see IMAGE_GUIDE.txt)
 #
-# For images: place files in static/media/meanwhile/ and reference as /media/meanwhile/filename.jpg
-# For travel entries, add: location, date (string), text (optional), src (optional photo)
+# For images: place files in static/media/meanwhile/
+# Reference as: /media/meanwhile/filename.jpg
+#
+# See static/media/meanwhile/IMAGE_GUIDE.txt for recommended dimensions.
 
 - type: text
   text: "Outside of research, I like to run and swim. I also like crafts like making plushies :))"
   color: "#4B1A6B"
 
-- type: image
-  src: /media/meanwhile/mooncake_solo.jpg
-  alt: "green frog plush"
-  caption: "Mooncake — frog plushie made for the CoEx lab"
+- type: collage
+  columns: 2
+  items:
+    - src: /media/meanwhile/mooncake_solo.jpg
+      alt: "green frog plush"
+      caption: "Mooncake — frog plushie made for the CoEx lab"
+      span: 1
+    - src: /media/meanwhile/couples_frog.jpg
+      alt: "green and pink frog plush set"
+      caption: "frog set :)"
+      span: 1
 
-- type: image
-  src: /media/meanwhile/couples_frog.jpg
-  alt: "green and pink frog plush set"
-  caption: "frog set :)"
-
-# To add a travel entry:
+# To add a full-page travel entry:
 # - type: travel
 #   src: /media/meanwhile/your-photo.jpg
 #   alt: "Description"
 #   location: "Tokyo, Japan"
 #   date: "March 2025"
-#   text: "Optional short caption or reflection."
+#   text: "Optional short caption."
