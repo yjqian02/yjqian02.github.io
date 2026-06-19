@@ -1,13 +1,9 @@
-/* ── Color palette ───────────────────────────────────────────────────────── */
+/* ── Brand colors ────────────────────────────────────────────────────────── */
 :root {
-  --bg:            #F2EDE4;          /* cream — page background              */
-  --teal:          #6DCBD5;          /* primary accent                       */
-  --teal-soft:     rgba(109,203,213,0.35);
-  --teal-subtle:   rgba(109,203,213,0.12);
-  --coral:         #E05A4E;          /* secondary accent / active            */
-  --coral-soft:    rgba(224,90,78,0.35);
-  --deep-purple:   #3C1A5B;          /* dark accent / section headers        */
-  --text:          #1a1a1a;          /* body text — near-black on cream      */
+  --crimson: #C41E56;
+  --crimson-soft: rgba(196, 30, 86, 0.45);
+  --crimson-subtle: rgba(196, 30, 86, 0.1);
+  --pale-gray: #DCDCDC;
 }
 
 /* ── Typography: Lora only ───────────────────────────────────────────────── */
@@ -17,34 +13,27 @@ body, * {
   font-family: 'Lora', Georgia, serif;
 }
 
-body {
-  background-color: var(--bg);
-  color: var(--text);
-}
-
-/* ── Break Hugo Blox width constraints for bio/info sections ─────────────── */
-#bio,
-#info {
-  width: 100%;
-}
-
-#bio > *,
-#bio > * > *,
-#info > *,
-#info > * > * {
+/* ── Break Hugo Blox container max-width (remove constraint, not force width) */
+#bio > *, #bio > * > *,
+#info > *, #info > * > * {
   max-width: none !important;
-  width: 100% !important;
-  box-sizing: border-box;
 }
 
-/* ── Homepage hero (photo + bio) ─────────────────────────────────────────── */
-
+/* ── Homepage hero (photo + bio) ────────────────────────────────────────── */
+/*
+ * Controlled breakout: wider than Hugo Blox's article container but not
+ * full-bleed. `left: 50% + translateX(-50%)` centers on the viewport.
+ * `min(1000px, …)` caps width so it doesn't stretch on very wide screens.
+ */
 .homepage-hero {
   display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: 3rem;
+  grid-template-columns: 180px 1fr;
+  gap: 2.5rem;
   align-items: start;
-  width: 100%;
+  width: min(1000px, calc(100vw - 4rem));
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .hero-avatar {
@@ -119,10 +108,6 @@ body {
   border-color: var(--teal);
 }
 
-.hero-news {
-  margin-top: 0;
-}
-
 .hero-right {
   padding-top: 0.25rem;
 }
@@ -145,13 +130,17 @@ body {
   .hero-cv-btn { text-align: left; display: inline-block; }
 }
 
-/* ── Homepage info row (education + interests) ───────────────────────────── */
+/* ── Homepage info row (news | education | interests) ───────────────────── */
 
 .bio-info-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  width: 100%;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2.5rem;
+  width: min(1000px, calc(100vw - 4rem));
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 0.5rem;
 }
 
 .bio-section-heading {
@@ -222,7 +211,7 @@ body {
   padding: 0.2rem 0;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .bio-info-row {
     grid-template-columns: 1fr;
     gap: 2rem;
@@ -232,9 +221,9 @@ body {
 /* ── Publications list page ──────────────────────────────────────────────── */
 
 .pub-list-page {
-  max-width: 860px;
+  max-width: 1000px;
   margin: 0 auto;
-  padding: 3rem 1.5rem 5rem;
+  padding: 3rem clamp(1.5rem, 5vw, 3rem) 5rem;
 }
 
 .pub-list-title {
@@ -305,44 +294,22 @@ body {
   flex-wrap: wrap;
 }
 
-/* Type badges — colored, fully readable */
+/* Type badges */
 .pub-badge {
   font-size: 0.65rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
   flex-shrink: 0;
-  padding: 0.15rem 0.5rem;
-  border-radius: 2px;
+  padding: 0;
   background: none;
-  border: 1px solid transparent;
+  color: var(--crimson);
+  opacity: 0.7;
 }
 
-.badge-conference {
-  color: var(--teal);
-  border-color: var(--teal-soft);
-}
-
-.badge-journal {
-  color: var(--deep-purple);
-  border-color: rgba(60,26,91,0.3);
-}
-
-.badge-workshop {
-  color: var(--coral);
-  border-color: var(--coral-soft);
-}
-
-.badge-preprint {
-  color: var(--teal);
-  border-color: var(--teal-soft);
-  border-style: dashed;
-}
-
-.badge-other {
-  color: var(--text);
-  opacity: 0.4;
-  border-color: rgba(128,128,128,0.2);
+.badge-preprint, .badge-other {
+  color: var(--pale-gray);
+  opacity: 0.55;
 }
 
 .pub-venue {
@@ -393,12 +360,9 @@ body {
 
 .pub-btn:hover { opacity: 1; }
 
-.pub-btn-pdf   { border-color: var(--teal-soft); color: var(--teal); }
-.pub-btn-video { border-color: var(--coral-soft); color: var(--coral); }
-.pub-btn-cite  { border-color: rgba(128,128,128,0.25); }
-
-.pub-btn-pdf:hover   { border-color: var(--teal); }
-.pub-btn-video:hover { border-color: var(--coral); }
+.pub-btn-pdf   { border-color: var(--crimson-soft); }
+.pub-btn-video { border-color: var(--crimson-soft); }
+.pub-btn:hover { border-color: var(--crimson); opacity: 1; }
 
 @media (max-width: 600px) {
   .pub-entry.has-thumb {
@@ -840,10 +804,11 @@ body {
   font-size: 0.65rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  color: var(--teal);
-  display: block;
-  margin-bottom: 0.4rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  background: var(--crimson-subtle);
+  color: var(--crimson);
+  border: 1px solid var(--crimson-soft);
 }
 
 .mag-travel-location {

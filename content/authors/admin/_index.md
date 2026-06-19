@@ -54,7 +54,7 @@ profiles:
 #   - social computing 🌐
 
 # education:
-#   - area: Ph.D. Computer Science
+#   - area: Ph.D. Human-Computer Interaction, School of Computer Science
 #     institution: Carnegie Mellon University
 #     date_start: 2024-09-01
 #     summary: |
