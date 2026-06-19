@@ -27,6 +27,8 @@
     <div class="bio-pub-entry">
       <div class="bio-pub-meta">
         {{ if $typeLabel }}<span class="pub-badge {{ $typeClass }}">{{ $typeLabel }}</span>{{ end }}
+        {{ $vs := .Params.venue_short_override | default .Params.venue_short }}
+        {{ if $vs }}<span class="venue-short-tag">{{ $vs }}</span>{{ end }}
         <span class="bio-pub-year">{{ .Date.Format "2006" }}</span>
       </div>
       <h4 class="bio-pub-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>

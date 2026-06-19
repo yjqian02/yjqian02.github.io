@@ -10,5 +10,6 @@ publishDate: '2025-01-01'
 publication_types:
 - article-journal
 publication: '*Interactions 32 (4), 58-61*'
+venue_short: 'Interactions'
 featured: false
 ---

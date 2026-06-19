@@ -11,5 +11,6 @@ publishDate: '2026-01-01'
 publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM on Human-Computer Interaction 10 (2), 1-32*'
+venue_short: 'CSCW'
 featured: false
 ---
