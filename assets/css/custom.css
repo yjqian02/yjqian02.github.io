@@ -334,9 +334,10 @@ body {
 }
 
 .badge-preprint {
-  color: var(--teal);
-  border-color: var(--teal-soft);
+  color: var(--deep-purple);
+  border-color: rgba(60,26,91,0.35);
   border-style: dashed;
+  opacity: 0.85;
 }
 
 .badge-other {
