@@ -16,17 +16,29 @@
   text: "Outside of research, I like to run and swim. I also like crafts like making plushies :))"
   color: "#4B1A6B"
 
+- type: image
+  src: /media/meanwhile/cat.jpg
+  alt: "cat resting on a green quilt"
+
+- type: image
+  src: /media/meanwhile/shoes-black.jpg
+  alt: "black lace-up sneakers with white socks"
+
 - type: collage
   columns: 2
   items:
+    - src: /media/meanwhile/plushies-frogs-trio.jpg
+      alt: "three frog plushies on a couch"
+      caption: "the frog family grows"
+      span: 2
     - src: /media/meanwhile/mooncake_solo.jpg
       alt: "green frog plush"
-      caption: "Mooncake — frog plushie made for the CoEx lab"
-      span: 1
+      caption: "Mooncake — made for the CoEx lab"
     - src: /media/meanwhile/couples_frog.jpg
       alt: "green and pink frog plush set"
       caption: "frog set :)"
-      span: 1
+    - src: /media/meanwhile/plushie-white.jpg
+      alt: "white plushie"
 
 # To add a full-page travel entry:
 # - type: travel
