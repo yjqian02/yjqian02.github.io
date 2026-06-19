@@ -19,10 +19,12 @@
 
     {{/* ── image ── */}}
     {{ else if eq .type "image" }}
+    {{ if .src }}
     <div class="meanwhile-cell type-image size-{{ .size | default "large" }}">
       <img src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">
       {{ with .caption }}<div class="cell-caption">{{ . }}</div>{{ end }}
     </div>
+    {{ end }}
 
     {{/* ── link ── */}}
     {{ else if eq .type "link" }}

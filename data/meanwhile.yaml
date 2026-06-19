@@ -18,9 +18,10 @@
   color: "#CB2957"
   size: small
 
-- type: image
-  src: /media/meanwhile/mooncake_solo.jpg
-  caption: "Mooncake - plush I made!"
-  alt: "Photo of frog plush on couch."
-  size: large
+# To add an image: upload to static/media/meanwhile/ then uncomment:
+# - type: image
+#   src: /media/meanwhile/your-photo.jpg
+#   alt: "Description"
+#   caption: "Optional caption"
+#   size: large
 
