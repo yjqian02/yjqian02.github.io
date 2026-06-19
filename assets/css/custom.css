@@ -1,3 +1,13 @@
+/* ── Navbar matches cream background in light mode ───────────────────────── */
+/* Hugo Blox sets .dark on <html> for dark mode — exclude it so dark mode
+   keeps its own navbar color; only override for light (default) mode.      */
+html:not(.dark) header,
+html:not(.dark) #navbar-main,
+html:not(.dark) .navbar {
+  background-color: var(--bg) !important;
+  border-bottom-color: rgba(128,128,128,0.1) !important;
+}
+
 /* ── Color palette ───────────────────────────────────────────────────────── */
 :root {
   --bg:            #F2EDE4;          /* cream — page background              */
