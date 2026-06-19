@@ -1,8 +1,21 @@
-/* ── Break Hugo Blox prose width limits for bio blocks ──────────────────── */
+/* ── Break Hugo Blox width constraints for bio/info sections ────────────── */
+/*
+ * Hugo Blox wraps each markdown block in an outer container div
+ * (article-container / max-w-7xl etc.) that sits ABOVE .prose.
+ * We must remove max-width at every ancestor level, not just on .prose.
+ */
+#bio,
+#info {
+  width: 100%;
+}
 
-#bio .prose,
-#info .prose {
-  max-width: none;
+#bio > *,
+#bio > * > *,
+#info > *,
+#info > * > * {
+  max-width: none !important;
+  width: 100% !important;
+  box-sizing: border-box;
 }
 
 /* ── Homepage hero (photo + bio) ────────────────────────────────────────── */
