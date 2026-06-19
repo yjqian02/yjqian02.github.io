@@ -11,7 +11,7 @@ authors:
 date: '2026-01-01'
 publishDate: '2026-01-01'
 publication_types:
-- paper-conference
-publication: '*Proceedings of the Extended Abstracts of the*'
+- chapter
+publication: ''
 featured: false
 ---
