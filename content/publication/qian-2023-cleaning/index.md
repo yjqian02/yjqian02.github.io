@@ -9,6 +9,7 @@ publishDate: '2023-01-01'
 publication_types:
 - manuscript
 publication: '*arXiv preprint arXiv:2309.06688*'
+venue_short: 'arXiv'
 featured: false
 url_pdf: https://arxiv.org/abs/2309.06688
 url_video: ''

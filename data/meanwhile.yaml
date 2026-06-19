@@ -20,10 +20,6 @@
   src: /media/meanwhile/cat.jpg
   alt: "cat resting on a green quilt"
 
-- type: image
-  src: /media/meanwhile/shoes-black.jpg
-  alt: "black lace-up sneakers with white socks"
-
 - type: collage
   columns: 2
   items:

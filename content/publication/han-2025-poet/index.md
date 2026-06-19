@@ -12,5 +12,6 @@ publishDate: '2025-01-01'
 publication_types:
 - paper-conference
 publication: '*UIST 2025*'
+venue_short: 'UIST'
 featured: false
 ---

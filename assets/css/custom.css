@@ -575,7 +575,21 @@ body {
   margin: 0;
 }
 
-/* ── Projects page — two-column editorial ────────────────────────────────── */
+/* ── Venue short tag ─────────────────────────────────────────────────────── */
+
+.venue-short-tag {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  background: var(--teal-subtle);
+  color: var(--deep-purple);
+  flex-shrink: 0;
+}
+
+/* ── Projects page — accordion layout ───────────────────────────────────── */
 
 .projects-page {
   max-width: 860px;
@@ -606,7 +620,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .projects-section-rule::before {
@@ -634,35 +648,68 @@ body {
   flex-shrink: 0;
 }
 
-/* Two-column row */
-.project-row {
-  display: grid;
-  grid-template-columns: 64px 1fr;
-  gap: 2rem;
-  padding: 2rem 0;
+/* ── Accordion ───────────────────────────────────────────────────────────── */
+
+.project-accordion {
   border-bottom: 1px solid rgba(128,128,128,0.1);
 }
 
-.project-row:last-child {
-  border-bottom: none;
+.project-accordion:first-of-type {
+  border-top: 1px solid rgba(128,128,128,0.1);
 }
 
-.project-row-left {
+.project-accordion-trigger {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  padding-top: 0.15rem;
-  gap: 0.5rem;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.1rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: opacity 0.15s;
 }
 
-.project-row-num {
+.project-accordion-trigger:hover {
+  opacity: 0.75;
+}
+
+.project-accordion-num {
   font-family: 'Lora', Georgia, serif;
   font-style: italic;
-  font-size: 2rem;
+  font-size: 1.1rem;
   font-weight: 400;
   color: var(--teal);
-  opacity: 0.3;
-  line-height: 1;
+  opacity: 0.45;
+  flex-shrink: 0;
+  width: 2rem;
+  text-align: right;
+}
+
+.project-accordion-title {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-style: italic;
+  flex: 1;
+  line-height: 1.3;
+}
+
+.project-accordion-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  flex-shrink: 0;
+}
+
+.project-tag {
+  font-size: 0.65rem;
+  letter-spacing: 0.03em;
+  padding: 0.1rem 0.4rem;
+  border: 1px solid rgba(128,128,128,0.2);
+  border-radius: 2px;
+  opacity: 0.55;
 }
 
 .project-active-tag {
@@ -672,43 +719,36 @@ body {
   letter-spacing: 0.1em;
   color: var(--coral);
   border: 1px solid var(--coral-soft);
-  padding: 0.15rem 0.4rem;
+  padding: 0.1rem 0.4rem;
   border-radius: 2px;
+  flex-shrink: 0;
 }
 
-.project-row-right {
-  padding-top: 0;
+.project-accordion-arrow {
+  font-size: 0.85rem;
+  opacity: 0.35;
+  flex-shrink: 0;
+  transition: transform 0.25s ease, opacity 0.2s;
 }
 
-/* Tags */
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  margin-bottom: 0.65rem;
+.project-accordion.is-open .project-accordion-arrow {
+  transform: rotate(180deg);
+  opacity: 0.7;
 }
 
-.project-tag {
-  font-size: 0.68rem;
-  letter-spacing: 0.03em;
-  padding: 0.15rem 0.5rem;
-  border: 1px solid rgba(128,128,128,0.2);
-  border-radius: 2px;
-  opacity: 0.6;
+/* Accordion body — hidden by default, slides open */
+.project-accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.25s ease;
+  padding: 0 0 0 3rem;
 }
 
-/* Title */
-.project-title {
-  font-family: 'Lora', Georgia, serif;
-  font-size: 1.2rem;
-  font-weight: 600;
-  font-style: italic;
-  margin: 0 0 0.6rem;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+.project-accordion.is-open .project-accordion-body {
+  max-height: 600px;
+  padding: 0 0 1.5rem 3rem;
 }
 
-/* Summary */
 .project-summary {
   font-size: 0.9rem;
   line-height: 1.7;
@@ -717,7 +757,7 @@ body {
   max-width: 52ch;
 }
 
-/* Publication list — left border accent */
+/* Publication list inside accordion */
 .project-pubs {
   display: flex;
   flex-direction: column;
@@ -733,7 +773,6 @@ body {
   gap: 1rem;
   text-decoration: none;
   padding: 0.2rem 0;
-  transition: color 0.15s;
 }
 
 .project-pub-row:hover .project-pub-title {
@@ -756,16 +795,12 @@ body {
 }
 
 @media (max-width: 600px) {
-  .project-row {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
-  }
-  .project-row-left {
-    flex-direction: row;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  .project-row-num { font-size: 1.25rem; }
+  .project-accordion-tags { display: none; }
+  .project-accordion-title { font-size: 0.95rem; }
+  .project-accordion-body { padding-left: 1rem; }
+  .project-accordion.is-open .project-accordion-body { padding-left: 1rem; }
+  .project-pub-row { flex-direction: column; gap: 0.15rem; }
+  .project-pub-meta { white-space: normal; }
 }
 
 /* ── Meanwhile — magazine format ─────────────────────────────────────────── */

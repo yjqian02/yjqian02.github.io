@@ -15,5 +15,6 @@ publishDate: '2025-01-01'
 publication_types:
 - manuscript
 publication: '*arXiv preprint arXiv:2509.24167*'
+venue_short: 'arXiv'
 featured: false
 ---

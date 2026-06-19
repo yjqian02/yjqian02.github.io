@@ -24,6 +24,8 @@
       {{ if $typeLabel }}
       <span class="pub-badge {{ $typeClass }}">{{ $typeLabel }}</span>
       {{ end }}
+      {{ $vs := .Params.venue_short_override | default .Params.venue_short }}
+      {{ if $vs }}<span class="venue-short-tag">{{ $vs }}</span>{{ end }}
       <span class="pub-single-date">{{ .Date.Format "2006" }}</span>
     </div>
 

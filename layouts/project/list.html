@@ -12,18 +12,17 @@
       <span class="projects-section-label">Current Work</span>
     </div>
     {{ range $i, $p := $active.ByDate.Reverse }}
-    <div class="project-row">
-      <div class="project-row-left">
-        <span class="project-row-num">{{ printf "%02d" (add $i 1) }}</span>
-        <span class="project-active-tag">Active</span>
-      </div>
-      <div class="project-row-right">
-        {{ if .Params.tags }}
-        <div class="project-tags">
+    <div class="project-accordion" id="proj-active-{{ $i }}">
+      <button class="project-accordion-trigger" onclick="toggleAccordion('proj-active-{{ $i }}')" aria-expanded="false">
+        <span class="project-accordion-num">{{ printf "%02d" (add $i 1) }}</span>
+        <span class="project-accordion-title">{{ .Title }}</span>
+        <span class="project-accordion-tags">
           {{ range .Params.tags }}<span class="project-tag">{{ . }}</span>{{ end }}
-        </div>
-        {{ end }}
-        <h3 class="project-title">{{ .Title }}</h3>
+        </span>
+        <span class="project-active-tag">Active</span>
+        <span class="project-accordion-arrow">↓</span>
+      </button>
+      <div class="project-accordion-body">
         {{ with .Params.summary }}<p class="project-summary">{{ . }}</p>{{ end }}
       </div>
     </div>
@@ -39,17 +38,16 @@
       <span class="projects-section-label">Research Themes</span>
     </div>
     {{ range $i, $p := $themes.ByDate.Reverse }}
-    <div class="project-row">
-      <div class="project-row-left">
-        <span class="project-row-num">{{ printf "%02d" (add $i 1) }}</span>
-      </div>
-      <div class="project-row-right">
-        {{ if .Params.tags }}
-        <div class="project-tags">
+    <div class="project-accordion" id="proj-theme-{{ $i }}">
+      <button class="project-accordion-trigger" onclick="toggleAccordion('proj-theme-{{ $i }}')" aria-expanded="false">
+        <span class="project-accordion-num">{{ printf "%02d" (add $i 1) }}</span>
+        <span class="project-accordion-title">{{ .Title }}</span>
+        <span class="project-accordion-tags">
           {{ range .Params.tags }}<span class="project-tag">{{ . }}</span>{{ end }}
-        </div>
-        {{ end }}
-        <h3 class="project-title">{{ .Title }}</h3>
+        </span>
+        <span class="project-accordion-arrow">↓</span>
+      </button>
+      <div class="project-accordion-body">
         {{ with .Params.summary }}<p class="project-summary">{{ . }}</p>{{ end }}
 
         {{ with .Params.related_pubs }}
@@ -65,7 +63,9 @@
                 {{ $t := index . 0 }}
                 {{ if eq $t "article-journal" }}Journal{{ else if eq $t "paper-conference" }}Conference{{ else if eq $t "chapter" }}Workshop{{ else if eq $t "manuscript" }}Preprint{{ end }}
               {{ end }}
-              {{ if .Date }}· {{ .Date.Format "2006" }}{{ end }}
+              {{ $vs := .Params.venue_short_override | default .Params.venue_short }}
+              {{ if $vs }} · {{ $vs }}{{ end }}
+              {{ if .Date }} · {{ .Date.Format "2006" }}{{ end }}
             </span>
           </a>
           {{ end }}
@@ -80,4 +80,24 @@
   {{ end }}
 
 </section>
+
+<script>
+function toggleAccordion(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var isOpen = el.classList.contains('is-open');
+
+  // Close all others
+  document.querySelectorAll('.project-accordion.is-open').forEach(function(a) {
+    a.classList.remove('is-open');
+    a.querySelector('.project-accordion-trigger').setAttribute('aria-expanded', 'false');
+  });
+
+  // Open this one (unless it was already open)
+  if (!isOpen) {
+    el.classList.add('is-open');
+    el.querySelector('.project-accordion-trigger').setAttribute('aria-expanded', 'true');
+  }
+}
+</script>
 {{ end }}

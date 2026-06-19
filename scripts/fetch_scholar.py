@@ -187,6 +187,62 @@ def venue_to_entry_type(venue: str) -> str:
     return "article"
 
 
+# Ordered list of (keywords, short_tag). First match wins.
+VENUE_SHORT_MAP: list[tuple[list[str], str]] = [
+    # HCI / CHI family
+    (["chi conference", "human factors in computing systems", "proceedings of chi", "acm chi"], "CHI"),
+    (["cscw", "computer-supported cooperative work", "proceedings of the acm on human-computer interaction", "pacmhci"], "CSCW"),
+    (["uist", "user interface software and technology"], "UIST"),
+    (["assets", "assistive technology"], "ASSETS"),
+    (["iui", "intelligent user interfaces"], "IUI"),
+    (["dis ", "designing interactive systems"], "DIS"),
+    (["group conference", " group '", "acm group"], "GROUP"),
+    (["ecscw"], "ECSCW"),
+    (["interact "], "INTERACT"),
+    (["nordichi"], "NordiCHI"),
+    # AI Ethics / Safety
+    (["facct", "fairness, accountability", "fat*", "fatml"], "FAccT"),
+    (["aies", "ai, ethics, and society"], "AIES"),
+    (["eaamo", "equity and access in algorithms"], "EAAMO"),
+    # NLP / ML
+    (["emnlp"], "EMNLP"),
+    (["naacl"], "NAACL"),
+    (["neurips", "neural information processing systems"], "NeurIPS"),
+    (["iclr", "international conference on learning representations"], "ICLR"),
+    (["icml", "international conference on machine learning"], "ICML"),
+    # Social / Web Computing
+    (["icwsm"], "ICWSM"),
+    (["websci", "web science"], "WebSci"),
+    (["world wide web", " www "], "WWW"),
+    (["wsdm"], "WSDM"),
+    (["kdd"], "KDD"),
+    (["recsys"], "RecSys"),
+    # Security / Privacy
+    (["soups", "symposium on usable privacy"], "SOUPS"),
+    (["ieee symposium on security", "ieee s&p"], "IEEE S&P"),
+    (["acm ccs", " ccs "], "CCS"),
+    (["usenix security"], "USENIX Security"),
+    # Journals
+    (["tochi", "transactions on computer-human interaction"], "TOCHI"),
+    (["tacl", "transactions of the association for computational linguistics"], "TACL"),
+    (["communications of the acm", "cacm"], "CACM"),
+    (["big data & society"], "Big Data & Society"),
+    # Preprint
+    (["arxiv"], "arXiv"),
+]
+
+
+def detect_venue_short(venue: str) -> str:
+    """Return a short venue tag (e.g. 'CHI', 'CSCW') from a full venue string."""
+    if not venue:
+        return ""
+    v = venue.lower()
+    for keywords, short in VENUE_SHORT_MAP:
+        if any(kw in v for kw in keywords):
+            return short
+    return ""
+
+
 # ── BibTeX ────────────────────────────────────────────────────────────────────
 
 def paper_to_bibtex(paper: dict) -> str:
@@ -234,13 +290,14 @@ def paper_to_hugo_markdown(paper: dict) -> tuple[str, str]:
     entry_type = venue_to_entry_type(venue)
     pub_type = "paper-conference" if entry_type == "inproceedings" else "article-journal"
 
+    venue_short = detect_venue_short(venue) or detect_venue_short(venue_raw)
+
     folder = make_folder_name(authors_raw, year, title)
 
-    # YAML-safe title (escape single quotes)
     safe_title = title.replace("'", "''")
     safe_venue = venue.replace("'", "''") if venue else ""
-
     authors_yaml = "\n".join(f"- {a}" for a in author_list)
+    venue_short_line = f"venue_short: '{venue_short}'\n" if venue_short else ""
 
     content = f"""---
 title: '{safe_title}'
@@ -251,7 +308,7 @@ publishDate: '{date}'
 publication_types:
 - {pub_type}
 publication: '{"*" + safe_venue + "*" if safe_venue else ""}'
-featured: false
+{venue_short_line}featured: false
 ---
 """
     return folder, content
@@ -283,26 +340,30 @@ def write_hugo_folders(papers: list[dict]) -> None:
 
         folder_path.mkdir(exist_ok=True)
 
-        # Respect manual date override: if existing index.md has
-        # `date_manual: true`, preserve its date field.
+        # Preserve manual overrides from existing index.md
         existing_md = folder_path / "index.md"
         if existing_md.exists():
             import re as _re
             existing_text = existing_md.read_text(encoding="utf-8")
+
+            # date_manual: true → keep the existing date field
             if "date_manual: true" in existing_text:
                 m = _re.search(r"date: '([^']+)'", existing_text)
                 if m:
-                    content = _re.sub(
-                        r"(date: ')([^']+)(')",
-                        lambda x: x.group(1) + m.group(1) + x.group(3),
-                        content,
-                        count=1,
-                    )
-                    content = content.replace(
-                        "featured: false",
-                        "date_manual: true\nfeatured: false",
-                    )
+                    content = _re.sub(r"date: '[^']+'", f"date: '{m.group(1)}'", content, count=1)
+                    content = content.replace("featured: false", "date_manual: true\nfeatured: false")
                     print(f"  Kept manual date for: {folder_name}")
+
+            # venue_short_override: 'X' → use X for venue_short, re-add override field
+            m2 = _re.search(r"venue_short_override: '([^']*)'", existing_text)
+            if m2:
+                override = m2.group(1)
+                content = _re.sub(r"venue_short: '[^']*'\n", "", content)
+                content = content.replace(
+                    "featured: false",
+                    f"venue_short: '{override}'\nvenue_short_override: '{override}'\nfeatured: false",
+                )
+                print(f"  Kept venue_short_override for: {folder_name}")
 
         (folder_path / "index.md").write_text(content, encoding="utf-8")
 

@@ -14,5 +14,6 @@ publishDate: '2026-01-01'
 publication_types:
 - chapter
 publication: '*ACM FAccT CRAFT 2026*'
+venue_short: 'FAccT'
 featured: false
 ---
