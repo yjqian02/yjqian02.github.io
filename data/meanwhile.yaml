@@ -18,11 +18,12 @@
   color: "#2a3a4f"
   size: small
 
-- type: image
-  src: /media/meanwhile/placeholder.jpg
-  caption: "Add a caption here"
-  alt: "Description of image"
-  size: large
+# To add an image: upload to static/media/meanwhile/ then uncomment:
+# - type: image
+#   src: /media/meanwhile/your-photo.jpg
+#   alt: "Description"
+#   caption: "Optional caption"
+#   size: large
 
 - type: link
   title: "Add an article or news link here"
