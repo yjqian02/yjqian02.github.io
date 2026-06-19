@@ -7,7 +7,7 @@
   {{ $pubs := where site.RegularPages "Section" "publication" }}
   {{ $pubs = where $pubs "Params.draft" "ne" true }}
 
-  {{ range ($pubs.GroupByDate "2006").Reverse }}
+  {{ range $pubs.GroupByDate "2006" }}
   <div class="pub-year-group">
     <h2 class="pub-year-label">{{ .Key }}</h2>
     <div class="pub-year-list">
