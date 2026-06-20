@@ -895,26 +895,16 @@ body {
   width: 100vw;
 }
 
-/* Blurred background fill — covers the slide, blurs to fill letterbox areas */
-.mag-bg-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: blur(28px) brightness(0.5);
-  transform: scale(1.08);
-  display: block;
-}
-
-/* Sharp foreground image — contain so nothing gets cropped */
+/* Full-bleed image — cover with top-biased position so portrait photos
+   show the subject (usually near top) rather than cropping to the middle.
+   Override per-image via position: field in meanwhile.yaml → object-position inline style. */
 .mag-full-img {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  z-index: 1;
+  object-fit: cover;
+  object-position: top center;
   display: block;
 }
 
@@ -926,7 +916,6 @@ body {
   right: 0;
   padding: 2rem 2.5rem;
   background: linear-gradient(transparent, rgba(0,0,0,0.6));
-  z-index: 2;
 }
 
 .mag-caption {
@@ -969,7 +958,6 @@ body {
   right: 0;
   padding: 2.5rem;
   background: linear-gradient(transparent, rgba(60,26,91,0.85));
-  z-index: 2;
 }
 
 .mag-travel-label {
