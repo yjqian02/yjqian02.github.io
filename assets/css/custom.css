@@ -589,9 +589,8 @@ body {
 
 .venue-short-tag {
   font-size: 0.65rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.03em;
   padding: 0.15rem 0.5rem;
   border-radius: 2px;
   background: var(--teal-subtle);
