@@ -19,12 +19,16 @@ YAML example:
     src: /media/meanwhile/tokyo-night.jpg
     alt: "Description for screen readers"
     caption: "Optional caption shown at bottom"
+    position: "50% 20%"    # optional: CSS object-position override
+                           # default is "top center" (shows top of photo first)
+                           # use "center" for landscapes, "top" for portraits
 
   - type: travel
     src: /media/meanwhile/kyoto-temple.jpg
     location: "Kyoto, Japan"
     date: "March 2025"
     text: "Optional short reflection."
+    position: "center"     # optional: same position override
 
 
 COLLAGE SLIDES
