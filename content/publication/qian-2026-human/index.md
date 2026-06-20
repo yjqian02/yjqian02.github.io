@@ -13,5 +13,7 @@ publishDate: '2026-01-01'
 publication_types:
 - chapter
 publication: ''
+venue_short: 'CHI'
+venue_short_override: 'CHI'
 featured: false
 ---

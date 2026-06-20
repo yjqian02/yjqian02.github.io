@@ -14,6 +14,7 @@ publishDate: '2026-01-01'
 publication_types:
 - manuscript
 publication: '*arXiv preprint arXiv:2602.01694*'
-venue_short: 'arXiv'
+venue_short: 'FAccT'
+venue_short_override: 'FAccT'
 featured: false
 ---
