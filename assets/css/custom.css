@@ -159,7 +159,7 @@ body {
 
 .bio-info-row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 3rem;
   width: 100%;
 }
@@ -232,7 +232,7 @@ body {
   padding: 0.2rem 0;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
   .bio-info-row {
     grid-template-columns: 1fr;
     gap: 2rem;
