@@ -159,8 +159,8 @@ body {
 
 .bio-info-row {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1.8fr 1fr 1fr;
+  gap: 2rem;
   width: 100%;
 }
 
@@ -513,7 +513,7 @@ body {
 
 .bio-recent-pubs {
   max-width: 860px;
-  margin: 0 auto;
+  margin: 0;
   padding: 0 1.5rem 2rem;
 }
 
@@ -608,9 +608,9 @@ body {
 }
 
 .projects-title {
-  font-size: clamp(1.8rem, 4vw, 2.6rem);
-  font-weight: 600;
-  font-style: italic;
+  font-size: 2rem;
+  font-weight: 700;
+  font-style: normal;
   margin: 0 0 0.5rem;
   letter-spacing: -0.02em;
 }
