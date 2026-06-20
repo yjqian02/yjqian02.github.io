@@ -16,6 +16,7 @@
       {{/* ── full-bleed image ── */}}
       {{ if eq .type "image" }}
       {{ if .src }}
+      <img class="mag-bg-img" src="{{ .src }}" alt="" aria-hidden="true">
       <img class="mag-full-img" src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">
       <div class="mag-slide-overlay">
         {{ with .caption }}<p class="mag-caption">{{ . }}</p>{{ end }}
@@ -25,6 +26,7 @@
       {{/* ── travel: full-bleed image + text panel ── */}}
       {{ else if eq .type "travel" }}
       {{ if .src }}
+      <img class="mag-bg-img" src="{{ .src }}" alt="" aria-hidden="true">
       <img class="mag-full-img" src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">
       {{ end }}
       <div class="mag-travel-content">
