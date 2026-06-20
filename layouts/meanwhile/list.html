@@ -1,17 +1,15 @@
 {{ define "main" }}
+{{ $total := len site.Data.meanwhile }}
 <div class="mag-outer">
 
   <div class="mag-topbar">
     <h1 class="mag-page-title">{{ .Title }}</h1>
-    <div class="mag-view-toggle">
-      <button class="mag-toggle-btn is-active" id="btn-vertical" onclick="setMagView('vertical')">↕ Scroll</button>
-      <button class="mag-toggle-btn" id="btn-horizontal" onclick="setMagView('horizontal')">→ Swipe</button>
-    </div>
+    <span class="mag-counter" id="mag-counter">1 / {{ $total }}</span>
   </div>
 
-  <div class="mag-slides mag-vertical" id="mag-slides">
+  <div class="mag-book" id="mag-book">
     {{ range $i, $item := site.Data.meanwhile }}
-    <div class="mag-slide slide-type-{{ .type | default "text" }}" id="mag-slide-{{ $i }}">
+    <div class="mag-slide slide-type-{{ .type | default "text" }}" id="mag-slide-{{ $i }}" data-index="{{ $i }}">
 
       {{/* ── full-bleed image ── */}}
       {{ if eq .type "image" }}
@@ -74,45 +72,81 @@
 
       {{ end }}
 
-      {{/* floating advance arrow */}}
-      {{ $total := len site.Data.meanwhile }}
-      {{ $next := add $i 1 }}
-      {{ if lt $next $total }}
-      <button class="mag-arrow-btn" onclick="magGoTo({{ $next }})" aria-label="Next">
-        <span class="mag-arrow-icon">↓</span>
-      </button>
-      {{ end }}
-
     </div>
     {{ end }}
+  </div>
+
+  {{/* Prev / Next navigation */}}
+  <div class="mag-nav">
+    <button class="mag-nav-btn" id="mag-prev" onclick="magNav(-1)" aria-label="Previous page" disabled>←</button>
+    <button class="mag-nav-btn" id="mag-next" onclick="magNav(1)" aria-label="Next page">→</button>
   </div>
 
 </div>
 
 <script>
 (function () {
-  window.magGoTo = function (index) {
-    var slide = document.getElementById('mag-slide-' + index);
-    if (!slide) return;
-    var container = document.getElementById('mag-slides');
-    var isH = container.classList.contains('mag-horizontal');
-    slide.scrollIntoView({
-      behavior: 'smooth',
-      block: isH ? 'nearest' : 'start',
-      inline: isH ? 'start' : 'nearest'
-    });
+  var total   = {{ $total }};
+  var current = 0;
+  var busy    = false;
+
+  function updateUI() {
+    document.getElementById('mag-counter').textContent = (current + 1) + ' / ' + total;
+    document.getElementById('mag-prev').disabled = current === 0;
+    document.getElementById('mag-next').disabled = current === total - 1;
+  }
+
+  window.magNav = function (dir) {
+    if (busy) return;
+    var next = current + dir;
+    if (next < 0 || next >= total) return;
+    busy = true;
+
+    var outEl  = document.getElementById('mag-slide-' + current);
+    var inEl   = document.getElementById('mag-slide-' + next);
+    var isForward = dir > 0;
+
+    /* Outgoing slide: fold away */
+    outEl.classList.add(isForward ? 'flip-out-fwd' : 'flip-out-back');
+
+    /* Incoming slide: start from edge */
+    inEl.style.visibility = 'visible';
+    inEl.style.zIndex = '1';
+    inEl.classList.add(isForward ? 'flip-in-fwd' : 'flip-in-back');
+
+    /* After outgoing animation completes, hide it */
+    var flipDuration = 450;
+    setTimeout(function () {
+      outEl.style.visibility = 'hidden';
+      outEl.style.zIndex = '0';
+      outEl.classList.remove('flip-out-fwd', 'flip-out-back');
+      inEl.classList.remove('flip-in-fwd', 'flip-in-back');
+      inEl.style.zIndex = '2';
+      current = next;
+      updateUI();
+      busy = false;
+    }, flipDuration);
   };
 
-  window.setMagView = function (mode) {
-    var container = document.getElementById('mag-slides');
-    container.className = 'mag-slides mag-' + mode;
-    document.getElementById('btn-vertical').classList.toggle('is-active', mode === 'vertical');
-    document.getElementById('btn-horizontal').classList.toggle('is-active', mode === 'horizontal');
-    document.querySelectorAll('.mag-arrow-icon').forEach(function (el) {
-      el.textContent = mode === 'vertical' ? '↓' : '→';
-    });
-    magGoTo(0);
-  };
+  /* Keyboard navigation */
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') magNav(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   magNav(-1);
+  });
+
+  /* Touch swipe */
+  var touchStartX = 0;
+  var book = document.getElementById('mag-book');
+  book.addEventListener('touchstart', function (e) { touchStartX = e.touches[0].clientX; }, { passive: true });
+  book.addEventListener('touchend', function (e) {
+    var dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 50) magNav(dx < 0 ? 1 : -1);
+  }, { passive: true });
+
+  /* Init: make first slide visible */
+  var first = document.getElementById('mag-slide-0');
+  if (first) { first.style.visibility = 'visible'; first.style.zIndex = '2'; }
+  updateUI();
 })();
 </script>
 {{ end }}
