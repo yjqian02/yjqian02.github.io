@@ -10,14 +10,28 @@ html:not(.dark) .navbar {
 
 /* ── Color palette ───────────────────────────────────────────────────────── */
 :root {
-  --bg:            #F2EDE4;          /* cream — page background              */
-  --teal:          #6DCBD5;          /* primary accent                       */
-  --teal-soft:     rgba(109,203,213,0.35);
-  --teal-subtle:   rgba(109,203,213,0.12);
-  --coral:         #E05A4E;          /* secondary accent / active            */
-  --coral-soft:    rgba(224,90,78,0.35);
-  --deep-purple:   #3C1A5B;          /* dark accent / section headers        */
-  --text:          #1a1a1a;          /* body text — near-black on cream      */
+  --bg:                  #F2EDE4;          /* cream — page background              */
+  --teal:                #6DCBD5;          /* primary accent                       */
+  --teal-soft:           rgba(109,203,213,0.35);
+  --teal-subtle:         rgba(109,203,213,0.12);
+  --coral:               #E05A4E;          /* secondary accent / active            */
+  --coral-soft:          rgba(224,90,78,0.35);
+  --deep-purple:         #3C1A5B;          /* dark accent / section headers        */
+  --deep-purple-border:  rgba(60,26,91,0.3);
+  --text:                #1a1a1a;          /* body text — near-black on cream      */
+}
+
+/* Dark mode overrides — Hugo Blox adds .dark to <html> */
+.dark {
+  --bg:                  #18101f;          /* deep dark purple-black               */
+  --text:                #ede8e0;          /* warm off-white                       */
+  --deep-purple:         #c9a8f0;          /* light lavender — readable on dark bg */
+  --deep-purple-border:  rgba(201,168,240,0.3);
+  --teal:                #6DCBD5;          /* stays same — bright enough on dark   */
+  --teal-soft:           rgba(109,203,213,0.3);
+  --teal-subtle:         rgba(109,203,213,0.14);
+  --coral:               #e8786d;          /* slightly lighter coral               */
+  --coral-soft:          rgba(232,120,109,0.3);
 }
 
 /* ── Typography: Lora only ───────────────────────────────────────────────── */
@@ -335,7 +349,7 @@ body {
 
 .badge-journal {
   color: var(--deep-purple);
-  border-color: rgba(60,26,91,0.3);
+  border-color: var(--deep-purple-border);
 }
 
 .badge-workshop {
@@ -345,7 +359,7 @@ body {
 
 .badge-preprint {
   color: var(--deep-purple);
-  border-color: rgba(60,26,91,0.35);
+  border-color: var(--deep-purple-border);
   border-style: dashed;
   opacity: 0.85;
 }
