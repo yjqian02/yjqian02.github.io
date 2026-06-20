@@ -12,5 +12,7 @@ publishDate: '2026-01-01'
 publication_types:
 - paper-conference
 publication: ''
+venue_short: 'CHI'
+venue_short_override: 'CHI'
 featured: false
 ---
