@@ -4,10 +4,7 @@
 {{ $recent := first 5 ($pubs.ByDate.Reverse) }}
 
 <section class="bio-recent-pubs">
-  <div class="bio-pubs-header">
-    <h3 class="bio-section-heading">Recent Publications</h3>
-    <a href="/publication/" class="bio-pubs-all">All publications →</a>
-  </div>
+  <h3 class="bio-section-heading">Recent Publications</h3>
   <div class="bio-pubs-list">
     {{ range $recent }}
     {{ $typeLabel := "" }}
@@ -36,4 +33,5 @@
     </div>
     {{ end }}
   </div>
+  <a href="/publication/" class="bio-pubs-all">All publications →</a>
 </section>
