@@ -19,32 +19,30 @@
       <div class="mag-slide-overlay">
         {{ with .caption }}<p class="mag-caption">{{ . }}</p>{{ end }}
       </div>
-      {{ end }}
 
-      {{/* ── travel: full-bleed image + text panel ── */}}
+      {{/* ── image ── */}}
+      {{ else if eq .type "image" }}
+      <div class="mag-page-image-wrap">
+        {{ if .src }}<img class="mag-page-photo" src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">{{ end }}
+        {{ with .caption }}<p class="mag-page-caption">{{ . }}</p>{{ end }}
+      </div>
+
+      {{/* ── travel ── */}}
       {{ else if eq .type "travel" }}
-      {{ if .src }}
-      <img class="mag-full-img" src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy"
-           {{ with .position }}style="object-position:{{ . }}"{{ end }}>
-      {{ end }}
-      <div class="mag-travel-content">
-        <span class="mag-travel-label">Travel</span>
-        {{ with .location }}<h2 class="mag-travel-location">{{ . }}</h2>{{ end }}
-        {{ with .date }}<span class="mag-travel-date">{{ . }}</span>{{ end }}
-        {{ with .text }}<p class="mag-travel-text">{{ . }}</p>{{ end }}
+      <div class="mag-page-travel">
+        {{ if .src }}<img class="mag-page-photo mag-travel-photo" src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">{{ end }}
+        <div class="mag-travel-info">
+          <span class="mag-travel-label">Travel</span>
+          {{ with .location }}<h2 class="mag-travel-location">{{ . }}</h2>{{ end }}
+          {{ with .date }}<span class="mag-travel-date">{{ . }}</span>{{ end }}
+          {{ with .text }}<p class="mag-travel-text">{{ . }}</p>{{ end }}
+        </div>
       </div>
 
-      {{/* ── text block ── */}}
-      {{ else if eq .type "text" }}
-      <div class="mag-text-fill" {{ with .color }}style="background:{{ . }}"{{ end }}>
-        <p class="mag-text-body">{{ .text }}</p>
-        {{ with .attribution }}<span class="mag-attribution">— {{ . }}</span>{{ end }}
-      </div>
-
-      {{/* ── link / article ── */}}
+      {{/* ── link ── */}}
       {{ else if eq .type "link" }}
-      <div class="mag-link-fill">
-        {{ if .image }}<img class="mag-link-img" src="{{ .image }}" alt="">{{ end }}
+      <div class="mag-page-link">
+        {{ if .image }}<img class="mag-page-link-img" src="{{ .image }}" alt="">{{ end }}
         <div class="mag-link-body">
           {{ with .source }}<span class="mag-source-label">{{ . }}</span>{{ end }}
           <h2 class="mag-link-title">{{ .title }}</h2>
@@ -53,12 +51,11 @@
         </div>
       </div>
 
-      {{/* ── collage: multiple items in one slide ── */}}
+      {{/* ── collage ── */}}
       {{ else if eq .type "collage" }}
-      <div class="mag-collage-fill"
-           {{ with .columns }}style="--collage-cols:{{ . }}"{{ end }}>
+      <div class="mag-page-collage" {{ with .columns }}style="--collage-cols:{{ . }}"{{ end }}>
         {{ range .items }}
-        <div class="mag-collage-item{{ if .span }} span-{{ .span }}{{ end }}{{ if eq .type "text" }} is-text{{ end }}"
+        <div class="mag-collage-cell{{ if .span }} span-{{ .span }}{{ end }}{{ if eq .type "text" }} is-text{{ end }}"
              {{ if and (eq .type "text") .color }}style="background:{{ .color }}"{{ end }}>
           {{ if .src }}
           <img src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">
