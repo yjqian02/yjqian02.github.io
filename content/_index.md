@@ -48,12 +48,32 @@ sections:
         <div class="bio-info-row">
           <div class="bio-col bio-col-news">
             <h3 class="bio-section-heading">Recent News</h3>
-            <ul class="bio-news-list">
-              <li><strong>May 2025.</strong> Paper accepted at CSCW 2025: "AURA: Supporting Responsible AI Content Work"</li>
-              <li><strong>Apr 2025.</strong> Presented at CHI 2025 workshop on AI safety and red teaming</li>
-              <li><strong>Sep 2024.</strong> Started Ph.D. at Carnegie Mellon University HCII</li>
-              <li><strong>May 2024.</strong> Graduated with B.S. Computer Science from University of Minnesota</li>
-            </ul>
+            <div class="news-scroll">
+              <div class="news-card">
+                <div class="news-card-body">
+                  <span class="news-card-date">May 2025</span>
+                  <p class="news-card-text">Paper accepted at CSCW 2025: "AURA: Supporting Responsible AI Content Work"</p>
+                </div>
+              </div>
+              <div class="news-card">
+                <div class="news-card-body">
+                  <span class="news-card-date">Apr 2025</span>
+                  <p class="news-card-text">Presented at CHI 2025 workshop on AI safety and red teaming</p>
+                </div>
+              </div>
+              <div class="news-card">
+                <div class="news-card-body">
+                  <span class="news-card-date">Sep 2024</span>
+                  <p class="news-card-text">Started Ph.D. at Carnegie Mellon University HCII</p>
+                </div>
+              </div>
+              <div class="news-card">
+                <div class="news-card-body">
+                  <span class="news-card-date">May 2024</span>
+                  <p class="news-card-text">Graduated with B.S. Computer Science from University of Minnesota</p>
+                </div>
+              </div>
+            </div>
           </div>
           <div class="bio-col bio-col-education">
             <h3 class="bio-section-heading">Education</h3>
@@ -86,25 +106,6 @@ sections:
 
   - block: recent-pubs
     id: pubs
-    design:
-      spacing:
-        padding: ["0", "0", "2rem", "0"]
-
-  - block: markdown
-    id: talks
-    content:
-      title: ""
-      text: |-
-        <div class="bio-talks">
-          <h3 class="bio-section-heading">Talks &amp; Presentations</h3>
-          <ul class="bio-talks-list">
-            <li>
-              <span class="bio-talk-meta">Apr 2025 · CHI Workshop</span>
-              <span class="bio-talk-title">Human Expertise for Scalable AI Evaluation and Red-Teaming</span>
-              <span class="bio-talk-venue">Workshop on Human Expertise for Scalable AI Evaluation and Red-Teaming, CHI 2025</span>
-            </li>
-          </ul>
-        </div>
     design:
       spacing:
         padding: ["0", "0", "4rem", "0"]
