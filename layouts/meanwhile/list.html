@@ -1,52 +1,45 @@
 {{ define "main" }}
-<div class="mag-outer">
+<div class="mag-wrapper">
 
-  <div class="mag-topbar">
-    <h1 class="mag-page-title">{{ .Title }}</h1>
-    <div class="mag-view-toggle">
-      <button class="mag-toggle-btn is-active" id="btn-vertical" onclick="setMagView('vertical')">↕ Scroll</button>
-      <button class="mag-toggle-btn" id="btn-horizontal" onclick="setMagView('horizontal')">→ Swipe</button>
-    </div>
+  <div class="mag-header">
+    <h1 class="mag-book-title">{{ .Title }}</h1>
+    <span class="mag-counter" id="mag-counter">1 / {{ len site.Data.meanwhile }}</span>
   </div>
 
-  <div class="mag-slides mag-vertical" id="mag-slides">
+  <div class="mag-book" id="mag-book">
     {{ range $i, $item := site.Data.meanwhile }}
-    <div class="mag-slide slide-type-{{ .type | default "text" }}" id="mag-slide-{{ $i }}">
+    <div class="mag-page{{ if eq $i 0 }} is-current{{ end }}" id="mag-page-{{ $i }}" data-index="{{ $i }}">
 
-      {{/* ── full-bleed image ── */}}
-      {{ if eq .type "image" }}
-      {{ if .src }}
-      <img class="mag-full-img" src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy"
-           {{ with .position }}style="object-position:{{ . }}"{{ end }}>
-      <div class="mag-slide-overlay">
-        {{ with .caption }}<p class="mag-caption">{{ . }}</p>{{ end }}
+      {{/* ── text ── */}}
+      {{ if eq .type "text" }}
+      <div class="mag-page-text" {{ with .color }}style="background:{{ . }}"{{ end }}>
+        <p class="mag-page-text-body">{{ .text }}</p>
+        {{ with .attribution }}<span class="mag-page-attribution">— {{ . }}</span>{{ end }}
       </div>
-      {{ end }}
 
-      {{/* ── travel: full-bleed image + text panel ── */}}
+      {{/* ── image ── */}}
+      {{ else if eq .type "image" }}
+      <div class="mag-page-image-wrap">
+        {{ if .src }}<img class="mag-page-photo" src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">{{ end }}
+        {{ with .caption }}<p class="mag-page-caption">{{ . }}</p>{{ end }}
+      </div>
+
+      {{/* ── travel ── */}}
       {{ else if eq .type "travel" }}
-      {{ if .src }}
-      <img class="mag-full-img" src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy"
-           {{ with .position }}style="object-position:{{ . }}"{{ end }}>
-      {{ end }}
-      <div class="mag-travel-content">
-        <span class="mag-travel-label">Travel</span>
-        {{ with .location }}<h2 class="mag-travel-location">{{ . }}</h2>{{ end }}
-        {{ with .date }}<span class="mag-travel-date">{{ . }}</span>{{ end }}
-        {{ with .text }}<p class="mag-travel-text">{{ . }}</p>{{ end }}
+      <div class="mag-page-travel">
+        {{ if .src }}<img class="mag-page-photo mag-travel-photo" src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">{{ end }}
+        <div class="mag-travel-info">
+          <span class="mag-travel-label">Travel</span>
+          {{ with .location }}<h2 class="mag-travel-location">{{ . }}</h2>{{ end }}
+          {{ with .date }}<span class="mag-travel-date">{{ . }}</span>{{ end }}
+          {{ with .text }}<p class="mag-travel-text">{{ . }}</p>{{ end }}
+        </div>
       </div>
 
-      {{/* ── text block ── */}}
-      {{ else if eq .type "text" }}
-      <div class="mag-text-fill" {{ with .color }}style="background:{{ . }}"{{ end }}>
-        <p class="mag-text-body">{{ .text }}</p>
-        {{ with .attribution }}<span class="mag-attribution">— {{ . }}</span>{{ end }}
-      </div>
-
-      {{/* ── link / article ── */}}
+      {{/* ── link ── */}}
       {{ else if eq .type "link" }}
-      <div class="mag-link-fill">
-        {{ if .image }}<img class="mag-link-img" src="{{ .image }}" alt="">{{ end }}
+      <div class="mag-page-link">
+        {{ if .image }}<img class="mag-page-link-img" src="{{ .image }}" alt="">{{ end }}
         <div class="mag-link-body">
           {{ with .source }}<span class="mag-source-label">{{ . }}</span>{{ end }}
           <h2 class="mag-link-title">{{ .title }}</h2>
@@ -55,12 +48,11 @@
         </div>
       </div>
 
-      {{/* ── collage: multiple items in one slide ── */}}
+      {{/* ── collage ── */}}
       {{ else if eq .type "collage" }}
-      <div class="mag-collage-fill"
-           {{ with .columns }}style="--collage-cols:{{ . }}"{{ end }}>
+      <div class="mag-page-collage" {{ with .columns }}style="--collage-cols:{{ . }}"{{ end }}>
         {{ range .items }}
-        <div class="mag-collage-item{{ if .span }} span-{{ .span }}{{ end }}{{ if eq .type "text" }} is-text{{ end }}"
+        <div class="mag-collage-cell{{ if .span }} span-{{ .span }}{{ end }}{{ if eq .type "text" }} is-text{{ end }}"
              {{ if and (eq .type "text") .color }}style="background:{{ .color }}"{{ end }}>
           {{ if .src }}
           <img src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">
@@ -73,46 +65,246 @@
       </div>
 
       {{ end }}
-
-      {{/* floating advance arrow */}}
-      {{ $total := len site.Data.meanwhile }}
-      {{ $next := add $i 1 }}
-      {{ if lt $next $total }}
-      <button class="mag-arrow-btn" onclick="magGoTo({{ $next }})" aria-label="Next">
-        <span class="mag-arrow-icon">↓</span>
-      </button>
-      {{ end }}
-
     </div>
     {{ end }}
+  </div>
+
+  <div class="mag-footer">
+    <button class="mag-nav-btn" id="mag-btn-prev" onclick="magNav(-1)" disabled aria-label="Previous page">←</button>
+    <button class="mag-nav-btn" id="mag-btn-next" onclick="magNav(1)" aria-label="Next page">→</button>
   </div>
 
 </div>
 
 <script>
 (function () {
-  window.magGoTo = function (index) {
-    var slide = document.getElementById('mag-slide-' + index);
-    if (!slide) return;
-    var container = document.getElementById('mag-slides');
-    var isH = container.classList.contains('mag-horizontal');
-    slide.scrollIntoView({
-      behavior: 'smooth',
-      block: isH ? 'nearest' : 'start',
-      inline: isH ? 'start' : 'nearest'
+  var book    = document.getElementById('mag-book');
+  var pages   = Array.from(document.querySelectorAll('.mag-page'));
+  var counter = document.getElementById('mag-counter');
+  var btnPrev = document.getElementById('mag-btn-prev');
+  var btnNext = document.getElementById('mag-btn-next');
+  var total   = pages.length;
+  var current = 0;
+  var isAnimating = false;
+  var isDragging  = false;
+  var dragDir     = 0;
+  var dragStartX  = 0;
+  var dragProgress = 0;
+
+  function initPages() {
+    pages.forEach(function (p, i) {
+      p.style.zIndex  = i === 0 ? '2' : '1';
+      p.style.display = i === 0 ? '' : 'none';
+      p.style.transform = '';
+      p.style.transition = '';
     });
+  }
+
+  function updateUI() {
+    counter.textContent = (current + 1) + ' / ' + total;
+    btnPrev.disabled = current === 0;
+    btnNext.disabled = current === total - 1;
+  }
+
+  initPages();
+  updateUI();
+
+  function calcProgress(clientX) {
+    var rect    = book.getBoundingClientRect();
+    var dx      = clientX - dragStartX;
+    var maxDrag = rect.width * 0.65;
+    if (dragDir === 1)  return Math.max(0, Math.min(1, -dx / maxDrag));
+    if (dragDir === -1) return Math.max(0, Math.min(1,  dx / maxDrag));
+    return 0;
+  }
+
+  function applyLive(progress) {
+    dragProgress = progress;
+    if (dragDir === 1) {
+      pages[current].style.transform = 'perspective(1400px) rotateY(' + (-90 * progress) + 'deg)';
+    } else if (dragDir === -1 && current > 0) {
+      pages[current - 1].style.transform = 'perspective(1400px) rotateY(' + (-90 * (1 - progress)) + 'deg)';
+    }
+  }
+
+  function completeTurn(dir) {
+    isAnimating = true;
+    if (dir === 1 && current < total - 1) {
+      var out = pages[current];
+      var inn = pages[current + 1];
+      out.style.transition = 'transform 0.30s ease-in';
+      out.style.transform  = 'perspective(1400px) rotateY(-90deg)';
+      setTimeout(function () {
+        out.style.transition = '';
+        out.style.transform  = '';
+        out.style.display    = 'none';
+        out.style.zIndex     = '1';
+        inn.style.zIndex     = '2';
+        current++;
+        updateUI();
+        isAnimating = false;
+      }, 300);
+
+    } else if (dir === -1 && current > 0) {
+      var inn = pages[current - 1];
+      inn.style.transition = 'transform 0.30s ease-out';
+      inn.style.transform  = 'perspective(1400px) rotateY(0deg)';
+      setTimeout(function () {
+        inn.style.transition = '';
+        inn.style.transform  = '';
+        inn.style.zIndex     = '2';
+        pages[current].style.display = 'none';
+        pages[current].style.zIndex  = '1';
+        current--;
+        updateUI();
+        isAnimating = false;
+      }, 300);
+
+    } else {
+      snapBack();
+    }
+  }
+
+  function snapBack() {
+    if (dragDir === 1) {
+      var pg = pages[current];
+      pg.style.transition = 'transform 0.22s ease-out';
+      pg.style.transform  = 'perspective(1400px) rotateY(0deg)';
+      if (current + 1 < total) pages[current + 1].style.display = 'none';
+      setTimeout(function () {
+        pg.style.transition = '';
+        pg.style.transform  = '';
+        pg.style.zIndex     = '2';
+        isAnimating = false;
+      }, 220);
+
+    } else if (dragDir === -1 && current > 0) {
+      var prev = pages[current - 1];
+      prev.style.transition = 'transform 0.22s ease-in';
+      prev.style.transform  = 'perspective(1400px) rotateY(-90deg)';
+      setTimeout(function () {
+        prev.style.transition = '';
+        prev.style.display    = 'none';
+        prev.style.zIndex     = '1';
+        pages[current].style.zIndex = '2';
+        isAnimating = false;
+      }, 220);
+    } else {
+      isAnimating = false;
+    }
+    isDragging = false;
+  }
+
+  function startDrag(clientX) {
+    if (isAnimating) return false;
+    var rect     = book.getBoundingClientRect();
+    var relX     = clientX - rect.left;
+    var rightZone = relX > rect.width * 0.33;
+
+    if (rightZone && current < total - 1) {
+      dragDir = 1;
+    } else if (!rightZone && current > 0) {
+      dragDir = -1;
+    } else {
+      return false;
+    }
+
+    isDragging   = true;
+    dragStartX   = clientX;
+    dragProgress = 0;
+
+    if (dragDir === 1) {
+      pages[current + 1].style.display = '';
+      pages[current + 1].style.zIndex  = '1';
+      pages[current + 1].style.transform = '';
+      pages[current].style.zIndex = '3';
+    } else {
+      pages[current - 1].style.display   = '';
+      pages[current - 1].style.zIndex    = '2';
+      pages[current - 1].style.transform = 'perspective(1400px) rotateY(-90deg)';
+      pages[current].style.zIndex = '1';
+    }
+    return true;
+  }
+
+  /* ── mouse ── */
+  book.addEventListener('mousedown', function (e) {
+    if (startDrag(e.clientX)) e.preventDefault();
+  });
+  document.addEventListener('mousemove', function (e) {
+    if (!isDragging) return;
+    applyLive(calcProgress(e.clientX));
+  });
+  document.addEventListener('mouseup', function (e) {
+    if (!isDragging) return;
+    isDragging = false;
+    if (dragProgress > 0.28) {
+      completeTurn(dragDir);
+    } else {
+      isAnimating = true;
+      snapBack();
+    }
+  });
+
+  /* ── touch ── */
+  book.addEventListener('touchstart', function (e) {
+    startDrag(e.touches[0].clientX);
+  }, { passive: true });
+  document.addEventListener('touchmove', function (e) {
+    if (!isDragging) return;
+    applyLive(calcProgress(e.touches[0].clientX));
+  }, { passive: true });
+  document.addEventListener('touchend', function () {
+    if (!isDragging) return;
+    isDragging = false;
+    if (dragProgress > 0.28) {
+      completeTurn(dragDir);
+    } else {
+      isAnimating = true;
+      snapBack();
+    }
+  });
+
+  /* ── cursor hint on hover ── */
+  book.addEventListener('mousemove', function (e) {
+    if (isDragging) return;
+    var rect  = book.getBoundingClientRect();
+    var relX  = e.clientX - rect.left;
+    var right = relX > rect.width * 0.33;
+    if (right && current < total - 1)       book.style.cursor = 'e-resize';
+    else if (!right && current > 0)          book.style.cursor = 'w-resize';
+    else                                     book.style.cursor = 'default';
+  });
+  book.addEventListener('mouseleave', function () {
+    book.style.cursor = 'default';
+  });
+
+  /* ── buttons & keyboard ── */
+  window.magNav = function (dir) {
+    if (isAnimating) return;
+    if (dir === 1  && current >= total - 1) return;
+    if (dir === -1 && current <= 0)         return;
+    dragDir      = dir;
+    dragProgress = 0;
+
+    if (dir === 1) {
+      pages[current + 1].style.display   = '';
+      pages[current + 1].style.zIndex    = '1';
+      pages[current + 1].style.transform = '';
+      pages[current].style.zIndex = '3';
+    } else {
+      pages[current - 1].style.display   = '';
+      pages[current - 1].style.zIndex    = '2';
+      pages[current - 1].style.transform = 'perspective(1400px) rotateY(-90deg)';
+      pages[current].style.zIndex = '1';
+    }
+    completeTurn(dir);
   };
 
-  window.setMagView = function (mode) {
-    var container = document.getElementById('mag-slides');
-    container.className = 'mag-slides mag-' + mode;
-    document.getElementById('btn-vertical').classList.toggle('is-active', mode === 'vertical');
-    document.getElementById('btn-horizontal').classList.toggle('is-active', mode === 'horizontal');
-    document.querySelectorAll('.mag-arrow-icon').forEach(function (el) {
-      el.textContent = mode === 'vertical' ? '↓' : '→';
-    });
-    magGoTo(0);
-  };
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') magNav(1);
+    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   magNav(-1);
+  });
 })();
 </script>
 {{ end }}
