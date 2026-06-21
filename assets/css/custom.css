@@ -1,16 +1,6 @@
-/* ── Navbar matches cream background in light mode ───────────────────────── */
-/* Hugo Blox sets .dark on <html> for dark mode — exclude it so dark mode
-   keeps its own navbar color; only override for light (default) mode.      */
-html:not(.dark) header,
-html:not(.dark) #navbar-main,
-html:not(.dark) .navbar {
-  background-color: var(--bg) !important;
-  border-bottom-color: rgba(128,128,128,0.1) !important;
-}
-
 /* ── Color palette ───────────────────────────────────────────────────────── */
 :root {
-  --bg:                  #F2EDE4;          /* cream — page background              */
+  --bg:                  #ffffff;          /* white — page background              */
   --teal:                #6DCBD5;          /* primary accent                       */
   --teal-soft:           rgba(109,203,213,0.35);
   --teal-subtle:         rgba(109,203,213,0.12);
@@ -18,7 +8,7 @@ html:not(.dark) .navbar {
   --coral-soft:          rgba(224,90,78,0.35);
   --deep-purple:         #3C1A5B;          /* dark accent / section headers        */
   --deep-purple-border:  rgba(60,26,91,0.3);
-  --text:                #1a1a1a;          /* body text — near-black on cream      */
+  --text:                #1a1a1a;
 }
 
 /* Dark mode overrides — Hugo Blox adds .dark to <html> */
