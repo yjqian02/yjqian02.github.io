@@ -24,11 +24,11 @@
   --coral-soft:          rgba(232,120,109,0.3);
 }
 
-/* ── Typography: Lora only ───────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap');
+/* ── Typography: Raleway ─────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&display=swap');
 
 body, * {
-  font-family: 'Lora', Georgia, serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 body {
@@ -273,7 +273,7 @@ body {
 }
 
 .pub-year-label {
-  font-family: 'Lora', Georgia, serif;
+  font-family: 'Raleway', sans-serif;
   font-size: 1.5rem;
   font-style: italic;
   font-weight: 400;
