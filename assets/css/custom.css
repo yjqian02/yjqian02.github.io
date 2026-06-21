@@ -607,6 +607,50 @@ body {
   margin: 0;
 }
 
+/* ── Bio page: talks & presentations ────────────────────────────────────── */
+
+.bio-talks {
+  padding: 0 1.5rem 1rem 2.5rem;
+}
+
+.bio-talks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.bio-talks-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.bio-talk-meta {
+  font-size: 0.72rem;
+  color: var(--deep-purple);
+  opacity: 0.42;
+}
+
+.bio-talk-title {
+  font-size: 0.93rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.bio-talk-venue {
+  font-size: 0.82rem;
+  font-style: italic;
+  opacity: 0.5;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .bio-talks { padding-left: 1rem; }
+}
+
 /* ── Venue short tag ─────────────────────────────────────────────────────── */
 
 .venue-short-tag {
