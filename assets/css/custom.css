@@ -167,10 +167,16 @@ body {
 
 .bio-info-row {
   display: grid;
-  grid-template-columns: 1.8fr 1fr 1fr;
+  grid-template-columns: 1.8fr 1fr;
   gap: 2rem;
   width: 100%;
   padding-left: 2.5rem;
+}
+
+.bio-col-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .bio-section-heading {
