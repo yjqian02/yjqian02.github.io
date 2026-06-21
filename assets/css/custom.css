@@ -1,16 +1,6 @@
-/* ── Navbar matches cream background in light mode ───────────────────────── */
-/* Hugo Blox sets .dark on <html> for dark mode — exclude it so dark mode
-   keeps its own navbar color; only override for light (default) mode.      */
-html:not(.dark) header,
-html:not(.dark) #navbar-main,
-html:not(.dark) .navbar {
-  background-color: var(--bg) !important;
-  border-bottom-color: rgba(128,128,128,0.1) !important;
-}
-
 /* ── Color palette ───────────────────────────────────────────────────────── */
 :root {
-  --bg:                  #F2EDE4;          /* cream — page background              */
+  --bg:                  #ffffff;          /* white — page background              */
   --teal:                #6DCBD5;          /* primary accent                       */
   --teal-soft:           rgba(109,203,213,0.35);
   --teal-subtle:         rgba(109,203,213,0.12);
@@ -18,7 +8,7 @@ html:not(.dark) .navbar {
   --coral-soft:          rgba(224,90,78,0.35);
   --deep-purple:         #3C1A5B;          /* dark accent / section headers        */
   --deep-purple-border:  rgba(60,26,91,0.3);
-  --text:                #1a1a1a;          /* body text — near-black on cream      */
+  --text:                #1a1a1a;
 }
 
 /* Dark mode overrides — Hugo Blox adds .dark to <html> */
@@ -46,16 +36,19 @@ body {
   color: var(--text);
 }
 
-/* ── Break Hugo Blox width constraints for bio/info sections ─────────────── */
+/* ── Break Hugo Blox width constraints for bio/info/pubs sections ────────── */
 #bio,
-#info {
+#info,
+#pubs {
   width: 100%;
 }
 
 #bio > *,
 #bio > * > *,
 #info > *,
-#info > * > * {
+#info > * > *,
+#pubs > *,
+#pubs > * > * {
   max-width: none !important;
   width: 100% !important;
   box-sizing: border-box;
@@ -562,12 +555,10 @@ body {
 }
 
 .bio-pub-entry {
-  padding-bottom: 1.1rem;
-  border-bottom: 1px solid rgba(128,128,128,0.1);
+  padding-bottom: 0;
 }
 
 .bio-pub-entry:last-child {
-  border-bottom: none;
   padding-bottom: 0;
 }
 
@@ -604,6 +595,50 @@ body {
   font-style: italic;
   opacity: 0.5;
   margin: 0;
+}
+
+/* ── Bio page: talks & presentations ────────────────────────────────────── */
+
+.bio-talks {
+  padding: 0 1.5rem 1rem 2.5rem;
+}
+
+.bio-talks-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.bio-talks-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.bio-talk-meta {
+  font-size: 0.72rem;
+  color: var(--deep-purple);
+  opacity: 0.42;
+}
+
+.bio-talk-title {
+  font-size: 0.93rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.bio-talk-venue {
+  font-size: 0.82rem;
+  font-style: italic;
+  opacity: 0.5;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .bio-talks { padding-left: 1rem; }
 }
 
 /* ── Venue short tag ─────────────────────────────────────────────────────── */
@@ -798,7 +833,7 @@ body {
   .project-pub-meta { white-space: normal; }
 }
 
-/* ── Meanwhile — book widget ──────────────────────────────────────────────── */
+/* ── Meanwhile — magazine page-flip format ───────────────────────────────── */
 
 .mag-wrapper {
   max-width: 820px;
@@ -806,7 +841,8 @@ body {
   padding: 0 1.5rem;
 }
 
-.mag-header {
+/* Top bar: title + page counter */
+.mag-topbar {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
@@ -822,68 +858,97 @@ body {
 }
 
 .mag-counter {
-  font-size: 0.78rem;
-  opacity: 0.45;
-  font-variant-numeric: tabular-nums;
+  font-size: 0.72rem;
+  opacity: 0.4;
+  letter-spacing: 0.05em;
 }
 
-/* The book container — fixed aspect ratio, page-flip perspective */
+/* Book: stacks all slides on top of each other */
 .mag-book {
+  flex: 1;
   position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: var(--bg);
-  box-shadow:
-    0 1px 3px rgba(0,0,0,0.07),
-    0 4px 16px rgba(0,0,0,0.10),
-    0 16px 48px rgba(0,0,0,0.08);
-  border-radius: 2px;
-  user-select: none;
-  /* spine shadow on left edge */
-  border-left: 5px solid rgba(0,0,0,0.07);
+  background: var(--deep-purple);
+  perspective: 1800px;
 }
 
-/* Individual page — absolutely stacked, flips around left edge */
-.mag-page {
+/* Individual slide — hidden by default, JS reveals active */
+.mag-slide {
   position: absolute;
   inset: 0;
-  background: var(--bg);
+  overflow: hidden;
+  background: var(--deep-purple);
+  visibility: hidden;
+  z-index: 0;
   transform-origin: left center;
   backface-visibility: hidden;
-  will-change: transform;
-  overflow: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* ── Page content types ── */
+/* ── Page flip animations ── */
 
-/* Text page: full colored fill */
-.mag-page-text {
-  position: absolute;
-  inset: 0;
+/* Forward: current page folds away to the left */
+@keyframes flipOutFwd {
+  from { transform: perspective(1800px) rotateY(0deg);    opacity: 1; }
+  to   { transform: perspective(1800px) rotateY(-90deg);  opacity: 0.2; }
+}
+/* Forward: next page unfolds from the right */
+@keyframes flipInFwd {
+  from { transform: perspective(1800px) rotateY(90deg);   opacity: 0.2; }
+  to   { transform: perspective(1800px) rotateY(0deg);    opacity: 1; }
+}
+
+/* Backward: current page folds away to the right */
+@keyframes flipOutBack {
+  from { transform: perspective(1800px) rotateY(0deg);    opacity: 1; transform-origin: right center; }
+  to   { transform: perspective(1800px) rotateY(90deg);   opacity: 0.2; transform-origin: right center; }
+}
+/* Backward: previous page unfolds from the left */
+@keyframes flipInBack {
+  from { transform: perspective(1800px) rotateY(-90deg);  opacity: 0.2; }
+  to   { transform: perspective(1800px) rotateY(0deg);    opacity: 1; }
+}
+
+.mag-slide.flip-out-fwd  { animation: flipOutFwd  0.45s ease-in  forwards; visibility: visible; z-index: 3; }
+.mag-slide.flip-in-fwd   { animation: flipInFwd   0.45s ease-out forwards; visibility: visible; z-index: 1; animation-delay: 0.2s; }
+.mag-slide.flip-out-back { animation: flipOutBack 0.45s ease-in  forwards; visibility: visible; z-index: 3; }
+.mag-slide.flip-in-back  { animation: flipInBack  0.45s ease-out forwards; visibility: visible; z-index: 1; animation-delay: 0.2s; }
+
+/* Prev / Next navigation bar */
+.mag-nav {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 2.5rem 10%;
+  justify-content: space-between;
+  padding: 0.6rem 2rem;
+  border-top: 1px solid rgba(128,128,128,0.1);
+  background: var(--bg);
+  flex-shrink: 0;
 }
 
-.mag-page-text-body {
-  font-size: clamp(1rem, 2.2vw, 1.6rem);
-  line-height: 1.6;
-  color: rgba(255,255,255,0.92);
-  margin: 0 0 0.85rem;
-  max-width: 32ch;
+.mag-nav-btn {
+  font-family: 'Lora', Georgia, serif;
+  font-size: 1rem;
+  padding: 0.3rem 1.2rem;
+  background: none;
+  border: 1px solid rgba(128,128,128,0.2);
+  border-radius: 3px;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.15s, border-color 0.15s;
 }
 
-.mag-page-attribution {
-  font-size: 0.82rem;
-  color: rgba(255,255,255,0.45);
-  font-style: italic;
+.mag-nav-btn:not(:disabled):hover {
+  opacity: 1;
+  border-color: var(--teal);
+  color: var(--teal);
 }
 
-/* Image page: centered photo with breathing room */
-.mag-page-image-wrap {
+.mag-nav-btn:disabled {
+  opacity: 0.2;
+  cursor: default;
+}
+
+/* Full-bleed image */
+.mag-full-img {
   position: absolute;
   inset: 0;
   display: flex;
@@ -895,14 +960,15 @@ body {
   background: var(--bg);
 }
 
-.mag-page-photo {
-  max-width: 100%;
-  max-height: 88%;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.14);
+/* Overlay for image captions */
+.mag-slide-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem 2.5rem;
+  background: linear-gradient(transparent, rgba(0,0,0,0.6));
+  z-index: 2;
 }
 
 .mag-page-caption {
@@ -930,9 +996,15 @@ body {
   min-height: 0;
 }
 
-.mag-travel-info {
-  padding: 1.25rem 2rem 1.5rem;
-  background: var(--deep-purple);
+/* Travel slide */
+.mag-travel-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.5rem;
+  background: linear-gradient(transparent, rgba(60,26,91,0.85));
+  z-index: 2;
 }
 
 .mag-travel-label {
@@ -1022,8 +1094,9 @@ body {
   font-weight: 500;
 }
 
-/* Collage page: grid filling full page */
-.mag-page-collage {
+/* ── Collage slide ───────────────────────────────────────────────────────── */
+
+.mag-collage-fill {
   position: absolute;
   inset: 0;
   display: grid;
@@ -1038,10 +1111,10 @@ body {
   min-height: 0;
 }
 
-.mag-collage-cell.span-2 { grid-column: span 2; }
-.mag-collage-cell.span-3 { grid-column: span 3; }
+.mag-collage-item.span-2 { grid-column: span 2; }
+.mag-collage-item.span-3 { grid-column: span 3; }
 
-.mag-collage-cell img {
+.mag-collage-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
