@@ -801,7 +801,7 @@ body {
   .project-pub-meta { white-space: normal; }
 }
 
-/* ── Meanwhile — magazine format ─────────────────────────────────────────── */
+/* ── Meanwhile — magazine page-flip format ───────────────────────────────── */
 
 .mag-outer {
   display: flex;
@@ -810,7 +810,7 @@ body {
   overflow: hidden;
 }
 
-/* Top bar: title + view toggle */
+/* Top bar: title + page counter */
 .mag-topbar {
   display: flex;
   align-items: center;
@@ -829,63 +829,97 @@ body {
   letter-spacing: -0.01em;
 }
 
-.mag-view-toggle {
-  display: flex;
-  gap: 0.35rem;
+.mag-counter {
+  font-size: 0.72rem;
+  opacity: 0.4;
+  letter-spacing: 0.05em;
 }
 
-.mag-toggle-btn {
+/* Book: stacks all slides on top of each other */
+.mag-book {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: var(--deep-purple);
+  perspective: 1800px;
+}
+
+/* Individual slide — hidden by default, JS reveals active */
+.mag-slide {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--deep-purple);
+  visibility: hidden;
+  z-index: 0;
+  transform-origin: left center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* ── Page flip animations ── */
+
+/* Forward: current page folds away to the left */
+@keyframes flipOutFwd {
+  from { transform: perspective(1800px) rotateY(0deg);    opacity: 1; }
+  to   { transform: perspective(1800px) rotateY(-90deg);  opacity: 0.2; }
+}
+/* Forward: next page unfolds from the right */
+@keyframes flipInFwd {
+  from { transform: perspective(1800px) rotateY(90deg);   opacity: 0.2; }
+  to   { transform: perspective(1800px) rotateY(0deg);    opacity: 1; }
+}
+
+/* Backward: current page folds away to the right */
+@keyframes flipOutBack {
+  from { transform: perspective(1800px) rotateY(0deg);    opacity: 1; transform-origin: right center; }
+  to   { transform: perspective(1800px) rotateY(90deg);   opacity: 0.2; transform-origin: right center; }
+}
+/* Backward: previous page unfolds from the left */
+@keyframes flipInBack {
+  from { transform: perspective(1800px) rotateY(-90deg);  opacity: 0.2; }
+  to   { transform: perspective(1800px) rotateY(0deg);    opacity: 1; }
+}
+
+.mag-slide.flip-out-fwd  { animation: flipOutFwd  0.45s ease-in  forwards; visibility: visible; z-index: 3; }
+.mag-slide.flip-in-fwd   { animation: flipInFwd   0.45s ease-out forwards; visibility: visible; z-index: 1; animation-delay: 0.2s; }
+.mag-slide.flip-out-back { animation: flipOutBack 0.45s ease-in  forwards; visibility: visible; z-index: 3; }
+.mag-slide.flip-in-back  { animation: flipInBack  0.45s ease-out forwards; visibility: visible; z-index: 1; animation-delay: 0.2s; }
+
+/* Prev / Next navigation bar */
+.mag-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.6rem 2rem;
+  border-top: 1px solid rgba(128,128,128,0.1);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+
+.mag-nav-btn {
   font-family: 'Lora', Georgia, serif;
-  font-size: 0.72rem;
-  padding: 0.25rem 0.65rem;
-  border: 1px solid rgba(128,128,128,0.25);
-  border-radius: 3px;
+  font-size: 1rem;
+  padding: 0.3rem 1.2rem;
   background: none;
+  border: 1px solid rgba(128,128,128,0.2);
+  border-radius: 3px;
   cursor: pointer;
-  opacity: 0.5;
+  opacity: 0.55;
   transition: opacity 0.15s, border-color 0.15s;
 }
 
-.mag-toggle-btn.is-active {
+.mag-nav-btn:not(:disabled):hover {
   opacity: 1;
   border-color: var(--teal);
   color: var(--teal);
 }
 
-/* Slide container — vertical scroll-snap */
-.mag-slides {
-  flex: 1;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  -webkit-overflow-scrolling: touch;
+.mag-nav-btn:disabled {
+  opacity: 0.2;
+  cursor: default;
 }
 
-/* Slide container — horizontal */
-.mag-slides.mag-horizontal {
-  overflow-y: hidden;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-  display: flex;
-  flex-wrap: nowrap;
-}
-
-/* Individual slide */
-.mag-slide {
-  position: relative;
-  height: 100%;
-  scroll-snap-align: start;
-  flex-shrink: 0;
-  overflow: hidden;
-  background: var(--deep-purple);
-}
-
-.mag-slides.mag-horizontal .mag-slide {
-  width: 100vw;
-}
-
-/* Full-bleed image — cover with top-biased position so portrait photos
-   show the subject (usually near top) rather than cropping to the middle.
-   Override per-image via position: field in meanwhile.yaml → object-position inline style. */
+/* Full-bleed image */
 .mag-full-img {
   position: absolute;
   inset: 0;
@@ -904,6 +938,7 @@ body {
   right: 0;
   padding: 2rem 2.5rem;
   background: linear-gradient(transparent, rgba(0,0,0,0.6));
+  z-index: 2;
 }
 
 .mag-caption {
@@ -946,6 +981,7 @@ body {
   right: 0;
   padding: 2.5rem;
   background: linear-gradient(transparent, rgba(60,26,91,0.85));
+  z-index: 2;
 }
 
 .mag-travel-label {
@@ -1035,42 +1071,6 @@ body {
   font-weight: 500;
 }
 
-/* Floating next-slide arrow */
-.mag-arrow-btn {
-  position: absolute;
-  bottom: 1.75rem;
-  right: 2rem;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.15);
-  border: 1px solid rgba(255,255,255,0.3);
-  color: #fff;
-  font-size: 1.1rem;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.15s;
-  backdrop-filter: blur(4px);
-  z-index: 10;
-}
-
-.mag-arrow-btn:hover {
-  background: rgba(255,255,255,0.28);
-}
-
-/* Light slides get a dark arrow */
-.slide-type-link .mag-arrow-btn {
-  background: rgba(0,0,0,0.08);
-  border-color: rgba(0,0,0,0.15);
-  color: var(--text);
-}
-
-.slide-type-link .mag-arrow-btn:hover {
-  background: rgba(0,0,0,0.15);
-}
-
 /* ── Collage slide ───────────────────────────────────────────────────────── */
 
 .mag-collage-fill {
@@ -1088,13 +1088,8 @@ body {
   min-height: 0;
 }
 
-.mag-collage-item.span-2 {
-  grid-column: span 2;
-}
-
-.mag-collage-item.span-3 {
-  grid-column: span 3;
-}
+.mag-collage-item.span-2 { grid-column: span 2; }
+.mag-collage-item.span-3 { grid-column: span 3; }
 
 .mag-collage-item img {
   width: 100%;
