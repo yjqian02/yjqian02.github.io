@@ -46,16 +46,19 @@ body {
   color: var(--text);
 }
 
-/* ── Break Hugo Blox width constraints for bio/info sections ─────────────── */
+/* ── Break Hugo Blox width constraints for bio/info/pubs sections ────────── */
 #bio,
-#info {
+#info,
+#pubs {
   width: 100%;
 }
 
 #bio > *,
 #bio > * > *,
 #info > *,
-#info > * > * {
+#info > * > *,
+#pubs > *,
+#pubs > * > * {
   max-width: none !important;
   width: 100% !important;
   box-sizing: border-box;
