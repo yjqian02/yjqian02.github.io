@@ -562,12 +562,10 @@ body {
 }
 
 .bio-pub-entry {
-  padding-bottom: 1.1rem;
-  border-bottom: 1px solid rgba(128,128,128,0.1);
+  padding-bottom: 0;
 }
 
 .bio-pub-entry:last-child {
-  border-bottom: none;
   padding-bottom: 0;
 }
 
