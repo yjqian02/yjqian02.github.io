@@ -88,5 +88,24 @@ sections:
     id: pubs
     design:
       spacing:
-        padding: ["0", "0", "3rem", "0"]
+        padding: ["0", "0", "2rem", "0"]
+
+  - block: markdown
+    id: talks
+    content:
+      title: ""
+      text: |-
+        <div class="bio-talks">
+          <h3 class="bio-section-heading">Talks &amp; Presentations</h3>
+          <ul class="bio-talks-list">
+            <li>
+              <span class="bio-talk-meta">Apr 2025 · CHI Workshop</span>
+              <span class="bio-talk-title">Human Expertise for Scalable AI Evaluation and Red-Teaming</span>
+              <span class="bio-talk-venue">Workshop on Human Expertise for Scalable AI Evaluation and Red-Teaming, CHI 2025</span>
+            </li>
+          </ul>
+        </div>
+    design:
+      spacing:
+        padding: ["0", "0", "4rem", "0"]
 ---
