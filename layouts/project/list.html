@@ -4,49 +4,57 @@
   <h1 class="projects-title">{{ .Title }}</h1>
   {{ with .Description }}<p class="projects-subtitle">{{ . }}</p>{{ end }}
 
-  <div class="projects-list">
-    {{ range $i, $p := .Pages.ByDate.Reverse }}
-    <div class="project-item" id="proj-{{ $i }}">
-      <button class="project-trigger" onclick="toggleProject('proj-{{ $i }}')" aria-expanded="false">
-        <span class="project-num">{{ printf "%02d" (add $i 1) }}</span>
-        <span class="project-info">
-          <span class="project-title-text">{{ .Title }}</span>
-          <span class="project-tags">
-            {{ range .Params.tags }}<span class="project-tag">{{ . }}</span>{{ end }}
-          </span>
-        </span>
-        <span class="project-arrow">↓</span>
-      </button>
-      <div class="project-body">
-        {{ with .Params.summary }}<p class="project-summary">{{ . }}</p>{{ end }}
-
-        {{ with .Params.related_pubs }}
-        <div class="project-pubs">
-          {{ range . }}
-          {{ $slug := . }}
-          {{ $pub := index (where site.RegularPages "File.Dir" (printf "publication/%s/" $slug)) 0 }}
-          {{ with $pub }}
-          <a class="project-pub-row" href="{{ .RelPermalink }}">
-            <span class="project-pub-title">{{ .Title }}</span>
-            <span class="project-pub-meta">
-              {{ with .Params.publication_types }}
-                {{ $t := index . 0 }}
-                {{ if eq $t "article-journal" }}Journal{{ else if eq $t "paper-conference" }}Conference{{ else if eq $t "chapter" }}Workshop{{ else if eq $t "manuscript" }}Preprint{{ end }}
-              {{ end }}
-              {{ $vs := .Params.venue_short_override | default .Params.venue_short }}
-              {{ if $vs }} · {{ $vs }}{{ end }}
-              {{ if .Date }} · {{ .Date.Format "2006" }}{{ end }}
-            </span>
-          </a>
-          {{ end }}
-          {{ end }}
-        </div>
-        {{ end }}
-
-      </div>
+  {{ range .Pages.GroupBy "Params.theme" }}
+  <div class="theme-group">
+    <div class="theme-label-col">
+      <span class="theme-label">{{ .Key }}</span>
     </div>
-    {{ end }}
+    <div class="theme-projects-col">
+      {{ range $p := .Pages.ByDate.Reverse }}
+      {{ $id := $p.File.TranslationBaseName }}
+      <div class="project-item" id="proj-{{ $id }}">
+        <button class="project-trigger" onclick="toggleProject('proj-{{ $id }}')" aria-expanded="false">
+          <span class="project-title-text">{{ $p.Title }}</span>
+          <span class="project-arrow">↓</span>
+        </button>
+        <div class="project-body">
+          {{ with $p.Params.summary }}<p class="project-summary">{{ . }}</p>{{ end }}
+
+          {{ with $p.Params.tags }}
+          <div class="project-tags-list">
+            {{ range . }}<span class="project-tag">{{ . }}</span>{{ end }}
+          </div>
+          {{ end }}
+
+          {{ with $p.Params.related_pubs }}
+          <div class="project-pubs">
+            {{ range . }}
+            {{ $slug := . }}
+            {{ $pub := index (where site.RegularPages "File.Dir" (printf "publication/%s/" $slug)) 0 }}
+            {{ with $pub }}
+            <a class="project-pub-row" href="{{ .RelPermalink }}">
+              <span class="project-pub-title">{{ .Title }}</span>
+              <span class="project-pub-meta">
+                {{ with .Params.publication_types }}
+                  {{ $t := index . 0 }}
+                  {{ if eq $t "article-journal" }}Journal{{ else if eq $t "paper-conference" }}Conference{{ else if eq $t "chapter" }}Workshop{{ else if eq $t "manuscript" }}Preprint{{ end }}
+                {{ end }}
+                {{ $vs := .Params.venue_short_override | default .Params.venue_short }}
+                {{ if $vs }} · {{ $vs }}{{ end }}
+                {{ if .Date }} · {{ .Date.Format "2006" }}{{ end }}
+              </span>
+            </a>
+            {{ end }}
+            {{ end }}
+          </div>
+          {{ end }}
+
+        </div>
+      </div>
+      {{ end }}
+    </div>
   </div>
+  {{ end }}
 
 </section>
 
@@ -55,12 +63,10 @@ function toggleProject(id) {
   var el = document.getElementById(id);
   if (!el) return;
   var isOpen = el.classList.contains('is-open');
-
-  document.querySelectorAll('.project-item.is-open').forEach(function(a) {
+  document.querySelectorAll('.project-item.is-open').forEach(function (a) {
     a.classList.remove('is-open');
     a.querySelector('.project-trigger').setAttribute('aria-expanded', 'false');
   });
-
   if (!isOpen) {
     el.classList.add('is-open');
     el.querySelector('.project-trigger').setAttribute('aria-expanded', 'true');
