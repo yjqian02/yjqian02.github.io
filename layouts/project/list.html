@@ -4,7 +4,7 @@
   <h1 class="projects-title">{{ .Title }}</h1>
   {{ with .Description }}<p class="projects-subtitle">{{ . }}</p>{{ end }}
 
-  {{ range .Pages.GroupBy "Params.theme" }}
+  {{ range .Pages.GroupByParam "theme" }}
   <div class="theme-group">
     <div class="theme-label-col">
       <span class="theme-label">{{ .Key }}</span>
