@@ -889,10 +889,10 @@ body {
   .project-pub-row { flex-direction: column; gap: 0.1rem; }
 }
 
-/* ── Meanwhile — open-book page-flip ─────────────────────────────────────── */
+/* ── Meanwhile — magazine page-flip ──────────────────────────────────────── */
 
 .mag-wrapper {
-  max-width: 860px;
+  max-width: 820px;
   margin: 2rem auto 3rem;
   padding: 0 1.5rem;
 }
@@ -912,85 +912,64 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Open-book shell: left decorative leaf + spine + right active leaf */
-.mag-book-shell {
-  display: flex;
-  align-items: stretch;
+/* Stage: wraps the book + shows stacked page edges on right */
+.mag-stage {
+  position: relative;
   width: 100%;
-  aspect-ratio: 1.9 / 1;
+  --pages-left: 1; /* JS updates this 0→1 as pages are consumed */
+}
+
+/* Stacked page-edge strip — visible to the right of the cover */
+.mag-stage::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  right: -11px;
+  bottom: 3px;
+  width: calc(12px * var(--pages-left, 1));
+  max-width: 12px;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      #f0ebe3 0px, #f0ebe3 3px,
+      #e2dcd3 3px, #e2dcd3 4px
+    );
+  border-radius: 0 2px 2px 0;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.10);
+  transition: width 0.3s ease;
+  pointer-events: none;
+}
+
+.dark .mag-stage::after {
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      #2c2038 0px, #2c2038 3px,
+      #1e1628 3px, #1e1628 4px
+    );
+}
+
+/* The magazine face — pages stack here */
+.mag-book {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--bg);
   box-shadow:
     0 1px 3px rgba(0,0,0,0.06),
-    0 6px 20px rgba(0,0,0,0.10),
-    0 20px 60px rgba(0,0,0,0.07);
+    0 4px 16px rgba(0,0,0,0.10),
+    0 16px 48px rgba(0,0,0,0.07);
   border-radius: 2px;
-  overflow: hidden;
   user-select: none;
 }
 
-/* Decorative left page — lined paper look */
-.mag-left-leaf {
-  width: 44%;
-  flex-shrink: 0;
-  background-color: #faf8f4;
-  background-image:
-    repeating-linear-gradient(
-      transparent, transparent 27px,
-      rgba(0,0,0,0.055) 27px, rgba(0,0,0,0.055) 28px
-    );
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
-  padding: 1.25rem 1.5rem;
-}
-
-.dark .mag-left-leaf {
-  background-color: #1c1228;
-  background-image:
-    repeating-linear-gradient(
-      transparent, transparent 27px,
-      rgba(255,255,255,0.04) 27px, rgba(255,255,255,0.04) 28px
-    );
-}
-
-.mag-left-label {
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--deep-purple);
-  opacity: 0.28;
-}
-
-/* Spine — gradient shadow between leaves */
-.mag-spine {
-  width: 12px;
-  flex-shrink: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0,0,0,0.10) 0%,
-    rgba(0,0,0,0.03) 50%,
-    rgba(0,0,0,0.08) 100%
-  );
-  z-index: 4;
-}
-
-/* Right leaf — active content with pages stacked inside */
-.mag-right-leaf,
-#mag-book {
-  flex: 1;
-  position: relative;
-  overflow: hidden;
-  background: var(--bg);
-}
-
-/* Individual page — bottom lifts on forward flip */
+/* Individual page — flips around left spine (rotateY) */
 .mag-page {
   position: absolute;
   inset: 0;
   background: var(--bg);
-  transform-origin: top center;
+  transform-origin: left center;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   will-change: transform;
@@ -1260,8 +1239,7 @@ body {
 
 @media (max-width: 600px) {
   .mag-wrapper { padding: 0 0.75rem; }
-  .mag-book-shell { aspect-ratio: 4 / 3; }
-  .mag-left-leaf, .mag-spine { display: none; }
+  .mag-stage::after { display: none; }
   .mag-page-image-wrap { padding: 1.25rem 1.25rem 1rem; }
   .mag-travel-info { padding: 0.85rem 1.25rem 1.1rem; }
   .mag-link-body { padding: 1rem 1.25rem; }
