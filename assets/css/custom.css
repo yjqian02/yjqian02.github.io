@@ -769,13 +769,6 @@ body {
 
 /* Each project row */
 .project-item {
-  border-left: 2px solid transparent;
-  transition: border-color 0.2s;
-}
-
-.project-item:hover,
-.project-item.is-open {
-  border-left-color: var(--teal);
 }
 
 .project-trigger {
