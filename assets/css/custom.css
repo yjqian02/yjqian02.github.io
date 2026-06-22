@@ -175,8 +175,8 @@ body {
 
 .bio-col-stack {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .bio-section-heading {
