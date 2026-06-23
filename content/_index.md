@@ -81,13 +81,11 @@ sections:
               <ul class="bio-education-list">
                 <li>
                   <span class="bio-edu-degree">Ph.D. Computer Science</span>
-                  <span class="bio-edu-institution">Carnegie Mellon University</span>
-                  <span class="bio-edu-years">2024 – present</span>
+                  <span class="bio-edu-sub">Carnegie Mellon University · 2024–present</span>
                 </li>
                 <li>
                   <span class="bio-edu-degree">B.S. Computer Science</span>
-                  <span class="bio-edu-institution">University of Minnesota</span>
-                  <span class="bio-edu-years">2020 – 2024</span>
+                  <span class="bio-edu-sub">University of Minnesota · 2020–2024</span>
                 </li>
               </ul>
             </div>
