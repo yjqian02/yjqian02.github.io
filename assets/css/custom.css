@@ -175,8 +175,8 @@ body {
 
 .bio-col-stack {
   display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  flex-direction: row;
+  gap: 1.25rem;
 }
 
 .bio-section-heading {
@@ -594,21 +594,24 @@ body {
   padding: 0 1.5rem 2rem 2.5rem;
 }
 
+.bio-pubs-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
 .bio-pubs-all {
-  display: inline-block;
-  margin-top: 1.25rem;
-  font-size: 0.82rem;
-  color: var(--teal);
+  font-size: 0.76rem;
+  color: var(--deep-purple);
   text-decoration: none;
-  border-bottom: 1px solid var(--teal-soft);
-  padding-bottom: 1px;
-  transition: opacity 0.15s, border-color 0.15s;
-  opacity: 0.85;
+  opacity: 0.45;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
 }
 
 .bio-pubs-all:hover {
-  opacity: 1;
-  border-color: var(--teal);
+  opacity: 0.85;
 }
 
 .bio-pubs-list {
