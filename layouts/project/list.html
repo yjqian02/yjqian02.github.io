@@ -4,58 +4,65 @@
   <h1 class="projects-title">{{ .Title }}</h1>
   {{ with .Description }}<p class="projects-subtitle">{{ . }}</p>{{ end }}
 
-  {{ range .Pages.GroupByParam "theme" }}
-  <div class="theme-group">
-    <div class="theme-label-col">
-      <span class="theme-label">{{ .Key }}</span>
-    </div>
-    <div class="theme-projects-col">
-      {{ range $p := .Pages.ByDate.Reverse }}
-      {{ $id := $p.File.TranslationBaseName }}
-      <div class="project-item" id="proj-{{ $id }}">
-        <button class="project-trigger" onclick="toggleProject('proj-{{ $id }}')" aria-expanded="false">
-          <span class="project-title-text">{{ $p.Title }}</span>
-          <span class="project-arrow">↓</span>
-        </button>
-        <div class="project-body">
-          {{ with $p.Params.summary }}<p class="project-summary">{{ . }}</p>{{ end }}
+  <div class="projects-layout">
 
-          {{ with $p.Params.tags }}
-          <div class="project-tags-list">
-            {{ range . }}<span class="project-tag">{{ . }}</span>{{ end }}
-          </div>
-          {{ end }}
+    {{/* ── Left: sticky theme nav ── */}}
+    <nav class="projects-theme-nav" aria-label="Research themes">
+      {{ range .Pages.GroupByParam "theme" }}
+      <a class="theme-nav-link" href="#theme-{{ .Key | urlize }}">{{ .Key }}</a>
+      {{ end }}
+    </nav>
 
-          {{ with $p.Params.related_pubs }}
-          <div class="project-pubs">
-            {{ range . }}
-            {{ $slug := . }}
-            {{ $pub := index (where site.RegularPages "File.Dir" (printf "publication/%s/" $slug)) 0 }}
-            {{ with $pub }}
-            <a class="project-pub-row" href="{{ .RelPermalink }}">
-              <span class="project-pub-title">{{ .Title }}</span>
-              <span class="project-pub-meta">
-                {{ with .Params.publication_types }}
-                  {{ $t := index . 0 }}
-                  {{ if eq $t "article-journal" }}Journal{{ else if eq $t "paper-conference" }}Conference{{ else if eq $t "chapter" }}Workshop{{ else if eq $t "manuscript" }}Preprint{{ end }}
-                {{ end }}
-                {{ $vs := .Params.venue_short_override | default .Params.venue_short }}
-                {{ if $vs }} · {{ $vs }}{{ end }}
-                {{ if .Date }} · {{ .Date.Format "2006" }}{{ end }}
-              </span>
-            </a>
+    {{/* ── Right: grouped project list ── */}}
+    <div class="projects-content">
+      {{ range .Pages.GroupByParam "theme" }}
+      <div class="theme-section" id="theme-{{ .Key | urlize }}">
+        {{ range $p := .Pages.ByDate.Reverse }}
+        {{ $id := $p.File.TranslationBaseName }}
+        <div class="project-item" id="proj-{{ $id }}">
+          <button class="project-trigger" onclick="toggleProject('proj-{{ $id }}')" aria-expanded="false">
+            <span class="project-title-text">{{ $p.Title }}</span>
+          </button>
+          <div class="project-body">
+            {{ with $p.Params.summary }}<p class="project-summary">{{ . }}</p>{{ end }}
+
+            {{ with $p.Params.tags }}
+            <div class="project-tags-list">
+              {{ range . }}<span class="project-tag">{{ . }}</span>{{ end }}
+            </div>
             {{ end }}
-            {{ end }}
-          </div>
-          {{ end }}
 
+            {{ with $p.Params.related_pubs }}
+            <div class="project-pubs">
+              {{ range . }}
+              {{ $slug := . }}
+              {{ $pub := index (where site.RegularPages "File.Dir" (printf "publication/%s/" $slug)) 0 }}
+              {{ with $pub }}
+              <a class="project-pub-row" href="{{ .RelPermalink }}">
+                <span class="project-pub-title">{{ .Title }}</span>
+                <span class="project-pub-meta">
+                  {{ with .Params.publication_types }}
+                    {{ $t := index . 0 }}
+                    {{ if eq $t "article-journal" }}Journal{{ else if eq $t "paper-conference" }}Conference{{ else if eq $t "chapter" }}Workshop{{ else if eq $t "manuscript" }}Preprint{{ end }}
+                  {{ end }}
+                  {{ $vs := .Params.venue_short_override | default .Params.venue_short }}
+                  {{ if $vs }} · {{ $vs }}{{ end }}
+                  {{ if .Date }} · {{ .Date.Format "2006" }}{{ end }}
+                </span>
+              </a>
+              {{ end }}
+              {{ end }}
+            </div>
+            {{ end }}
+
+          </div>
         </div>
+        {{ end }}
       </div>
       {{ end }}
     </div>
-  </div>
-  {{ end }}
 
+  </div>
 </section>
 
 <script>
@@ -63,7 +70,7 @@ function toggleProject(id) {
   var el = document.getElementById(id);
   if (!el) return;
   var isOpen = el.classList.contains('is-open');
-  document.querySelectorAll('.project-item.is-open').forEach(function (a) {
+  document.querySelectorAll('.project-item.is-open').forEach(function(a) {
     a.classList.remove('is-open');
     a.querySelector('.project-trigger').setAttribute('aria-expanded', 'false');
   });
@@ -72,5 +79,37 @@ function toggleProject(id) {
     el.querySelector('.project-trigger').setAttribute('aria-expanded', 'true');
   }
 }
+
+/* Scroll-spy: highlight the active theme in the left nav */
+(function () {
+  var sections = Array.from(document.querySelectorAll('.theme-section'));
+  var links    = Array.from(document.querySelectorAll('.theme-nav-link'));
+  if (!sections.length || !links.length) return;
+
+  function setActive(id) {
+    links.forEach(function (l) {
+      l.classList.toggle('is-active', l.getAttribute('href') === '#' + id);
+    });
+  }
+
+  if (sections[0]) setActive(sections[0].id);
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) setActive(entry.target.id);
+    });
+  }, { rootMargin: '-10% 0px -70% 0px', threshold: 0 });
+
+  sections.forEach(function (s) { observer.observe(s); });
+
+  links.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      var target = document.getElementById(link.getAttribute('href').slice(1));
+      if (!target) return;
+      e.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+})();
 </script>
 {{ end }}
