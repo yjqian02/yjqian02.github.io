@@ -927,13 +927,30 @@ body {
   align-items: stretch;
   width: 100%;
   aspect-ratio: 1.9 / 1;
+  position: relative;
   box-shadow:
-    0 1px 3px rgba(0,0,0,0.06),
-    0 6px 20px rgba(0,0,0,0.10),
-    0 20px 60px rgba(0,0,0,0.07);
+    0 2px 8px rgba(0,0,0,0.10),
+    0 8px 28px rgba(0,0,0,0.13),
+    0 28px 72px rgba(0,0,0,0.09),
+    12px 20px 40px rgba(0,0,0,0.06);
   border-radius: 2px;
   overflow: hidden;
   user-select: none;
+}
+
+/* Top accent bar — magazine masthead strip */
+.mag-book-shell::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #3C1A5B 0%, var(--teal) 100%);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.dark .mag-book-shell::before {
+  background: linear-gradient(90deg, #c9a8f0 0%, var(--teal) 100%);
 }
 
 /* Decorative left page — lined paper look */
@@ -952,6 +969,8 @@ body {
   align-items: flex-end;
   justify-content: flex-start;
   padding: 1.25rem 1.5rem;
+  /* Binding strip on left outer edge */
+  box-shadow: inset 5px 0 0 0 #3C1A5B;
 }
 
 .dark .mag-left-leaf {
@@ -961,6 +980,7 @@ body {
       transparent, transparent 27px,
       rgba(255,255,255,0.04) 27px, rgba(255,255,255,0.04) 28px
     );
+  box-shadow: inset 5px 0 0 0 #c9a8f0;
 }
 
 .mag-left-label {
@@ -972,15 +992,15 @@ body {
   opacity: 0.28;
 }
 
-/* Spine — gradient shadow between leaves */
+/* Spine — visible shadow crease between leaves */
 .mag-spine {
-  width: 12px;
+  width: 14px;
   flex-shrink: 0;
   background: linear-gradient(
     to right,
-    rgba(0,0,0,0.10) 0%,
-    rgba(0,0,0,0.03) 50%,
-    rgba(0,0,0,0.08) 100%
+    rgba(0,0,0,0.16) 0%,
+    rgba(0,0,0,0.04) 55%,
+    rgba(0,0,0,0.10) 100%
   );
   z-index: 4;
 }
@@ -992,6 +1012,17 @@ body {
   position: relative;
   overflow: hidden;
   background: var(--bg);
+}
+
+/* Subtle right-edge vignette suggesting stacked page depth */
+#mag-book::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0;
+  width: 14px;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.055));
+  z-index: 10;
+  pointer-events: none;
 }
 
 /* Individual page — bottom lifts on forward flip */
