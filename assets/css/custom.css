@@ -911,6 +911,56 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* Outer container — page-edge strips poke out left and right */
+.mag-book-outer {
+  position: relative;
+  width: 100%;
+  /* horizontal room for page edges */
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* Left page-edge stack */
+.mag-book-outer::before {
+  content: '';
+  position: absolute;
+  top: 5px; bottom: 5px;
+  left: 2px;
+  width: 10px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #f0ebe2 0px, #f0ebe2 2px,
+    #ddd6c9 2px, #ddd6c9 3px
+  );
+  border-radius: 2px 0 0 2px;
+  box-shadow: -3px 0 8px rgba(0,0,0,0.15);
+}
+
+/* Right page-edge stack */
+.mag-book-outer::after {
+  content: '';
+  position: absolute;
+  top: 5px; bottom: 5px;
+  right: 2px;
+  width: 10px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #f0ebe2 0px, #f0ebe2 2px,
+    #ddd6c9 2px, #ddd6c9 3px
+  );
+  border-radius: 0 2px 2px 0;
+  box-shadow: 3px 0 8px rgba(0,0,0,0.15);
+}
+
+.dark .mag-book-outer::before,
+.dark .mag-book-outer::after {
+  background: repeating-linear-gradient(
+    to bottom,
+    #2a1d38 0px, #2a1d38 2px,
+    #1c1228 2px, #1c1228 3px
+  );
+}
+
 /* Open-book shell: left decorative leaf + spine + right active leaf */
 .mag-book-shell {
   display: flex;
@@ -919,11 +969,10 @@ body {
   aspect-ratio: 1.9 / 1;
   position: relative;
   box-shadow:
-    0 2px 8px rgba(0,0,0,0.10),
-    0 8px 28px rgba(0,0,0,0.13),
-    0 28px 72px rgba(0,0,0,0.09),
-    12px 20px 40px rgba(0,0,0,0.06);
-  border-radius: 2px;
+    0 2px 8px rgba(0,0,0,0.12),
+    0 10px 32px rgba(0,0,0,0.14),
+    0 32px 80px rgba(0,0,0,0.10);
+  border-radius: 1px;
   overflow: hidden;
   user-select: none;
 }
@@ -959,8 +1008,10 @@ body {
   align-items: flex-end;
   justify-content: flex-start;
   padding: 1.25rem 1.5rem;
-  /* Binding strip on left outer edge */
-  box-shadow: inset 5px 0 0 0 #3C1A5B;
+  /* Binding strip on left outer edge + shadow curving toward spine */
+  box-shadow:
+    inset 5px 0 0 0 #3C1A5B,
+    inset -18px 0 20px -10px rgba(0,0,0,0.12);
 }
 
 .dark .mag-left-leaf {
@@ -970,7 +1021,9 @@ body {
       transparent, transparent 27px,
       rgba(255,255,255,0.04) 27px, rgba(255,255,255,0.04) 28px
     );
-  box-shadow: inset 5px 0 0 0 #c9a8f0;
+  box-shadow:
+    inset 5px 0 0 0 #c9a8f0,
+    inset -18px 0 20px -10px rgba(0,0,0,0.25);
 }
 
 .mag-left-label {
@@ -982,15 +1035,16 @@ body {
   opacity: 0.28;
 }
 
-/* Spine — visible shadow crease between leaves */
+/* Spine — deep shadow crease simulating the book gutter */
 .mag-spine {
-  width: 14px;
+  width: 16px;
   flex-shrink: 0;
   background: linear-gradient(
     to right,
-    rgba(0,0,0,0.16) 0%,
-    rgba(0,0,0,0.04) 55%,
-    rgba(0,0,0,0.10) 100%
+    rgba(0,0,0,0.22) 0%,
+    rgba(0,0,0,0.06) 40%,
+    rgba(0,0,0,0.06) 60%,
+    rgba(0,0,0,0.18) 100%
   );
   z-index: 4;
 }
@@ -1002,15 +1056,17 @@ body {
   position: relative;
   overflow: hidden;
   background: var(--bg);
+  /* Shadow curving away from spine toward outer edge */
+  box-shadow: inset 16px 0 20px -10px rgba(0,0,0,0.10);
 }
 
-/* Subtle right-edge vignette suggesting stacked page depth */
+/* Right-edge vignette suggesting more pages behind */
 #mag-book::after {
   content: '';
   position: absolute;
   top: 0; right: 0; bottom: 0;
-  width: 14px;
-  background: linear-gradient(to right, transparent, rgba(0,0,0,0.055));
+  width: 16px;
+  background: linear-gradient(to right, transparent, rgba(0,0,0,0.06));
   z-index: 10;
   pointer-events: none;
 }
