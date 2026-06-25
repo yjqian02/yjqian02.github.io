@@ -1031,6 +1031,7 @@ body {
   position: relative;
   overflow: hidden;
   background: var(--bg);
+  perspective: 1400px;
 }
 
 /* Page-curvature gradient on right page: darker near spine, fades to bright */
@@ -1063,11 +1064,25 @@ body {
   position: absolute;
   inset: 0;
   background: var(--bg);
-  transform-origin: top center;
+  transform-origin: left center;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   will-change: transform;
   overflow: hidden;
+}
+
+/* Fold shadow cast onto the revealed page during a flip */
+#mag-flip-shadow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  background: linear-gradient(to right,
+    rgba(0,0,0,0.30) 0%,
+    rgba(0,0,0,0.08) 30%,
+    transparent 55%
+  );
+  opacity: 0;
 }
 
 /* ── Page content types ─────────────────────────────────────────────────── */
