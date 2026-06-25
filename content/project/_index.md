@@ -1,5 +1,5 @@
 ---
 title: Projects
-description: Research I'm actively building and themes that run across multiple publications.
+description: Projects that cover my publications organized by theme.
 type: project
 ---

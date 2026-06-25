@@ -1,7 +1,7 @@
 ---
-title: "Add a Current Project Here"
-summary: "Replace this with a description of something you're actively working on that doesn't yet have a publication. This could be a new study, a tool you're building, or an early-stage research direction."
-theme: "Active Projects"
+title: "AI in Creative Workflows"
+summary: "How might we design AI within creative workflows to enhance human expertise? What are possible challenges with surveillance, privacy, and authorship and how might we navigate them?"
+theme: "AI in Creative Workflows"
 status: active
 date: 2025-01-01
 tags:
