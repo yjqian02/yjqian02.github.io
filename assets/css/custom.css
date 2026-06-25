@@ -1113,6 +1113,11 @@ body {
   -webkit-backface-visibility: hidden;
 }
 
+/* Front face needs a background so it's opaque when facing the viewer */
+#mag-flipper-front {
+  background: var(--bg);
+}
+
 /* Back face: warm paper texture matching the left leaf */
 #mag-flipper-back {
   transform: rotateY(180deg);
