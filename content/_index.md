@@ -69,13 +69,13 @@ sections:
               </div>
               <div class="news-card">
                 <div class="news-card-body">
-                  <span class="news-card-date">May 2025</span>
+                  <span class="news-card-date">Oct 2025</span>
                   <p class="news-card-text">Presented in Bergen, Norway at CSCW 2025: "AURA: Supporting Responsible AI Content Work"</p>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
-                  <span class="news-card-date">Apr 2025</span>
+                  <span class="news-card-date">Apr 2026</span>
                   <p class="news-card-text">Attended my first CHI in Barcelona, Spain presenting a paper "Worker Discretion Advised" and organizing the HEARTS workshop</p>
                 </div>
               </div>
