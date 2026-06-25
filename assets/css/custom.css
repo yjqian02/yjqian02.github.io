@@ -296,9 +296,12 @@ body {
 
 @media (max-width: 768px) {
   .homepage-hero,
-  .bio-info-row,
+  .bio-info-row {
+    padding-left: 1rem;
+  }
   .bio-recent-pubs {
     padding-left: 1rem;
+    padding-right: 1rem;
   }
   .bio-info-row {
     grid-template-columns: 1fr;
