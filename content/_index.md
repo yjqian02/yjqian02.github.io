@@ -51,6 +51,12 @@ sections:
             <div class="news-scroll">
               <div class="news-card">
                 <div class="news-card-body">
+                  <span class="news-card-date">Jun 2026</span>
+                  <p class="news-card-text">Accepted an internship with RC-Trust in Düsseldorf, Germany, working with Jat Singh</p>
+                </div>
+              </div>
+              <div class="news-card">
+                <div class="news-card-body">
                   <span class="news-card-date">Jun 2025</span>
                   <p class="news-card-text">Presented at Alt FAccT 2025 in New York City</p>
                 </div>
