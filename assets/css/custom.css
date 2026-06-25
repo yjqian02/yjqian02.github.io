@@ -585,7 +585,7 @@ body {
 .bio-recent-pubs {
   width: 100%;
   margin: 3rem 0 0;
-  padding: 0 0 2rem 2.5rem;
+  padding: 0 2.5rem 2rem 2.5rem;
 }
 
 .bio-pubs-header {
@@ -1083,6 +1083,46 @@ body {
     transparent 55%
   );
   opacity: 0;
+}
+
+/* ── Full-sweep page flipper ────────────────────────────────────────────── */
+/* Lives inside .mag-book-shell as a sibling of #mag-book so it can sweep   */
+/* the full width of the open book (right leaf → left leaf).                */
+
+#mag-flipper {
+  display: none;
+  position: absolute;
+  transform-origin: 0 50%; /* pivot at LEFT edge = the spine */
+  transform-style: preserve-3d;
+  z-index: 50;
+  pointer-events: none;
+}
+
+#mag-flipper-front,
+#mag-flipper-back {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Back face: warm paper texture matching the left leaf */
+#mag-flipper-back {
+  transform: rotateY(180deg);
+  background-color: #faf8f4;
+  background-image: repeating-linear-gradient(
+    transparent, transparent 27px,
+    rgba(0,0,0,0.048) 27px, rgba(0,0,0,0.048) 28px
+  );
+}
+
+.dark #mag-flipper-back {
+  background-color: #1c1228;
+  background-image: repeating-linear-gradient(
+    transparent, transparent 27px,
+    rgba(255,255,255,0.04) 27px, rgba(255,255,255,0.04) 28px
+  );
 }
 
 /* ── Page content types ─────────────────────────────────────────────────── */
