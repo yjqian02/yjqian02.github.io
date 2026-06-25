@@ -51,20 +51,20 @@ sections:
             <div class="news-scroll">
               <div class="news-card">
                 <div class="news-card-body">
-                  <span class="news-card-date">May 2025</span>
-                  <p class="news-card-text">Paper accepted at CSCW 2025: "AURA: Supporting Responsible AI Content Work"</p>
+                  <span class="news-card-date">Apr 2025</span>
+                  <p class="news-card-text">Attended my first CHI in Barcelona, Spain presenting a paper "Worker Discretion Advised" and organizing the HEARTS workshop</p>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
-                  <span class="news-card-date">Apr 2025</span>
-                  <p class="news-card-text">Presented at CHI 2025 workshop on AI safety and red teaming</p>
+                  <span class="news-card-date">May 2025</span>
+                  <p class="news-card-text">Presented in Bergen, Norway at CSCW 2025: "AURA: Supporting Responsible AI Content Work"</p>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Sep 2024</span>
-                  <p class="news-card-text">Started Ph.D. at Carnegie Mellon University HCII</p>
+                  <p class="news-card-text">Started my Ph.D. at Carnegie Mellon University HCII</p>
                 </div>
               </div>
               <div class="news-card">
