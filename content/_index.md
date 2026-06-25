@@ -57,6 +57,24 @@ sections:
               </div>
               <div class="news-card">
                 <div class="news-card-body">
+                  <span class="news-card-date">Apr 2026</span>
+                  <p class="news-card-text">Attended my first CHI in Barcelona, Spain presenting a paper "Worker Discretion Advised" and organizing the HEARTS workshop</p>
+                </div>
+              </div>
+              <div class="news-card">
+                <div class="news-card-body">
+                  <span class="news-card-date">Oct 2025</span>
+                  <p class="news-card-text">Presented in Bergen, Norway at CSCW 2025: "AURA: Supporting Responsible AI Content Work"</p>
+                </div>
+              </div>
+              <div class="news-card">
+                <div class="news-card-body">
+                  <span class="news-card-date">Oct 2025</span>
+                  <p class="news-card-text">Organized a SIG at CSCW 2025 in Bergen, Norway</p>
+                </div>
+              </div>
+              <div class="news-card">
+                <div class="news-card-body">
                   <span class="news-card-date">Jun 2025</span>
                   <p class="news-card-text">Presented at Alt FAccT 2025 in New York City</p>
                 </div>
@@ -69,20 +87,8 @@ sections:
               </div>
               <div class="news-card">
                 <div class="news-card-body">
-                  <span class="news-card-date">May 2025</span>
-                  <p class="news-card-text">Presented in Bergen, Norway at CSCW 2025: "AURA: Supporting Responsible AI Content Work"</p>
-                </div>
-              </div>
-              <div class="news-card">
-                <div class="news-card-body">
-                  <span class="news-card-date">Apr 2025</span>
-                  <p class="news-card-text">Attended my first CHI in Barcelona, Spain presenting a paper "Worker Discretion Advised" and organizing the HEARTS workshop</p>
-                </div>
-              </div>
-              <div class="news-card">
-                <div class="news-card-body">
-                  <span class="news-card-date">Oct 2025</span>
-                  <p class="news-card-text">Organizing a SIG at CSCW 2025</p>
+                  <span class="news-card-date">Nov 2024</span>
+                  <p class="news-card-text">Organized "The Human Factor in AI Red-Teaming" workshop at CSCW 2024</p>
                 </div>
               </div>
               <div class="news-card">
@@ -95,6 +101,12 @@ sections:
                 <div class="news-card-body">
                   <span class="news-card-date">May 2024</span>
                   <p class="news-card-text">Graduated with B.S. Computer Science from University of Minnesota</p>
+                </div>
+              </div>
+              <div class="news-card">
+                <div class="news-card-body">
+                  <span class="news-card-date">Apr 2024</span>
+                  <p class="news-card-text">Awarded the National Science Foundation (NSF) Graduate Research Fellowship Program (GRFP)</p>
                 </div>
               </div>
             </div>
