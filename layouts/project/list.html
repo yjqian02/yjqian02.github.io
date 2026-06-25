@@ -18,19 +18,13 @@
       {{ range .Pages.GroupByParam "theme" }}
       <div class="theme-section" id="theme-{{ .Key | urlize }}">
         {{ range $p := .Pages.ByDate.Reverse }}
-        {{ $id := $p.File.TranslationBaseName }}
+        {{ $id := $p.File.Dir | strings.TrimSuffix "/" | path.Base }}
         <div class="project-item" id="proj-{{ $id }}">
           <button class="project-trigger" onclick="toggleProject('proj-{{ $id }}')" aria-expanded="false">
             <span class="project-title-text">{{ $p.Title }}</span>
           </button>
           <div class="project-body">
             {{ with $p.Params.summary }}<p class="project-summary">{{ . }}</p>{{ end }}
-
-            {{ with $p.Params.tags }}
-            <div class="project-tags-list">
-              {{ range . }}<span class="project-tag">{{ . }}</span>{{ end }}
-            </div>
-            {{ end }}
 
             {{ with $p.Params.related_pubs }}
             <div class="project-pubs">

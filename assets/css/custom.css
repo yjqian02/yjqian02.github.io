@@ -580,7 +580,7 @@ body {
 
 .bio-recent-pubs {
   width: 100%;
-  margin: 0;
+  margin: 3rem 0 0;
   padding: 0 0 2rem 2.5rem;
 }
 
@@ -827,23 +827,6 @@ body {
   opacity: 0.65;
   margin: 0.5rem 0 1rem;
   max-width: 52ch;
-}
-
-.project-tags-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  margin-bottom: 1rem;
-}
-
-.project-tag {
-  font-size: 0.62rem;
-  letter-spacing: 0.02em;
-  padding: 0.1rem 0.45rem;
-  border: 1px solid var(--deep-purple-border);
-  border-radius: 2px;
-  color: var(--deep-purple);
-  opacity: 0.55;
 }
 
 /* Publications inside expanded body */
