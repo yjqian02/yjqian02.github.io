@@ -31,7 +31,11 @@
         {{ if $vs }}<span class="venue-short-tag">{{ $vs }}</span>{{ end }}
         <span class="bio-pub-year">{{ .Date.Format "2006" }}</span>
       </div>
-      <h4 class="bio-pub-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h4>
+      {{ $primaryUrl := "" }}
+      {{ with .Params.url_pdf }}{{ if . }}{{ $primaryUrl = . }}{{ end }}{{ end }}
+      {{ if not $primaryUrl }}{{ with .Params.url_source }}{{ if . }}{{ $primaryUrl = . }}{{ end }}{{ end }}{{ end }}
+      {{ if not $primaryUrl }}{{ with .Params.url_video }}{{ if . }}{{ $primaryUrl = . }}{{ end }}{{ end }}{{ end }}
+      <h4 class="bio-pub-title">{{ if $primaryUrl }}<a href="{{ $primaryUrl }}" target="_blank" rel="noopener">{{ .Title }}</a>{{ else }}{{ .Title }}{{ end }}</h4>
       {{ with .Params.publication }}<p class="bio-pub-venue">{{ . | markdownify }}</p>{{ end }}
     </div>
     {{ end }}

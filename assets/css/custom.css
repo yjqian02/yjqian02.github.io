@@ -471,12 +471,13 @@ body {
 
 .pub-btn:hover { opacity: 1; }
 
-.pub-btn-pdf   { border-color: var(--teal-soft); color: var(--teal); }
-.pub-btn-video { border-color: var(--coral-soft); color: var(--coral); }
-.pub-btn-cite  { border-color: rgba(128,128,128,0.25); }
+.pub-btn-pdf    { border-color: var(--teal-soft); color: var(--teal); }
+.pub-btn-video  { border-color: var(--coral-soft); color: var(--coral); }
+.pub-btn-source { border-color: var(--deep-purple-border); color: var(--deep-purple); }
 
-.pub-btn-pdf:hover   { border-color: var(--teal); }
-.pub-btn-video:hover { border-color: var(--coral); }
+.pub-btn-pdf:hover    { border-color: var(--teal); }
+.pub-btn-video:hover  { border-color: var(--coral); }
+.pub-btn-source:hover { border-color: var(--deep-purple); }
 
 @media (max-width: 600px) {
   .pub-entry.has-thumb {

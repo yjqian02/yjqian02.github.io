@@ -54,8 +54,12 @@
             <span class="pub-venue">{{ . | markdownify }}</span>
             {{ end }}
           </div>
+          {{ $primaryUrl := "" }}
+          {{ with .Params.url_pdf }}{{ if . }}{{ $primaryUrl = . }}{{ end }}{{ end }}
+          {{ if not $primaryUrl }}{{ with .Params.url_source }}{{ if . }}{{ $primaryUrl = . }}{{ end }}{{ end }}{{ end }}
+          {{ if not $primaryUrl }}{{ with .Params.url_video }}{{ if . }}{{ $primaryUrl = . }}{{ end }}{{ end }}{{ end }}
           <h3 class="pub-title">
-            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+            {{ if $primaryUrl }}<a href="{{ $primaryUrl }}" target="_blank" rel="noopener">{{ .Title }}</a>{{ else }}{{ .Title }}{{ end }}
           </h3>
           <p class="pub-authors">
             {{ with .Params.authors }}{{ delimit . ", " }}{{ end }}
@@ -67,7 +71,9 @@
             {{ with .Params.url_video }}{{ if . }}
             <a href="{{ . }}" class="pub-btn pub-btn-video" target="_blank" rel="noopener">Video</a>
             {{ end }}{{ end }}
-            <a href="{{ .RelPermalink }}" class="pub-btn pub-btn-cite">Details</a>
+            {{ with .Params.url_source }}{{ if . }}
+            <a href="{{ . }}" class="pub-btn pub-btn-source" target="_blank" rel="noopener">Website</a>
+            {{ end }}{{ end }}
           </div>
         </div>
       </article>
