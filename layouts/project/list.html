@@ -38,7 +38,15 @@
               {{ $slug := . }}
               {{ $pub := index (where site.RegularPages "File.Dir" (printf "publication/%s/" $slug)) 0 }}
               {{ with $pub }}
-              <a class="project-pub-row" href="{{ .RelPermalink }}">
+              {{ $pubUrl := "" }}
+              {{ with .Params.url_pdf }}{{ if . }}{{ $pubUrl = . }}{{ end }}{{ end }}
+              {{ if not $pubUrl }}{{ with .Params.url_source }}{{ if . }}{{ $pubUrl = . }}{{ end }}{{ end }}{{ end }}
+              {{ if not $pubUrl }}{{ with .Params.url_video }}{{ if . }}{{ $pubUrl = . }}{{ end }}{{ end }}{{ end }}
+              {{ if $pubUrl }}
+              <a class="project-pub-row" href="{{ $pubUrl }}" target="_blank" rel="noopener">
+              {{ else }}
+              <div class="project-pub-row">
+              {{ end }}
                 <span class="project-pub-title">{{ .Title }}</span>
                 <span class="project-pub-meta">
                   {{ with .Params.publication_types }}
@@ -49,7 +57,7 @@
                   {{ if $vs }} · {{ $vs }}{{ end }}
                   {{ if .Date }} · {{ .Date.Format "2006" }}{{ end }}
                 </span>
-              </a>
+              {{ if $pubUrl }}</a>{{ else }}</div>{{ end }}
               {{ end }}
               {{ end }}
             </div>
