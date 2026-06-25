@@ -79,14 +79,8 @@ sections:
             <div class="bio-col bio-col-education">
               <h3 class="bio-section-heading">Education</h3>
               <ul class="bio-education-list">
-                <li>
-                  <span class="bio-edu-degree">Ph.D. Computer Science</span>
-                  <span class="bio-edu-sub">Carnegie Mellon University · 2024–present</span>
-                </li>
-                <li>
-                  <span class="bio-edu-degree">B.S. Computer Science</span>
-                  <span class="bio-edu-sub">University of Minnesota · 2020–2024</span>
-                </li>
+                <li>Ph.D. Computer Science · Carnegie Mellon University · 2024–present</li>
+                <li>B.S. Computer Science · University of Minnesota · 2020–2024</li>
               </ul>
             </div>
             <div class="bio-col bio-col-interests">
