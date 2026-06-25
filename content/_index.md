@@ -97,6 +97,12 @@ sections:
                   <p class="news-card-text">Graduated with B.S. Computer Science from University of Minnesota</p>
                 </div>
               </div>
+              <div class="news-card">
+                <div class="news-card-body">
+                  <span class="news-card-date">Apr 2024</span>
+                  <p class="news-card-text">Awarded the National Science Foundation (NSF) Graduate Research Fellowship Program (GRFP)</p>
+                </div>
+              </div>
             </div>
           </div>
           <div class="bio-col-stack">
