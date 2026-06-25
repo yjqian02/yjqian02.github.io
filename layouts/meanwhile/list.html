@@ -12,6 +12,7 @@
     </div>
     <div class="mag-spine" aria-hidden="true"></div>
     <div class="mag-right-leaf" id="mag-book">
+      <div id="mag-flip-shadow" aria-hidden="true"></div>
       {{ range $i, $item := site.Data.meanwhile }}
       <div class="mag-page{{ if eq $i 0 }} is-current{{ end }}" id="mag-page-{{ $i }}" data-index="{{ $i }}">
 
@@ -85,26 +86,29 @@
 
 <script>
 (function () {
-  var book    = document.getElementById('mag-book');
-  var pages   = Array.from(document.querySelectorAll('.mag-page'));
-  var counter = document.getElementById('mag-counter');
-  var btnPrev = document.getElementById('mag-btn-prev');
-  var btnNext = document.getElementById('mag-btn-next');
-  var total   = pages.length;
-  var current = 0;
-  var isAnimating = false;
-  var isDragging  = false;
-  var dragDir     = 0;
-  var dragStartY  = 0;
+  var book     = document.getElementById('mag-book');
+  var shadow   = document.getElementById('mag-flip-shadow');
+  var pages    = Array.from(document.querySelectorAll('.mag-page'));
+  var counter  = document.getElementById('mag-counter');
+  var btnPrev  = document.getElementById('mag-btn-prev');
+  var btnNext  = document.getElementById('mag-btn-next');
+  var total    = pages.length;
+  var current  = 0;
+  var isAnimating  = false;
+  var isDragging   = false;
+  var dragDir      = 0;
+  var dragStartX   = 0;
   var dragProgress = 0;
 
+  /* ── setup ── */
   function initPages() {
     pages.forEach(function (p, i) {
-      p.style.zIndex  = i === 0 ? '2' : '1';
-      p.style.display = i === 0 ? '' : 'none';
-      p.style.transform = '';
+      p.style.zIndex     = i === 0 ? '2' : '1';
+      p.style.display    = i === 0 ? '' : 'none';
+      p.style.transform  = '';
       p.style.transition = '';
     });
+    shadow.style.opacity = '0';
   }
 
   function updateUI() {
@@ -116,155 +120,195 @@
   initPages();
   updateUI();
 
-  function calcProgress(clientY) {
+  /* ── shadow helper — peaks at 90° (progress = 0.5) ── */
+  function setShadow(progress) {
+    /* sin curve: 0 at 0, 1 at 0.5, 0 at 1 */
+    var intensity = Math.sin(Math.PI * Math.max(0, Math.min(1, progress)));
+    shadow.style.opacity = (intensity * 0.85).toFixed(3);
+  }
+
+  /* ── drag helpers ── */
+  function calcProgress(clientX) {
     var rect    = book.getBoundingClientRect();
-    var dy      = clientY - dragStartY;
-    var maxDrag = rect.height * 0.65;
-    if (dragDir === 1)  return Math.max(0, Math.min(1, -dy / maxDrag)); /* drag up = forward */
-    if (dragDir === -1) return Math.max(0, Math.min(1,  dy / maxDrag)); /* drag down = backward */
+    var dx      = clientX - dragStartX;
+    var maxDrag = rect.width * 0.75;
+    if (dragDir === 1)  return Math.max(0, Math.min(1, -dx / maxDrag)); /* drag left  = forward */
+    if (dragDir === -1) return Math.max(0, Math.min(1,  dx / maxDrag)); /* drag right = backward */
     return 0;
   }
 
   function applyLive(progress) {
     dragProgress = progress;
     if (dragDir === 1) {
-      pages[current].style.transform = 'perspective(1400px) rotateX(' + (-90 * progress) + 'deg)';
+      pages[current].style.transform = 'rotateY(' + (-180 * progress) + 'deg)';
     } else if (dragDir === -1 && current > 0) {
-      pages[current - 1].style.transform = 'perspective(1400px) rotateX(' + (-90 * (1 - progress)) + 'deg)';
+      pages[current - 1].style.transform = 'rotateY(' + (-180 * (1 - progress)) + 'deg)';
     }
+    setShadow(progress);
   }
+
+  /* ── complete the turn ── */
+  var FLIP_MS = 480;
+  var EASE    = 'cubic-bezier(0.645, 0.045, 0.355, 1.000)';
 
   function completeTurn(dir) {
     isAnimating = true;
+
     if (dir === 1 && current < total - 1) {
       var out = pages[current];
       var inn = pages[current + 1];
-      out.style.transition = 'transform 0.32s ease-in';
-      out.style.transform  = 'perspective(1400px) rotateX(-90deg)';
+      out.style.transition = 'transform ' + FLIP_MS + 'ms ' + EASE;
+      out.style.transform  = 'rotateY(-180deg)';
+      animateShadow(dragProgress, 1);         /* shadow rises then falls */
       setTimeout(function () {
         out.style.transition = '';
         out.style.transform  = '';
         out.style.display    = 'none';
         out.style.zIndex     = '1';
         inn.style.zIndex     = '2';
+        shadow.style.opacity = '0';
         current++;
         updateUI();
         isAnimating = false;
-      }, 320);
+      }, FLIP_MS);
+
     } else if (dir === -1 && current > 0) {
       var inn = pages[current - 1];
-      inn.style.transition = 'transform 0.32s ease-out';
-      inn.style.transform  = 'perspective(1400px) rotateX(0deg)';
+      inn.style.transition = 'transform ' + FLIP_MS + 'ms ' + EASE;
+      inn.style.transform  = 'rotateY(0deg)';
+      animateShadow(1 - dragProgress, 1);
       setTimeout(function () {
         inn.style.transition = '';
         inn.style.transform  = '';
         inn.style.zIndex     = '2';
         pages[current].style.display = 'none';
         pages[current].style.zIndex  = '1';
+        shadow.style.opacity = '0';
         current--;
         updateUI();
         isAnimating = false;
-      }, 320);
+      }, FLIP_MS);
+
     } else {
       snapBack();
     }
   }
 
-  function snapBack() {
-    if (dragDir === 1) {
-      var pg = pages[current];
-      pg.style.transition = 'transform 0.22s ease-out';
-      pg.style.transform  = 'perspective(1400px) rotateX(0deg)';
-      if (current + 1 < total) pages[current + 1].style.display = 'none';
-      setTimeout(function () {
-        pg.style.transition = '';
-        pg.style.transform  = '';
-        pg.style.zIndex     = '2';
-        isAnimating = false;
-      }, 220);
-    } else if (dragDir === -1 && current > 0) {
-      var prev = pages[current - 1];
-      prev.style.transition = 'transform 0.22s ease-in';
-      prev.style.transform  = 'perspective(1400px) rotateX(-90deg)';
-      setTimeout(function () {
-        prev.style.transition = '';
-        prev.style.display    = 'none';
-        prev.style.zIndex     = '1';
-        pages[current].style.zIndex = '2';
-        isAnimating = false;
-      }, 220);
-    } else {
-      isAnimating = false;
+  /* rAF-based shadow animation from startProg → endProg over FLIP_MS */
+  function animateShadow(startProg, endProg) {
+    var start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var t = Math.min(1, (ts - start) / FLIP_MS);
+      setShadow(startProg + (endProg - startProg) * t);
+      if (t < 1) requestAnimationFrame(step);
     }
-    isDragging = false;
+    requestAnimationFrame(step);
   }
 
-  function startDrag(clientY) {
+  /* ── snap back ── */
+  function snapBack() {
+    isAnimating = true;
+    if (dragDir === 1) {
+      var pg = pages[current];
+      pg.style.transition = 'transform 0.28s ease-out';
+      pg.style.transform  = 'rotateY(0deg)';
+      if (current + 1 < total) pages[current + 1].style.display = 'none';
+      setTimeout(function () {
+        pg.style.transition  = '';
+        pg.style.transform   = '';
+        pg.style.zIndex      = '2';
+        shadow.style.opacity = '0';
+        isAnimating = false;
+        isDragging  = false;
+      }, 280);
+    } else if (dragDir === -1 && current > 0) {
+      var prev = pages[current - 1];
+      prev.style.transition = 'transform 0.28s ease-out';
+      prev.style.transform  = 'rotateY(-180deg)';
+      setTimeout(function () {
+        prev.style.transition  = '';
+        prev.style.display     = 'none';
+        prev.style.zIndex      = '1';
+        pages[current].style.zIndex = '2';
+        shadow.style.opacity = '0';
+        isAnimating = false;
+        isDragging  = false;
+      }, 280);
+    } else {
+      shadow.style.opacity = '0';
+      isAnimating = false;
+      isDragging  = false;
+    }
+  }
+
+  /* ── start drag ── */
+  function startDrag(clientX) {
     if (isAnimating) return false;
     var rect     = book.getBoundingClientRect();
-    var relY     = clientY - rect.top;
-    var bottomHalf = relY > rect.height * 0.45;
+    var relX     = clientX - rect.left;
+    var rightHalf = relX > rect.width * 0.5;
 
-    if (bottomHalf && current < total - 1) dragDir = 1;   /* bottom zone → drag up → forward */
-    else if (!bottomHalf && current > 0)   dragDir = -1;  /* top zone → drag down → backward */
-    else                                   return false;
+    if (rightHalf && current < total - 1) dragDir = 1;    /* right zone → drag left → forward */
+    else if (!rightHalf && current > 0)   dragDir = -1;   /* left  zone → drag right → backward */
+    else                                  return false;
 
     isDragging   = true;
-    dragStartY   = clientY;
+    dragStartX   = clientX;
     dragProgress = 0;
 
     if (dragDir === 1) {
-      pages[current + 1].style.display = '';
-      pages[current + 1].style.zIndex  = '1';
-      pages[current + 1].style.transform = '';
+      pages[current + 1].style.display   = '';
+      pages[current + 1].style.zIndex    = '1';
+      pages[current + 1].style.transform = 'rotateY(0deg)';
       pages[current].style.zIndex = '3';
     } else {
       pages[current - 1].style.display   = '';
-      pages[current - 1].style.zIndex    = '2';
-      pages[current - 1].style.transform = 'perspective(1400px) rotateX(-90deg)';
-      pages[current].style.zIndex = '1';
+      pages[current - 1].style.zIndex    = '3';
+      pages[current - 1].style.transform = 'rotateY(-180deg)';
+      pages[current].style.zIndex = '2';
     }
     return true;
   }
 
   /* ── mouse ── */
   book.addEventListener('mousedown', function (e) {
-    if (startDrag(e.clientY)) e.preventDefault();
+    if (startDrag(e.clientX)) e.preventDefault();
   });
   document.addEventListener('mousemove', function (e) {
     if (!isDragging) return;
-    applyLive(calcProgress(e.clientY));
+    applyLive(calcProgress(e.clientX));
   });
   document.addEventListener('mouseup', function () {
     if (!isDragging) return;
     isDragging = false;
-    if (dragProgress > 0.28) { completeTurn(dragDir); }
+    if (dragProgress > 0.28) completeTurn(dragDir);
     else { isAnimating = true; snapBack(); }
   });
 
   /* ── touch ── */
   book.addEventListener('touchstart', function (e) {
-    startDrag(e.touches[0].clientY);
+    startDrag(e.touches[0].clientX);
   }, { passive: true });
   document.addEventListener('touchmove', function (e) {
     if (!isDragging) return;
-    applyLive(calcProgress(e.touches[0].clientY));
+    applyLive(calcProgress(e.touches[0].clientX));
   }, { passive: true });
   document.addEventListener('touchend', function () {
     if (!isDragging) return;
     isDragging = false;
-    if (dragProgress > 0.28) { completeTurn(dragDir); }
+    if (dragProgress > 0.28) completeTurn(dragDir);
     else { isAnimating = true; snapBack(); }
   });
 
   /* ── cursor hint ── */
   book.addEventListener('mousemove', function (e) {
     if (isDragging) return;
-    var rect   = book.getBoundingClientRect();
-    var bottom = (e.clientY - rect.top) > rect.height * 0.45;
-    if (bottom && current < total - 1)   book.style.cursor = 'n-resize';
-    else if (!bottom && current > 0)     book.style.cursor = 's-resize';
-    else                                 book.style.cursor = 'default';
+    var rect  = book.getBoundingClientRect();
+    var right = (e.clientX - rect.left) > rect.width * 0.5;
+    if (right && current < total - 1)   book.style.cursor = 'w-resize';
+    else if (!right && current > 0)     book.style.cursor = 'e-resize';
+    else                                book.style.cursor = 'default';
   });
   book.addEventListener('mouseleave', function () { book.style.cursor = 'default'; });
 
@@ -278,13 +322,13 @@
     if (dir === 1) {
       pages[current + 1].style.display   = '';
       pages[current + 1].style.zIndex    = '1';
-      pages[current + 1].style.transform = '';
+      pages[current + 1].style.transform = 'rotateY(0deg)';
       pages[current].style.zIndex = '3';
     } else {
       pages[current - 1].style.display   = '';
-      pages[current - 1].style.zIndex    = '2';
-      pages[current - 1].style.transform = 'perspective(1400px) rotateX(-90deg)';
-      pages[current].style.zIndex = '1';
+      pages[current - 1].style.zIndex    = '3';
+      pages[current - 1].style.transform = 'rotateY(-180deg)';
+      pages[current].style.zIndex = '2';
     }
     completeTurn(dir);
   };

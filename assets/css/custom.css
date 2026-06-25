@@ -296,9 +296,12 @@ body {
 
 @media (max-width: 768px) {
   .homepage-hero,
-  .bio-info-row,
+  .bio-info-row {
+    padding-left: 1rem;
+  }
   .bio-recent-pubs {
     padding-left: 1rem;
+    padding-right: 1rem;
   }
   .bio-info-row {
     grid-template-columns: 1fr;
@@ -471,12 +474,13 @@ body {
 
 .pub-btn:hover { opacity: 1; }
 
-.pub-btn-pdf   { border-color: var(--teal-soft); color: var(--teal); }
-.pub-btn-video { border-color: var(--coral-soft); color: var(--coral); }
-.pub-btn-cite  { border-color: rgba(128,128,128,0.25); }
+.pub-btn-pdf    { border-color: var(--teal-soft); color: var(--teal); }
+.pub-btn-video  { border-color: var(--coral-soft); color: var(--coral); }
+.pub-btn-source { border-color: var(--deep-purple-border); color: var(--deep-purple); }
 
-.pub-btn-pdf:hover   { border-color: var(--teal); }
-.pub-btn-video:hover { border-color: var(--coral); }
+.pub-btn-pdf:hover    { border-color: var(--teal); }
+.pub-btn-video:hover  { border-color: var(--coral); }
+.pub-btn-source:hover { border-color: var(--deep-purple); }
 
 @media (max-width: 600px) {
   .pub-entry.has-thumb {
@@ -580,7 +584,7 @@ body {
 
 .bio-recent-pubs {
   width: 100%;
-  margin: 0;
+  margin: 3rem 0 0;
   padding: 0 0 2rem 2.5rem;
 }
 
@@ -829,23 +833,6 @@ body {
   max-width: 52ch;
 }
 
-.project-tags-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  margin-bottom: 1rem;
-}
-
-.project-tag {
-  font-size: 0.62rem;
-  letter-spacing: 0.02em;
-  padding: 0.1rem 0.45rem;
-  border: 1px solid var(--deep-purple-border);
-  border-radius: 2px;
-  color: var(--deep-purple);
-  opacity: 0.55;
-}
-
 /* Publications inside expanded body */
 .project-pubs {
   display: flex;
@@ -1044,6 +1031,7 @@ body {
   position: relative;
   overflow: hidden;
   background: var(--bg);
+  perspective: 1400px;
 }
 
 /* Page-curvature gradient on right page: darker near spine, fades to bright */
@@ -1076,11 +1064,25 @@ body {
   position: absolute;
   inset: 0;
   background: var(--bg);
-  transform-origin: top center;
+  transform-origin: left center;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   will-change: transform;
   overflow: hidden;
+}
+
+/* Fold shadow cast onto the revealed page during a flip */
+#mag-flip-shadow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  background: linear-gradient(to right,
+    rgba(0,0,0,0.30) 0%,
+    rgba(0,0,0,0.08) 30%,
+    transparent 55%
+  );
+  opacity: 0;
 }
 
 /* ── Page content types ─────────────────────────────────────────────────── */
