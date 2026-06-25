@@ -79,8 +79,8 @@ sections:
             <div class="bio-col bio-col-education">
               <h3 class="bio-section-heading">Education</h3>
               <ul class="bio-education-list">
-                <li>Ph.D. Computer Science · Carnegie Mellon University · 2024–present</li>
-                <li>B.S. Computer Science · University of Minnesota · 2020–2024</li>
+                <li>Ph.D. Computer Science, Carnegie Mellon University<br>2024–present</li>
+                <li>B.S. Computer Science, University of Minnesota<br>2020–2024</li>
               </ul>
             </div>
             <div class="bio-col bio-col-interests">
