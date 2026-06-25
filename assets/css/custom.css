@@ -198,6 +198,12 @@ body {
   margin: 0 0 0.85rem;
 }
 
+/* Allow grid cell to constrain news cards so overflow-x scroll works */
+.bio-col.bio-col-news {
+  min-width: 0;
+  padding-right: 1rem;
+}
+
 /* News horizontal scroll */
 .news-scroll {
   display: flex;

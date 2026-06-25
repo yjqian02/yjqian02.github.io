@@ -175,7 +175,7 @@
   function applyLive(progress) {
     dragProgress = progress;
     /* forward: rotateY 0→180°  |  backward: rotateY 180→0° */
-    var angle = (dragDir === 1) ? 180 * progress : 180 * (1 - progress);
+    var angle = (dragDir === 1) ? -180 * progress : -180 * (1 - progress);
     flipper.style.transform = PERSP + 'rotateY(' + angle + 'deg)';
     setShadow(progress);
   }
@@ -208,12 +208,12 @@
       flipper.style.transform  = PERSP + 'rotateY(0deg)';
       flipper.style.display    = '';
     } else {
-      /* backward: flipper starts at 180° (left side), showing its back */
+      /* backward: flipper starts at -180° (left side), showing its back */
       flipFront.innerHTML = pages[current - 1].innerHTML;
       pages[current].style.display = '';
       pages[current].style.zIndex  = '2';
       flipper.style.transition = '';
-      flipper.style.transform  = PERSP + 'rotateY(180deg)';
+      flipper.style.transform  = PERSP + 'rotateY(-180deg)';
       flipper.style.display    = '';
     }
     return true;
@@ -222,7 +222,7 @@
   /* ── complete turn ── */
   function completeTurn(dir) {
     isAnimating = true;
-    var targetAngle = (dir === 1) ? 180 : 0;
+    var targetAngle = (dir === 1) ? -180 : 0;
 
     flipper.style.transition = 'transform ' + FLIP_MS + 'ms ' + EASE;
     flipper.style.transform  = PERSP + 'rotateY(' + targetAngle + 'deg)';
@@ -256,7 +256,7 @@
   /* ── snap back ── */
   function snapBack() {
     isAnimating = true;
-    var snapAngle = (dragDir === 1) ? 0 : 180;
+    var snapAngle = (dragDir === 1) ? 0 : -180;
 
     flipper.style.transition = 'transform 0.28s ease-out';
     flipper.style.transform  = PERSP + 'rotateY(' + snapAngle + 'deg)';
@@ -352,7 +352,7 @@
       pages[current].style.display = '';
       pages[current].style.zIndex  = '2';
       flipper.style.transition = '';
-      flipper.style.transform  = PERSP + 'rotateY(180deg)';
+      flipper.style.transform  = PERSP + 'rotateY(-180deg)';
       flipper.style.display    = '';
     }
     completeTurn(dir);
