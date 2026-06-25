@@ -52,8 +52,15 @@ body {
   max-width: none !important;
   width: 100% !important;
   box-sizing: border-box;
+}
+
+/* Strip Hugo Blox prose wrapper padding so bio-info-row and
+   bio-recent-pubs share the same left baseline */
+#info .prose,
+#info [class*="prose"] {
   padding-left: 0 !important;
   padding-right: 0 !important;
+  max-width: none !important;
 }
 
 /* ── Homepage hero (photo + bio) ─────────────────────────────────────────── */
@@ -169,7 +176,7 @@ body {
 
 .bio-info-row {
   display: grid;
-  grid-template-columns: 1.8fr 1fr;
+  grid-template-columns: 1.5fr 1fr;
   gap: 2rem;
   width: 100%;
   padding-left: 2.5rem;
