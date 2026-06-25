@@ -74,6 +74,12 @@
       </div>
       {{ end }}
     </div>
+
+    {{/* Flipper lives in .mag-book-shell so it can sweep across the full book width */}}
+    <div id="mag-flipper" aria-hidden="true">
+      <div id="mag-flipper-front"></div>
+      <div id="mag-flipper-back"></div>
+    </div>
   </div>
   </div>
 
@@ -86,8 +92,11 @@
 
 <script>
 (function () {
+  var shellEl  = document.querySelector('.mag-book-shell');
   var book     = document.getElementById('mag-book');
   var shadow   = document.getElementById('mag-flip-shadow');
+  var flipper  = document.getElementById('mag-flipper');
+  var flipFront = document.getElementById('mag-flipper-front');
   var pages    = Array.from(document.querySelectorAll('.mag-page'));
   var counter  = document.getElementById('mag-counter');
   var btnPrev  = document.getElementById('mag-btn-prev');
@@ -100,15 +109,20 @@
   var dragStartX   = 0;
   var dragProgress = 0;
 
-  /* ── setup ── */
+  var FLIP_MS  = 520;
+  var EASE     = 'cubic-bezier(0.645, 0.045, 0.355, 1.000)';
+  var PERSP    = 'perspective(1600px) ';
+
+  /* ── page init ── */
   function initPages() {
     pages.forEach(function (p, i) {
-      p.style.zIndex     = i === 0 ? '2' : '1';
-      p.style.display    = i === 0 ? '' : 'none';
-      p.style.transform  = '';
+      p.style.zIndex    = i === 0 ? '2' : '1';
+      p.style.display   = i === 0 ? '' : 'none';
+      p.style.transform = '';
       p.style.transition = '';
     });
     shadow.style.opacity = '0';
+    flipper.style.display = 'none';
   }
 
   function updateUI() {
@@ -120,155 +134,156 @@
   initPages();
   updateUI();
 
-  /* ── shadow helper — peaks at 90° (progress = 0.5) ── */
+  /* ── position flipper exactly over #mag-book ── */
+  function sizeFlipperToBook() {
+    var bookRect  = book.getBoundingClientRect();
+    var shellRect = shellEl.getBoundingClientRect();
+    flipper.style.left   = (bookRect.left  - shellRect.left) + 'px';
+    flipper.style.top    = (bookRect.top   - shellRect.top)  + 'px';
+    flipper.style.width  = bookRect.width  + 'px';
+    flipper.style.height = bookRect.height + 'px';
+  }
+
+  /* ── shadow: peaks at progress = 0.5 (page edge-on at 90°) ── */
   function setShadow(progress) {
-    /* sin curve: 0 at 0, 1 at 0.5, 0 at 1 */
     var intensity = Math.sin(Math.PI * Math.max(0, Math.min(1, progress)));
-    shadow.style.opacity = (intensity * 0.85).toFixed(3);
+    shadow.style.opacity = (intensity * 0.80).toFixed(3);
   }
 
-  /* ── drag helpers ── */
-  function calcProgress(clientX) {
-    var rect    = book.getBoundingClientRect();
-    var dx      = clientX - dragStartX;
-    var maxDrag = rect.width * 0.75;
-    if (dragDir === 1)  return Math.max(0, Math.min(1, -dx / maxDrag)); /* drag left  = forward */
-    if (dragDir === -1) return Math.max(0, Math.min(1,  dx / maxDrag)); /* drag right = backward */
-    return 0;
-  }
-
-  function applyLive(progress) {
-    dragProgress = progress;
-    if (dragDir === 1) {
-      pages[current].style.transform = 'rotateY(' + (-180 * progress) + 'deg)';
-    } else if (dragDir === -1 && current > 0) {
-      pages[current - 1].style.transform = 'rotateY(' + (-180 * (1 - progress)) + 'deg)';
-    }
-    setShadow(progress);
-  }
-
-  /* ── complete the turn ── */
-  var FLIP_MS = 480;
-  var EASE    = 'cubic-bezier(0.645, 0.045, 0.355, 1.000)';
-
-  function completeTurn(dir) {
-    isAnimating = true;
-
-    if (dir === 1 && current < total - 1) {
-      var out = pages[current];
-      var inn = pages[current + 1];
-      out.style.transition = 'transform ' + FLIP_MS + 'ms ' + EASE;
-      out.style.transform  = 'rotateY(-180deg)';
-      animateShadow(dragProgress, 1);         /* shadow rises then falls */
-      setTimeout(function () {
-        out.style.transition = '';
-        out.style.transform  = '';
-        out.style.display    = 'none';
-        out.style.zIndex     = '1';
-        inn.style.zIndex     = '2';
-        shadow.style.opacity = '0';
-        current++;
-        updateUI();
-        isAnimating = false;
-      }, FLIP_MS);
-
-    } else if (dir === -1 && current > 0) {
-      var inn = pages[current - 1];
-      inn.style.transition = 'transform ' + FLIP_MS + 'ms ' + EASE;
-      inn.style.transform  = 'rotateY(0deg)';
-      animateShadow(1 - dragProgress, 1);
-      setTimeout(function () {
-        inn.style.transition = '';
-        inn.style.transform  = '';
-        inn.style.zIndex     = '2';
-        pages[current].style.display = 'none';
-        pages[current].style.zIndex  = '1';
-        shadow.style.opacity = '0';
-        current--;
-        updateUI();
-        isAnimating = false;
-      }, FLIP_MS);
-
-    } else {
-      snapBack();
-    }
-  }
-
-  /* rAF-based shadow animation from startProg → endProg over FLIP_MS */
-  function animateShadow(startProg, endProg) {
-    var start = null;
+  function animateShadow(startP, endP) {
+    var t0 = null;
     function step(ts) {
-      if (!start) start = ts;
-      var t = Math.min(1, (ts - start) / FLIP_MS);
-      setShadow(startProg + (endProg - startProg) * t);
-      if (t < 1) requestAnimationFrame(step);
+      if (!t0) t0 = ts;
+      var frac = Math.min(1, (ts - t0) / FLIP_MS);
+      setShadow(startP + (endP - startP) * frac);
+      if (frac < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
 
-  /* ── snap back ── */
-  function snapBack() {
-    isAnimating = true;
-    if (dragDir === 1) {
-      var pg = pages[current];
-      pg.style.transition = 'transform 0.28s ease-out';
-      pg.style.transform  = 'rotateY(0deg)';
-      if (current + 1 < total) pages[current + 1].style.display = 'none';
-      setTimeout(function () {
-        pg.style.transition  = '';
-        pg.style.transform   = '';
-        pg.style.zIndex      = '2';
-        shadow.style.opacity = '0';
-        isAnimating = false;
-        isDragging  = false;
-      }, 280);
-    } else if (dragDir === -1 && current > 0) {
-      var prev = pages[current - 1];
-      prev.style.transition = 'transform 0.28s ease-out';
-      prev.style.transform  = 'rotateY(-180deg)';
-      setTimeout(function () {
-        prev.style.transition  = '';
-        prev.style.display     = 'none';
-        prev.style.zIndex      = '1';
-        pages[current].style.zIndex = '2';
-        shadow.style.opacity = '0';
-        isAnimating = false;
-        isDragging  = false;
-      }, 280);
-    } else {
-      shadow.style.opacity = '0';
-      isAnimating = false;
-      isDragging  = false;
-    }
+  /* ── calc drag progress (horizontal) ── */
+  function calcProgress(clientX) {
+    var rect = book.getBoundingClientRect();
+    var dx   = clientX - dragStartX;
+    var max  = rect.width * 0.75;
+    if (dragDir === 1)  return Math.max(0, Math.min(1, -dx / max)); /* drag left  = forward */
+    if (dragDir === -1) return Math.max(0, Math.min(1,  dx / max)); /* drag right = backward */
+    return 0;
+  }
+
+  /* ── live drag update ── */
+  function applyLive(progress) {
+    dragProgress = progress;
+    /* forward: rotateY 0→180°  |  backward: rotateY 180→0° */
+    var angle = (dragDir === 1) ? 180 * progress : 180 * (1 - progress);
+    flipper.style.transform = PERSP + 'rotateY(' + angle + 'deg)';
+    setShadow(progress);
   }
 
   /* ── start drag ── */
   function startDrag(clientX) {
     if (isAnimating) return false;
-    var rect     = book.getBoundingClientRect();
-    var relX     = clientX - rect.left;
-    var rightHalf = relX > rect.width * 0.5;
+    var rect   = book.getBoundingClientRect();
+    var relX   = clientX - rect.left;
+    var right  = relX > rect.width * 0.5;
 
-    if (rightHalf && current < total - 1) dragDir = 1;    /* right zone → drag left → forward */
-    else if (!rightHalf && current > 0)   dragDir = -1;   /* left  zone → drag right → backward */
-    else                                  return false;
+    if (right && current < total - 1)  dragDir = 1;   /* right zone → drag left → forward */
+    else if (!right && current > 0)    dragDir = -1;  /* left  zone → drag right → backward */
+    else                               return false;
 
     isDragging   = true;
     dragStartX   = clientX;
     dragProgress = 0;
 
+    sizeFlipperToBook();
+    shellEl.style.overflow = 'visible';
+
     if (dragDir === 1) {
-      pages[current + 1].style.display   = '';
-      pages[current + 1].style.zIndex    = '1';
-      pages[current + 1].style.transform = 'rotateY(0deg)';
-      pages[current].style.zIndex = '3';
+      /* forward: flipper starts at 0° (right side), next page revealed under it */
+      flipFront.innerHTML = pages[current].innerHTML;
+      pages[current].style.display = 'none';
+      pages[current + 1].style.display = '';
+      pages[current + 1].style.zIndex  = '2';
+      flipper.style.transition = '';
+      flipper.style.transform  = PERSP + 'rotateY(0deg)';
+      flipper.style.display    = '';
     } else {
-      pages[current - 1].style.display   = '';
-      pages[current - 1].style.zIndex    = '3';
-      pages[current - 1].style.transform = 'rotateY(-180deg)';
-      pages[current].style.zIndex = '2';
+      /* backward: flipper starts at 180° (left side), showing its back */
+      flipFront.innerHTML = pages[current - 1].innerHTML;
+      pages[current].style.display = '';
+      pages[current].style.zIndex  = '2';
+      flipper.style.transition = '';
+      flipper.style.transform  = PERSP + 'rotateY(180deg)';
+      flipper.style.display    = '';
     }
     return true;
+  }
+
+  /* ── complete turn ── */
+  function completeTurn(dir) {
+    isAnimating = true;
+    var targetAngle = (dir === 1) ? 180 : 0;
+
+    flipper.style.transition = 'transform ' + FLIP_MS + 'ms ' + EASE;
+    flipper.style.transform  = PERSP + 'rotateY(' + targetAngle + 'deg)';
+    animateShadow(dragProgress, 1);
+
+    setTimeout(function () {
+      flipper.style.transition = '';
+      flipper.style.display    = 'none';
+      shellEl.style.overflow   = '';
+      shadow.style.opacity     = '0';
+
+      if (dir === 1) {
+        /* commit forward */
+        pages[current].style.display = 'none';
+        pages[current].style.zIndex  = '1';
+        pages[current + 1].style.zIndex = '2';
+        current++;
+      } else {
+        /* commit backward */
+        pages[current].style.display = 'none';
+        pages[current].style.zIndex  = '1';
+        pages[current - 1].style.display = '';
+        pages[current - 1].style.zIndex  = '2';
+        current--;
+      }
+      updateUI();
+      isAnimating = false;
+    }, FLIP_MS);
+  }
+
+  /* ── snap back ── */
+  function snapBack() {
+    isAnimating = true;
+    var snapAngle = (dragDir === 1) ? 0 : 180;
+
+    flipper.style.transition = 'transform 0.28s ease-out';
+    flipper.style.transform  = PERSP + 'rotateY(' + snapAngle + 'deg)';
+
+    setTimeout(function () {
+      flipper.style.transition = '';
+      flipper.style.display    = 'none';
+      shellEl.style.overflow   = '';
+      shadow.style.opacity     = '0';
+
+      /* restore original page visibility */
+      if (dragDir === 1) {
+        pages[current].style.display = '';
+        pages[current].style.zIndex  = '2';
+        if (current + 1 < total) {
+          pages[current + 1].style.display = 'none';
+          pages[current + 1].style.zIndex  = '1';
+        }
+      } else {
+        pages[current].style.display = '';
+        pages[current].style.zIndex  = '2';
+        pages[current - 1].style.display = 'none';
+      }
+
+      isAnimating = false;
+      isDragging  = false;
+    }, 280);
   }
 
   /* ── mouse ── */
@@ -306,9 +321,9 @@
     if (isDragging) return;
     var rect  = book.getBoundingClientRect();
     var right = (e.clientX - rect.left) > rect.width * 0.5;
-    if (right && current < total - 1)   book.style.cursor = 'w-resize';
-    else if (!right && current > 0)     book.style.cursor = 'e-resize';
-    else                                book.style.cursor = 'default';
+    if (right && current < total - 1)  book.style.cursor = 'w-resize';
+    else if (!right && current > 0)    book.style.cursor = 'e-resize';
+    else                               book.style.cursor = 'default';
   });
   book.addEventListener('mouseleave', function () { book.style.cursor = 'default'; });
 
@@ -317,18 +332,28 @@
     if (isAnimating) return;
     if (dir === 1  && current >= total - 1) return;
     if (dir === -1 && current <= 0)         return;
+
     dragDir      = dir;
     dragProgress = 0;
+
+    sizeFlipperToBook();
+    shellEl.style.overflow = 'visible';
+
     if (dir === 1) {
-      pages[current + 1].style.display   = '';
-      pages[current + 1].style.zIndex    = '1';
-      pages[current + 1].style.transform = 'rotateY(0deg)';
-      pages[current].style.zIndex = '3';
+      flipFront.innerHTML = pages[current].innerHTML;
+      pages[current].style.display = 'none';
+      pages[current + 1].style.display = '';
+      pages[current + 1].style.zIndex  = '2';
+      flipper.style.transition = '';
+      flipper.style.transform  = PERSP + 'rotateY(0deg)';
+      flipper.style.display    = '';
     } else {
-      pages[current - 1].style.display   = '';
-      pages[current - 1].style.zIndex    = '3';
-      pages[current - 1].style.transform = 'rotateY(-180deg)';
-      pages[current].style.zIndex = '2';
+      flipFront.innerHTML = pages[current - 1].innerHTML;
+      pages[current].style.display = '';
+      pages[current].style.zIndex  = '2';
+      flipper.style.transition = '';
+      flipper.style.transform  = PERSP + 'rotateY(180deg)';
+      flipper.style.display    = '';
     }
     completeTurn(dir);
   };
