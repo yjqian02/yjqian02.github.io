@@ -884,7 +884,7 @@ body {
 /* ── Meanwhile — open-book page-flip ─────────────────────────────────────── */
 
 .mag-wrapper {
-  max-width: 860px;
+  max-width: 1080px;
   margin: 2rem auto 3rem;
   padding: 0 1.5rem;
 }
@@ -952,7 +952,7 @@ body {
   display: flex;
   align-items: stretch;
   width: 100%;
-  aspect-ratio: 1.9 / 1;
+  aspect-ratio: 1.6 / 1;
   position: relative;
   z-index: 1;
   box-shadow:
