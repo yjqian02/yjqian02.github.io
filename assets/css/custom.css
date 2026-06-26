@@ -215,6 +215,9 @@ body {
   padding-bottom: 0.5rem;
   scrollbar-width: thin;
   scrollbar-color: var(--teal-soft) transparent;
+  /* fade-out right edge to hint at more content */
+  -webkit-mask-image: linear-gradient(to right, black 80%, transparent 100%);
+  mask-image: linear-gradient(to right, black 80%, transparent 100%);
 }
 
 .news-scroll::-webkit-scrollbar {
