@@ -52,7 +52,7 @@ sections:
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Jun 2026</span>
-                  <p class="news-card-text">Accepted an internship with RC-Trust in Düsseldorf, Germany, working with Jat Singh</p>
+                  <p class="news-card-text">Started an internship with RC-Trust in Düsseldorf, Germany, working with Jat Singh</p>
                 </div>
               </div>
               <div class="news-card">
