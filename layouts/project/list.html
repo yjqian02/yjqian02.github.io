@@ -48,9 +48,10 @@
                     {{ if eq $t "article-journal" }}Journal{{ else if eq $t "paper-conference" }}Conference{{ else if eq $t "chapter" }}Workshop{{ else if eq $t "manuscript" }}Preprint{{ end }}
                   {{ end }}
                   {{ $vs := .Params.venue_short_override | default .Params.venue_short }}
-                  {{ if $vs }} {{ $vs }}{{ end }}
-                  {{ if .Date }} {{ .Date.Format "2006" }}{{ end }}
+                  {{ if $vs }} · {{ $vs }}{{ end }}
+                  {{ if .Date }} · {{ .Date.Format "2006" }}{{ end }}
                 </span>
+                {{ with .Params.publication }}<span class="project-pub-venue">{{ . | markdownify }}</span>{{ end }}
               {{ if $pubUrl }}</a>{{ else }}</div>{{ end }}
               {{ end }}
               {{ end }}
@@ -109,6 +110,7 @@ function toggleProject(id) {
       var target = document.getElementById(link.getAttribute('href').slice(1));
       if (!target) return;
       e.preventDefault();
+      setActive(target.id);
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
