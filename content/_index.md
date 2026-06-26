@@ -58,7 +58,7 @@ sections:
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Jun 2026</span>
-                  <p class="news-card-text">Attended my first FAccT in Athens, Greece, organizing a CRAFT workshop on ethical curation of data for foundation models</p>
+                  <p class="news-card-text">Attended my first FAccT in Montreal, Canada, organizing a CRAFT workshop on ethical curation of data for foundation models</p>
                 </div>
               </div>
               <div class="news-card">
