@@ -6,8 +6,8 @@
   --teal-subtle:         rgba(109,203,213,0.12);
   --coral:               #E05A4E;          /* secondary accent / active            */
   --coral-soft:          rgba(224,90,78,0.35);
-  --deep-purple:         #3C1A5B;          /* dark accent / section headers        */
-  --deep-purple-border:  rgba(60,26,91,0.3);
+  --deep-purple:         #C94F3A;          /* primary accent / section headers     */
+  --deep-purple-border:  rgba(201,79,58,0.3);
   --text:                #1a1a1a;
 }
 
@@ -15,8 +15,8 @@
 .dark {
   --bg:                  #18101f;          /* deep dark purple-black               */
   --text:                #ede8e0;          /* warm off-white                       */
-  --deep-purple:         #c9a8f0;          /* light lavender — readable on dark bg */
-  --deep-purple-border:  rgba(201,168,240,0.3);
+  --deep-purple:         #f0907e;          /* light coral — readable on dark bg    */
+  --deep-purple-border:  rgba(240,144,126,0.3);
   --teal:                #6DCBD5;          /* stays same — bright enough on dark   */
   --teal-soft:           rgba(109,203,213,0.3);
   --teal-subtle:         rgba(109,203,213,0.14);
