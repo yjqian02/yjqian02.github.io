@@ -852,12 +852,11 @@ body {
   gap: 0.12rem;
   text-decoration: none;
   padding: 0.45rem 0.65rem;
-  border-left: 1px solid var(--teal-soft);
-  transition: border-color 0.15s, background 0.15s;
+  border-radius: 3px;
+  transition: background 0.15s;
 }
 
 .project-pub-row:hover {
-  border-left-color: var(--teal);
   background: var(--teal-subtle);
 }
 
