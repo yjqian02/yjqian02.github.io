@@ -13,7 +13,7 @@ date: '2026-01-01'
 publishDate: '2026-01-01'
 publication_types:
 - paper-conference
-publication: '*arXiv preprint arXiv:2602.01694*'
+publication: '*2026 ACM Conference on Fairness, Accountability, and Transparency*'
 url_pdf: 'https://arxiv.org/pdf/2602.01694'
 venue_short: 'FAccT'
 venue_short_override: 'FAccT'

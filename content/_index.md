@@ -117,7 +117,7 @@ sections:
                   <span class="news-card-date">Nov 2024</span>
                   <p class="news-card-text">Organized "The Human Factor in AI Red-Teaming" workshop at CSCW 2024</p>
                   <div class="news-card-divider"></div>
-                  <span class="news-card-location">📍 San Jose, CA</span>
+                  <span class="news-card-location">📍 San José, Costa Rica</span>
                 </div>
               </div>
               <div class="news-card">

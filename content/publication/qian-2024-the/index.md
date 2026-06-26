@@ -13,7 +13,7 @@ date: '2024-01-01'
 publishDate: '2024-01-01'
 publication_types:
 - article-journal
-publication: '*Companion Publication of the*'
+publication: '*Companion Publication of the 2024 ACM Conference on Computer-Supported Cooperative Work and Social Computing*'
 url_pdf: 'https://dl.acm.org/doi/abs/10.1145/3678884.3687147'
 featured: false
 ---
