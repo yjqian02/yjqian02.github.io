@@ -103,25 +103,66 @@ class ScholarProfileParser(HTMLParser):
 
 
 class ScholarCitationParser(HTMLParser):
-    """Extract the primary external URL from a Scholar citation detail page."""
+    """Extract the primary external URL and full venue from a Scholar citation detail page."""
 
     def __init__(self):
         super().__init__()
         self.external_url: str = ""
-        self._found = False
+        self.full_venue: str = ""
+        self._url_found = False
+        self._in_field = False
+        self._in_value = False
+        self._field_label = ""
+        self._value_text = ""
+        self._depth = 0
 
     def handle_starttag(self, tag, attrs):
-        if self._found:
-            return
         attrs_dict = dict(attrs)
         classes = attrs_dict.get("class", "").split()
-        # The main paper link on a citation detail page uses this class
-        if tag == "a" and "gsc_oci_title_link" in classes:
+
+        # Primary paper link
+        if not self._url_found and tag == "a" and "gsc_oci_title_link" in classes:
             href = attrs_dict.get("href", "")
-            # Skip relative Scholar-internal links
             if href and not href.startswith("/citations") and not href.startswith("/scholar"):
                 self.external_url = href
-                self._found = True
+                self._url_found = True
+
+        # Field label rows: <div class="gsc_oci_field">Conference</div>
+        if tag == "div" and "gsc_oci_field" in classes:
+            self._in_field = True
+            self._field_label = ""
+            self._depth = 1
+            return
+
+        # Field value rows: <div class="gsc_oci_value">Full venue name</div>
+        if tag == "div" and "gsc_oci_value" in classes and self._field_label in ("Conference", "Journal"):
+            self._in_value = True
+            self._value_text = ""
+            self._depth = 1
+            return
+
+        if self._in_field or self._in_value:
+            self._depth += 1
+
+    def handle_endtag(self, tag):
+        if self._in_field or self._in_value:
+            self._depth -= 1
+            if self._depth == 0:
+                if self._in_field:
+                    self._field_label = self._field_label.strip()
+                    self._in_field = False
+                elif self._in_value:
+                    venue = self._value_text.strip()
+                    if venue and not self.full_venue:
+                        self.full_venue = venue
+                    self._in_value = False
+                    self._field_label = ""
+
+    def handle_data(self, data):
+        if self._in_field:
+            self._field_label += data
+        elif self._in_value:
+            self._value_text += data
 
 
 # ── Fetch ─────────────────────────────────────────────────────────────────────
@@ -165,8 +206,8 @@ def fetch_all_papers() -> list[dict]:
     return papers
 
 
-def fetch_paper_url(citation_url: str) -> str:
-    """Fetch a Scholar citation detail page and return the primary external URL."""
+def fetch_paper_details(citation_url: str) -> dict:
+    """Fetch a Scholar citation detail page and return url + full venue name."""
     full_url = "https://scholar.google.com" + citation_url
     try:
         req = urllib.request.Request(full_url, headers=HEADERS)
@@ -178,14 +219,14 @@ def fetch_paper_url(citation_url: str) -> str:
         # Convert arXiv abstract page to direct PDF
         if url and "arxiv.org/abs/" in url:
             url = url.replace("arxiv.org/abs/", "arxiv.org/pdf/")
-        return url
+        return {"url": url, "full_venue": parser.full_venue}
     except Exception as exc:
         print(f"    Warning: could not fetch detail page: {exc}", file=sys.stderr)
-        return ""
+        return {"url": "", "full_venue": ""}
 
 
 def enrich_with_urls(papers: list[dict]) -> None:
-    """Fetch each paper's Scholar detail page to get the external URL."""
+    """Fetch each paper's Scholar detail page to get the external URL and full venue."""
     print(f"\nFetching detail pages for {len(papers)} papers...")
     for paper in papers:
         citation_url = paper.get("citation_url", "")
@@ -193,12 +234,15 @@ def enrich_with_urls(papers: list[dict]) -> None:
             continue
         title_preview = paper["title"][:55]
         print(f"  [{title_preview}]")
-        url = fetch_paper_url(citation_url)
-        if url:
-            paper["url_pdf"] = url
-            print(f"    → {url}")
+        details = fetch_paper_details(citation_url)
+        if details["url"]:
+            paper["url_pdf"] = details["url"]
+            print(f"    → {details['url']}")
         else:
             print(f"    → (no link found)")
+        if details["full_venue"]:
+            paper["full_venue"] = details["full_venue"]
+            print(f"    venue: {details['full_venue']}")
         time.sleep(1.5)
 
 
@@ -350,15 +394,18 @@ def paper_to_hugo_markdown(paper: dict) -> tuple[str, str]:
     date = f"{year}-01-01"
 
     author_list = authors_to_list(authors_raw)
-    entry_type = venue_to_entry_type(venue)
+    # Prefer the full venue fetched from the detail page; fall back to profile snippet
+    full_venue = paper.get("full_venue", "")
+    display_venue = full_venue if full_venue else venue
+    entry_type = venue_to_entry_type(display_venue or venue_raw)
     pub_type = "paper-conference" if entry_type == "inproceedings" else "article-journal"
 
-    venue_short = detect_venue_short(venue) or detect_venue_short(venue_raw)
+    venue_short = detect_venue_short(display_venue) or detect_venue_short(venue_raw)
 
     folder = make_folder_name(authors_raw, year, title)
 
     safe_title = title.replace("'", "''")
-    safe_venue = venue.replace("'", "''") if venue else ""
+    safe_venue = display_venue.replace("'", "''") if display_venue else ""
     authors_yaml = "\n".join(f"- {a}" for a in author_list)
     venue_short_line = f"venue_short: '{venue_short}'\n" if venue_short else ""
 
@@ -430,6 +477,17 @@ def write_hugo_folders(papers: list[dict]) -> None:
                     f"venue_short: '{override}'\nvenue_short_override: '{override}'\nfeatured: false",
                 )
                 print(f"  Kept venue_short_override for: {folder_name}")
+
+            # publication_manual: true → keep the existing publication field
+            if "publication_manual: true" in existing_text:
+                m_pub = _re.search(r"publication: '([^']*)'", existing_text)
+                existing_pub = m_pub.group(1) if m_pub else ""
+                content = _re.sub(r"publication: '[^']*'\n", "", content)
+                content = content.replace(
+                    "featured: false",
+                    f"publication: '{existing_pub}'\npublication_manual: true\nfeatured: false",
+                )
+                print(f"  Kept manual publication for: {folder_name}")
 
             # url_pdf_manual: true → keep the existing url_pdf and ignore freshly scraped one
             if "url_pdf_manual: true" in existing_text:
