@@ -57,6 +57,12 @@ sections:
               </div>
               <div class="news-card">
                 <div class="news-card-body">
+                  <span class="news-card-date">Jun 2026</span>
+                  <p class="news-card-text">Attended my first FAccT in Athens, Greece, organizing a CRAFT workshop on ethical curation of data for foundation models</p>
+                </div>
+              </div>
+              <div class="news-card">
+                <div class="news-card-body">
                   <span class="news-card-date">Apr 2026</span>
                   <p class="news-card-text">Attended my first CHI in Barcelona, Spain presenting a paper "Worker Discretion Advised" and organizing the HEARTS workshop</p>
                 </div>
@@ -93,6 +99,12 @@ sections:
               </div>
               <div class="news-card">
                 <div class="news-card-body">
+                  <span class="news-card-date">Oct 2024</span>
+                  <p class="news-card-text">Selected to attend CAMLIS as part of NIST ARIA in collaboration with Humane Intelligence</p>
+                </div>
+              </div>
+              <div class="news-card">
+                <div class="news-card-body">
                   <span class="news-card-date">Sep 2024</span>
                   <p class="news-card-text">Started my Ph.D. at Carnegie Mellon University HCII</p>
                 </div>
@@ -107,6 +119,12 @@ sections:
                 <div class="news-card-body">
                   <span class="news-card-date">Apr 2024</span>
                   <p class="news-card-text">Awarded the National Science Foundation (NSF) Graduate Research Fellowship Program (GRFP)</p>
+                </div>
+              </div>
+              <div class="news-card">
+                <div class="news-card-body">
+                  <span class="news-card-date">Oct 2023</span>
+                  <p class="news-card-text">Attended my first CSCW in Minneapolis, presenting the poster "#Pragmatic or #Clinical"</p>
                 </div>
               </div>
             </div>
