@@ -149,7 +149,7 @@ sections:
                   <span class="news-card-date">Apr 2024</span>
                   <p class="news-card-text">Awarded the National Science Foundation (NSF) Graduate Research Fellowship Program (GRFP)</p>
                   <div class="news-card-divider"></div>
-                  <span class="news-card-location">📍 Remote</span>
+                  <span class="news-card-location">🎓 Fellowship</span>
                 </div>
               </div>
               <div class="news-card">
