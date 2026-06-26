@@ -221,7 +221,6 @@
       flipper.style.display    = 'block';
     } else {
       /* backward: flipper starts at -180° (left side), showing its back */
-      lazyLoadPage(current - 1);
       flipFront.innerHTML = pages[current - 1].innerHTML;
       pages[current].style.display = '';
       pages[current].style.zIndex  = '2';
@@ -372,7 +371,14 @@
       flipper.style.transform  = PERSP + 'rotateY(-180deg)';
       flipper.style.display    = 'block';
     }
-    completeTurn(dir);
+    /* double-rAF ensures the browser commits the initial state before the
+       CSS transition starts — required when going from display:none */
+    isAnimating = true;
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        completeTurn(dir);
+      });
+    });
   };
 
   document.addEventListener('keydown', function (e) {

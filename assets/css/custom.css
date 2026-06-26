@@ -198,6 +198,12 @@ body {
   margin: 0 0 0.85rem;
 }
 
+/* Allow grid cell to constrain news cards so overflow-x scroll works */
+.bio-col.bio-col-news {
+  min-width: 0;
+  padding-right: 1rem;
+}
+
 /* News horizontal scroll */
 .news-scroll {
   display: flex;
@@ -878,7 +884,7 @@ body {
 /* ── Meanwhile — open-book page-flip ─────────────────────────────────────── */
 
 .mag-wrapper {
-  max-width: 860px;
+  max-width: 1080px;
   margin: 2rem auto 3rem;
   padding: 0 1.5rem;
 }
@@ -946,7 +952,7 @@ body {
   display: flex;
   align-items: stretch;
   width: 100%;
-  aspect-ratio: 1.9 / 1;
+  aspect-ratio: 1.6 / 1;
   position: relative;
   z-index: 1;
   box-shadow:
@@ -1105,6 +1111,11 @@ body {
   overflow: hidden;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
+}
+
+/* Front face needs a background so it's opaque when facing the viewer */
+#mag-flipper-front {
+  background: var(--bg);
 }
 
 /* Back face: warm paper texture matching the left leaf */

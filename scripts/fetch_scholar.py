@@ -38,7 +38,7 @@ HEADERS = {
 }
 
 
-# ── HTML parser ───────────────────────────────────────────────────────────────
+# ── HTML parsers ──────────────────────────────────────────────────────────────
 
 class ScholarProfileParser(HTMLParser):
     """Extract publication rows from a Scholar profile page."""
@@ -58,7 +58,7 @@ class ScholarProfileParser(HTMLParser):
 
         if tag == "tr" and "gsc_a_tr" in classes:
             self._in_row = True
-            self._cur = {"title": "", "authors": "", "venue": "", "year": ""}
+            self._cur = {"title": "", "authors": "", "venue": "", "year": "", "citation_url": ""}
             self._gray_count = 0
             return
 
@@ -68,6 +68,10 @@ class ScholarProfileParser(HTMLParser):
         if tag == "a" and "gsc_a_at" in classes and self._capture is None:
             self._capture = "title"
             self._depth = 1
+            # Capture the href so we can later fetch the detail page
+            href = attrs.get("href", "")
+            if href and self._cur is not None:
+                self._cur["citation_url"] = href
             return
         if tag == "div" and "gs_gray" in classes and self._capture is None:
             self._gray_count += 1
@@ -96,6 +100,28 @@ class ScholarProfileParser(HTMLParser):
     def handle_data(self, data):
         if self._capture and self._cur is not None:
             self._cur[self._capture] += data
+
+
+class ScholarCitationParser(HTMLParser):
+    """Extract the primary external URL from a Scholar citation detail page."""
+
+    def __init__(self):
+        super().__init__()
+        self.external_url: str = ""
+        self._found = False
+
+    def handle_starttag(self, tag, attrs):
+        if self._found:
+            return
+        attrs_dict = dict(attrs)
+        classes = attrs_dict.get("class", "").split()
+        # The main paper link on a citation detail page uses this class
+        if tag == "a" and "gsc_oci_title_link" in classes:
+            href = attrs_dict.get("href", "")
+            # Skip relative Scholar-internal links
+            if href and not href.startswith("/citations") and not href.startswith("/scholar"):
+                self.external_url = href
+                self._found = True
 
 
 # ── Fetch ─────────────────────────────────────────────────────────────────────
@@ -137,6 +163,43 @@ def fetch_all_papers() -> list[dict]:
         time.sleep(2)
 
     return papers
+
+
+def fetch_paper_url(citation_url: str) -> str:
+    """Fetch a Scholar citation detail page and return the primary external URL."""
+    full_url = "https://scholar.google.com" + citation_url
+    try:
+        req = urllib.request.Request(full_url, headers=HEADERS)
+        with urllib.request.urlopen(req, timeout=30) as resp:
+            html = resp.read().decode("utf-8", errors="replace")
+        parser = ScholarCitationParser()
+        parser.feed(html)
+        url = parser.external_url
+        # Convert arXiv abstract page to direct PDF
+        if url and "arxiv.org/abs/" in url:
+            url = url.replace("arxiv.org/abs/", "arxiv.org/pdf/")
+        return url
+    except Exception as exc:
+        print(f"    Warning: could not fetch detail page: {exc}", file=sys.stderr)
+        return ""
+
+
+def enrich_with_urls(papers: list[dict]) -> None:
+    """Fetch each paper's Scholar detail page to get the external URL."""
+    print(f"\nFetching detail pages for {len(papers)} papers...")
+    for paper in papers:
+        citation_url = paper.get("citation_url", "")
+        if not citation_url:
+            continue
+        title_preview = paper["title"][:55]
+        print(f"  [{title_preview}]")
+        url = fetch_paper_url(citation_url)
+        if url:
+            paper["url_pdf"] = url
+            print(f"    → {url}")
+        else:
+            print(f"    → (no link found)")
+        time.sleep(1.5)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────────────
@@ -299,6 +362,9 @@ def paper_to_hugo_markdown(paper: dict) -> tuple[str, str]:
     authors_yaml = "\n".join(f"- {a}" for a in author_list)
     venue_short_line = f"venue_short: '{venue_short}'\n" if venue_short else ""
 
+    url_pdf = paper.get("url_pdf", "")
+    url_pdf_line = f"url_pdf: '{url_pdf}'\n" if url_pdf else ""
+
     content = f"""---
 title: '{safe_title}'
 authors:
@@ -308,7 +374,7 @@ publishDate: '{date}'
 publication_types:
 - {pub_type}
 publication: '{"*" + safe_venue + "*" if safe_venue else ""}'
-{venue_short_line}featured: false
+{venue_short_line}{url_pdf_line}featured: false
 ---
 """
     return folder, content
@@ -365,6 +431,27 @@ def write_hugo_folders(papers: list[dict]) -> None:
                 )
                 print(f"  Kept venue_short_override for: {folder_name}")
 
+            # url_pdf_manual: true → keep the existing url_pdf and ignore freshly scraped one
+            if "url_pdf_manual: true" in existing_text:
+                m3 = _re.search(r"url_pdf: '([^']*)'", existing_text)
+                existing_url = m3.group(1) if m3 else ""
+                content = _re.sub(r"url_pdf: '[^']*'\n", "", content)
+                content = content.replace(
+                    "featured: false",
+                    f"url_pdf: '{existing_url}'\nurl_pdf_manual: true\nfeatured: false",
+                )
+                print(f"  Kept manual url_pdf for: {folder_name}")
+
+            # If the scraper failed to fetch a URL, fall back to preserving the existing one
+            elif "url_pdf: '" not in content and "url_pdf: '" in existing_text:
+                m4 = _re.search(r"url_pdf: '([^']+)'", existing_text)
+                if m4:
+                    content = content.replace(
+                        "featured: false",
+                        f"url_pdf: '{m4.group(1)}'\nfeatured: false",
+                    )
+                    print(f"  Preserved existing url_pdf for: {folder_name}")
+
         (folder_path / "index.md").write_text(content, encoding="utf-8")
 
     # Remove folders that are no longer in the scraped set,
@@ -404,6 +491,8 @@ def main() -> None:
         _, y = parse_venue_year(p.get("venue", ""))
         year = p.get("year") or y or "????"
         print(f"  {year}  {p['title'][:70]}")
+
+    enrich_with_urls(papers)
 
     print()
     write_bib(papers)
