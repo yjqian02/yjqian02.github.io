@@ -12,8 +12,9 @@ authors:
 date: '2026-01-01'
 publishDate: '2026-01-01'
 publication_types:
-- chapter
-publication: '*ACM FAccT CRAFT 2026*'
+- article-journal
+publication: '*ACM FAccT CRAFT 21*'
 venue_short: 'FAccT'
+url_pdf: 'https://hal.science/hal-05612331/'
 featured: false
 ---

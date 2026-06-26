@@ -11,9 +11,9 @@ date: '2026-01-01'
 publishDate: '2026-01-01'
 publication_types:
 - paper-conference
-publication: ''
+publication: '*Proceedings of the*'
+url_pdf: 'https://dl.acm.org/doi/abs/10.1145/3772318.3791558'
 venue_short: 'CHI'
 venue_short_override: 'CHI'
 featured: false
-url_pdf: 'https://dl.acm.org/doi/full/10.1145/3772318.3791558'
 ---

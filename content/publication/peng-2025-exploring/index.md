@@ -13,8 +13,9 @@ authors:
 date: '2025-01-01'
 publishDate: '2025-01-01'
 publication_types:
-- manuscript
+- article-journal
 publication: '*arXiv preprint arXiv:2509.24167*'
 venue_short: 'arXiv'
+url_pdf: 'https://arxiv.org/pdf/2509.24167'
 featured: false
 ---

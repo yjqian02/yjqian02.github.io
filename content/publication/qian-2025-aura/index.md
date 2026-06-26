@@ -13,8 +13,6 @@ publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM on Human-Computer Interaction 9 (2), 1-45*'
 venue_short: 'CSCW'
-featured: false
 url_pdf: 'https://dl.acm.org/doi/abs/10.1145/3710931'
-url_video: ''
-url_source: ''
+featured: false
 ---

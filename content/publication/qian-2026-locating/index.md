@@ -12,5 +12,6 @@ publication_types:
 - paper-conference
 publication: '*Proceedings of the ACM on Human-Computer Interaction 10 (2), 1-32*'
 venue_short: 'CSCW'
+url_pdf: 'https://dl.acm.org/doi/abs/10.1145/3788065'
 featured: false
 ---

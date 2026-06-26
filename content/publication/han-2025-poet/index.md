@@ -11,7 +11,7 @@ date: '2025-01-01'
 publishDate: '2025-01-01'
 publication_types:
 - paper-conference
-publication: '*UIST 2025*'
-venue_short: 'UIST'
+publication: '*Proceedings of the 38th Annual ACM Symposium on User Interface Software and …*'
+url_pdf: 'https://dl.acm.org/doi/abs/10.1145/3746059.3747710'
 featured: false
 ---
