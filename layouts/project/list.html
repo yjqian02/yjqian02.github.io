@@ -49,7 +49,7 @@
                   {{ end }}
                   {{ $vs := .Params.venue_short_override | default .Params.venue_short }}
                   {{ if $vs }} · {{ $vs }}{{ end }}
-                  {{ if .Date }} · {{ .Date.Format "2006" }}{{ end }}
+                  {{ if .Date }} {{ .Date.Format "2006" }}{{ end }}
                 </span>
               {{ if $pubUrl }}</a>{{ else }}</div>{{ end }}
               {{ end }}
