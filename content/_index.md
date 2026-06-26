@@ -121,6 +121,12 @@ sections:
                   <p class="news-card-text">Attended my first CSCW in Minneapolis, presenting the poster "#Pragmatic or #Clinical"</p>
                 </div>
               </div>
+              <div class="news-card">
+                <div class="news-card-body">
+                  <span class="news-card-date">Jun 2023</span>
+                  <p class="news-card-text">Started an internship in Seattle, WA at Microsoft Research</p>
+                </div>
+              </div>
             </div>
           </div>
           <div class="bio-col-stack">
