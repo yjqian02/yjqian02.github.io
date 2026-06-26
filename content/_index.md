@@ -51,7 +51,13 @@ sections:
             <div class="news-scroll">
               <div class="news-card">
                 <div class="news-card-body">
-                  <span class="news-card-date">Jun 2026</span>
+                  <span class="news-card-date">Jul 2026</span>
+                  <p class="news-card-text">Organized a workshop "Where to Put the Human: Designing HITL vs. HOTL" and panel "Beyond the Algorithm: How AI Is Reshaping Trust & Safety Operations" at TrustCon 2026 in San Francisco, CA</p>
+                </div>
+              </div>
+              <div class="news-card">
+                <div class="news-card-body">
+                  <span class="news-card-date">Jul 2026</span>
                   <p class="news-card-text">Started an internship with RC-Trust in Düsseldorf, Germany, working with Jat Singh</p>
                 </div>
               </div>
@@ -76,7 +82,7 @@ sections:
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Jun 2025</span>
-                  <p class="news-card-text">Presented at Alt FAccT 2025 in New York City</p>
+                  <p class="news-card-text">Served as session chair at Alt FAccT 2025 in New York City</p>
                 </div>
               </div>
               <div class="news-card">

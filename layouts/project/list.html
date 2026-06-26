@@ -48,8 +48,8 @@
                     {{ if eq $t "article-journal" }}Journal{{ else if eq $t "paper-conference" }}Conference{{ else if eq $t "chapter" }}Workshop{{ else if eq $t "manuscript" }}Preprint{{ end }}
                   {{ end }}
                   {{ $vs := .Params.venue_short_override | default .Params.venue_short }}
-                  {{ if $vs }} · {{ $vs }}{{ end }}
-                  {{ if .Date }} · {{ .Date.Format "2006" }}{{ end }}
+                  {{ if $vs }} {{ $vs }}{{ end }}
+                  {{ if .Date }} {{ .Date.Format "2006" }}{{ end }}
                 </span>
               {{ if $pubUrl }}</a>{{ else }}</div>{{ end }}
               {{ end }}
