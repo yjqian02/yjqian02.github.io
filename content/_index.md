@@ -52,13 +52,13 @@ sections:
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Jun 2026</span>
-                  <p class="news-card-text">Accepted an internship with RC-Trust in Düsseldorf, Germany, working with Jat Singh</p>
+                  <p class="news-card-text">Started an internship with RC-Trust in Düsseldorf, Germany, working with Jat Singh</p>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Jun 2026</span>
-                  <p class="news-card-text">Attended my first FAccT in Athens, Greece, organizing a CRAFT workshop on ethical curation of data for foundation models</p>
+                  <p class="news-card-text">Attended my first FAccT in Montreal, Canada, organizing a CRAFT workshop on ethical curation of data for foundation models</p>
                 </div>
               </div>
               <div class="news-card">
@@ -70,19 +70,13 @@ sections:
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Oct 2025</span>
-                  <p class="news-card-text">Presented in Bergen, Norway at CSCW 2025: "AURA: Supporting Responsible AI Content Work"</p>
+                  <p class="news-card-text">Presented the AURA paper and organized a SIG at CSCW 2025 in Bergen, Norway</p>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
-                  <span class="news-card-date">Oct 2025</span>
-                  <p class="news-card-text">Presented in Bergen, Norway at CSCW 2025: "AURA: Supporting Responsible AI Content Work"</p>
-                </div>
-              </div>
-              <div class="news-card">
-                <div class="news-card-body">
-                  <span class="news-card-date">Apr 2026</span>
-                  <p class="news-card-text">Attended my first CHI in Barcelona, Spain presenting a paper "Worker Discretion Advised" and organizing the HEARTS workshop</p>
+                  <span class="news-card-date">Jun 2025</span>
+                  <p class="news-card-text">Presented at Alt FAccT 2025 in New York City</p>
                 </div>
               </div>
               <div class="news-card">
@@ -125,6 +119,12 @@ sections:
                 <div class="news-card-body">
                   <span class="news-card-date">Oct 2023</span>
                   <p class="news-card-text">Attended my first CSCW in Minneapolis, presenting the poster "#Pragmatic or #Clinical"</p>
+                </div>
+              </div>
+              <div class="news-card">
+                <div class="news-card-body">
+                  <span class="news-card-date">Jun 2023</span>
+                  <p class="news-card-text">Started an internship in Seattle, WA at Microsoft Research</p>
                 </div>
               </div>
             </div>
