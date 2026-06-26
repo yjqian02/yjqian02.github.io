@@ -12,7 +12,7 @@ authors:
 date: '2026-01-01'
 publishDate: '2026-01-01'
 publication_types:
-- manuscript
+- paper-conference
 publication: '*arXiv preprint arXiv:2602.01694*'
 venue_short: 'FAccT'
 venue_short_override: 'FAccT'
