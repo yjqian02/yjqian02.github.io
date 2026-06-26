@@ -12,7 +12,7 @@ authors:
 date: '2026-01-01'
 publishDate: '2026-01-01'
 publication_types:
-- article-journal
+- manuscript
 publication: '*arXiv preprint arXiv:2605.07986*'
 venue_short: 'arXiv'
 url_pdf: 'https://arxiv.org/pdf/2605.07986'

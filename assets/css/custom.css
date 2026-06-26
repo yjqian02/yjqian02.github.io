@@ -204,6 +204,46 @@ body {
   padding-right: 1rem;
 }
 
+/* Two-column news layout: Upcoming | Recent News */
+.news-two-col {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+}
+
+.news-subcol {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.upcoming-col {
+  flex: 0 0 160px;
+}
+
+.recent-col {
+  flex: 1;
+  min-width: 0;
+}
+
+.news-upcoming-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.news-card.upcoming-card {
+  border-color: var(--teal-soft);
+  width: 100%;
+}
+
+.news-card.upcoming-card .news-card-date {
+  color: var(--teal);
+  opacity: 0.85;
+}
+
 /* News horizontal scroll */
 .news-scroll {
   display: flex;
@@ -272,6 +312,24 @@ body {
   font-size: 0.78rem;
   line-height: 1.5;
   margin: 0;
+  flex: 1;
+}
+
+.news-card-divider {
+  height: 1px;
+  background: var(--deep-purple-border);
+  margin: 0.4rem -0.7rem 0.3rem;
+}
+
+.upcoming-card .news-card-divider {
+  background: var(--teal-soft);
+}
+
+.news-card-location {
+  font-size: 0.65rem;
+  line-height: 1.3;
+  margin: 0;
+  opacity: 0.7;
 }
 
 /* Education list */
