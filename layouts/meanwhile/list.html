@@ -26,14 +26,14 @@
         {{/* ── image ── */}}
         {{ else if eq .type "image" }}
         <div class="mag-page-image-wrap">
-          {{ if .src }}<img class="mag-page-photo" src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">{{ end }}
+          {{ if .src }}<img class="mag-page-photo" data-src="{{ .src }}" alt="{{ .alt | default "" }}">{{ end }}
           {{ with .caption }}<p class="mag-page-caption">{{ . }}</p>{{ end }}
         </div>
 
         {{/* ── travel ── */}}
         {{ else if eq .type "travel" }}
         <div class="mag-page-travel">
-          {{ if .src }}<img class="mag-page-photo mag-travel-photo" src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">{{ end }}
+          {{ if .src }}<img class="mag-page-photo mag-travel-photo" data-src="{{ .src }}" alt="{{ .alt | default "" }}">{{ end }}
           <div class="mag-travel-info">
             <span class="mag-travel-label">Travel</span>
             {{ with .location }}<h2 class="mag-travel-location">{{ . }}</h2>{{ end }}
@@ -45,7 +45,7 @@
         {{/* ── link ── */}}
         {{ else if eq .type "link" }}
         <div class="mag-page-link">
-          {{ if .image }}<img class="mag-page-link-img" src="{{ .image }}" alt="">{{ end }}
+          {{ if .image }}<img class="mag-page-link-img" data-src="{{ .image }}" alt="">{{ end }}
           <div class="mag-link-body">
             {{ with .source }}<span class="mag-source-label">{{ . }}</span>{{ end }}
             <h2 class="mag-link-title">{{ .title }}</h2>
@@ -61,7 +61,7 @@
           <div class="mag-collage-cell{{ if .span }} span-{{ .span }}{{ end }}{{ if eq .type "text" }} is-text{{ end }}"
                {{ if and (eq .type "text") .color }}style="background:{{ .color }}"{{ end }}>
             {{ if .src }}
-            <img src="{{ .src }}" alt="{{ .alt | default "" }}" loading="lazy">
+            <img data-src="{{ .src }}" alt="{{ .alt | default "" }}">
             {{ with .caption }}<div class="mag-collage-caption">{{ . }}</div>{{ end }}
             {{ else if eq .type "text" }}
             <p class="mag-collage-text">{{ .text }}</p>
@@ -113,6 +113,15 @@
   var EASE     = 'cubic-bezier(0.645, 0.045, 0.355, 1.000)';
   var PERSP    = 'perspective(1600px) ';
 
+  /* ── lazy image loading — only load current + next page images ── */
+  function lazyLoadPage(index) {
+    if (index < 0 || index >= total) return;
+    pages[index].querySelectorAll('img[data-src]').forEach(function (img) {
+      img.src = img.getAttribute('data-src');
+      img.removeAttribute('data-src');
+    });
+  }
+
   /* ── page init ── */
   function initPages() {
     pages.forEach(function (p, i) {
@@ -133,6 +142,8 @@
 
   initPages();
   updateUI();
+  lazyLoadPage(0);
+  lazyLoadPage(1);
 
   /* ── position flipper exactly over #mag-book ── */
   function sizeFlipperToBook() {
@@ -200,6 +211,7 @@
 
     if (dragDir === 1) {
       /* forward: flipper starts at 0° (right side), next page revealed under it */
+      lazyLoadPage(current + 1);
       flipFront.innerHTML = pages[current].innerHTML;
       pages[current].style.display = 'none';
       pages[current + 1].style.display = '';
@@ -248,6 +260,8 @@
         pages[current - 1].style.zIndex  = '2';
         current--;
       }
+      lazyLoadPage(current + 1);
+      lazyLoadPage(current - 1);
       updateUI();
       isAnimating = false;
     }, FLIP_MS);
@@ -340,6 +354,7 @@
     shellEl.style.overflow = 'visible';
 
     if (dir === 1) {
+      lazyLoadPage(current + 1);
       flipFront.innerHTML = pages[current].innerHTML;
       pages[current].style.display = 'none';
       pages[current + 1].style.display = '';
@@ -348,6 +363,7 @@
       flipper.style.transform  = PERSP + 'rotateY(0deg)';
       flipper.style.display    = 'block';
     } else {
+      lazyLoadPage(current - 1);
       flipFront.innerHTML = pages[current - 1].innerHTML;
       pages[current].style.display = '';
       pages[current].style.zIndex  = '2';
