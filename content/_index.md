@@ -47,14 +47,21 @@ sections:
       text: |-
         <div class="bio-info-row">
           <div class="bio-col bio-col-news">
-            <h3 class="bio-section-heading">Recent News</h3>
-            <div class="news-scroll">
-              <div class="news-card">
-                <div class="news-card-body">
-                  <span class="news-card-date">Jul 2026</span>
-                  <p class="news-card-text">Organized a workshop "Where to Put the Human: Designing HITL vs. HOTL" and panel "Beyond the Algorithm: How AI Is Reshaping Trust & Safety Operations" at TrustCon 2026 in San Francisco, CA</p>
+            <div class="news-two-col">
+              <div class="news-subcol upcoming-col">
+                <h3 class="bio-section-heading">Upcoming</h3>
+                <div class="news-upcoming-cards">
+                  <div class="news-card upcoming-card">
+                    <div class="news-card-body">
+                      <span class="news-card-date">Jul 2026</span>
+                      <p class="news-card-text">Organized a workshop "Where to Put the Human: Designing HITL vs. HOTL" and panel "Beyond the Algorithm: How AI Is Reshaping Trust & Safety Operations" at TrustCon 2026 in San Francisco, CA</p>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <div class="news-subcol recent-col">
+                <h3 class="bio-section-heading">Recent News</h3>
+            <div class="news-scroll">
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Jul 2026</span>
@@ -132,6 +139,8 @@ sections:
                   <span class="news-card-date">Jun 2023</span>
                   <p class="news-card-text">Started an internship in Seattle, WA at Microsoft Research</p>
                 </div>
+              </div>
+            </div>
               </div>
             </div>
           </div>
