@@ -54,7 +54,9 @@ sections:
                   <div class="news-card upcoming-card">
                     <div class="news-card-body">
                       <span class="news-card-date">Jul 2026</span>
-                      <p class="news-card-text">Organized a workshop "Where to Put the Human: Designing HITL vs. HOTL" and panel "Beyond the Algorithm: How AI Is Reshaping Trust & Safety Operations" at TrustCon 2026 in San Francisco, CA</p>
+                      <p class="news-card-text">Organized a workshop "Where to Put the Human: Designing HITL vs. HOTL" and panel "Beyond the Algorithm: How AI Is Reshaping Trust & Safety Operations" at TrustCon 2026</p>
+                      <div class="news-card-divider"></div>
+                      <span class="news-card-location">📍 San Francisco, CA</span>
                     </div>
                   </div>
                 </div>
@@ -65,79 +67,105 @@ sections:
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Jul 2026</span>
-                  <p class="news-card-text">Started an internship with RC-Trust in Düsseldorf, Germany, working with Jat Singh</p>
+                  <p class="news-card-text">Started an internship with RC-Trust working with Jat Singh</p>
+                  <div class="news-card-divider"></div>
+                  <span class="news-card-location">📍 Düsseldorf, Germany</span>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Jun 2026</span>
-                  <p class="news-card-text">Attended my first FAccT in Montreal, Canada, organizing a CRAFT workshop on ethical curation of data for foundation models</p>
+                  <p class="news-card-text">Attended my first FAccT, organizing a CRAFT workshop on ethical curation of data for foundation models</p>
+                  <div class="news-card-divider"></div>
+                  <span class="news-card-location">📍 Montreal, Canada</span>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Apr 2026</span>
-                  <p class="news-card-text">Attended my first CHI in Barcelona, Spain presenting a paper "Worker Discretion Advised" and organizing the HEARTS workshop</p>
+                  <p class="news-card-text">Attended my first CHI, presenting a paper "Worker Discretion Advised" and organizing the HEARTS workshop</p>
+                  <div class="news-card-divider"></div>
+                  <span class="news-card-location">📍 Barcelona, Spain</span>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Oct 2025</span>
-                  <p class="news-card-text">Presented the AURA paper and organized a SIG at CSCW 2025 in Bergen, Norway</p>
+                  <p class="news-card-text">Presented the AURA paper and organized a SIG at CSCW 2025</p>
+                  <div class="news-card-divider"></div>
+                  <span class="news-card-location">📍 Bergen, Norway</span>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Jun 2025</span>
-                  <p class="news-card-text">Served as session chair at Alt FAccT 2025 in New York City</p>
+                  <p class="news-card-text">Served as session chair at Alt FAccT 2025</p>
+                  <div class="news-card-divider"></div>
+                  <span class="news-card-location">📍 New York City, NY</span>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">May 2025</span>
-                  <p class="news-card-text">Organized a red-teaming workshop in Washington, D.C. for APS 2025</p>
+                  <p class="news-card-text">Organized a red-teaming workshop for APS 2025</p>
+                  <div class="news-card-divider"></div>
+                  <span class="news-card-location">📍 Washington, D.C.</span>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Nov 2024</span>
                   <p class="news-card-text">Organized "The Human Factor in AI Red-Teaming" workshop at CSCW 2024</p>
+                  <div class="news-card-divider"></div>
+                  <span class="news-card-location">📍 San Jose, CA</span>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Oct 2024</span>
                   <p class="news-card-text">Selected to attend CAMLIS as part of NIST ARIA in collaboration with Humane Intelligence</p>
+                  <div class="news-card-divider"></div>
+                  <span class="news-card-location">📍 Washington, D.C.</span>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Sep 2024</span>
                   <p class="news-card-text">Started my Ph.D. at Carnegie Mellon University HCII</p>
+                  <div class="news-card-divider"></div>
+                  <span class="news-card-location">📍 Pittsburgh, PA</span>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">May 2024</span>
                   <p class="news-card-text">Graduated with B.S. Computer Science from University of Minnesota</p>
+                  <div class="news-card-divider"></div>
+                  <span class="news-card-location">📍 Minneapolis, MN</span>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Apr 2024</span>
                   <p class="news-card-text">Awarded the National Science Foundation (NSF) Graduate Research Fellowship Program (GRFP)</p>
+                  <div class="news-card-divider"></div>
+                  <span class="news-card-location">📍 Remote</span>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Oct 2023</span>
-                  <p class="news-card-text">Attended my first CSCW in Minneapolis, presenting the poster "#Pragmatic or #Clinical"</p>
+                  <p class="news-card-text">Attended my first CSCW, presenting the poster "#Pragmatic or #Clinical"</p>
+                  <div class="news-card-divider"></div>
+                  <span class="news-card-location">📍 Minneapolis, MN</span>
                 </div>
               </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Jun 2023</span>
-                  <p class="news-card-text">Started an internship in Seattle, WA at Microsoft Research</p>
+                  <p class="news-card-text">Started an internship at Microsoft Research</p>
+                  <div class="news-card-divider"></div>
+                  <span class="news-card-location">📍 Seattle, WA</span>
                 </div>
               </div>
             </div>
