@@ -902,14 +902,7 @@ body {
 }
 
 .project-pub-entry {
-  border-bottom: 1px solid var(--teal-soft);
   padding-bottom: 0.9rem;
-  margin-bottom: 0.1rem;
-}
-
-.project-pub-entry:last-child {
-  border-bottom: none;
-  padding-bottom: 0;
 }
 
 .project-pub-entry .pub-title {
