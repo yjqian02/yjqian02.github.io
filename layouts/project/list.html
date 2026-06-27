@@ -32,27 +32,39 @@
               {{ $slug := . }}
               {{ $pub := index (where site.RegularPages "File.Dir" (printf "publication/%s/" $slug)) 0 }}
               {{ with $pub }}
-              {{ $pubUrl := "" }}
-              {{ with .Params.url_pdf }}{{ if . }}{{ $pubUrl = . }}{{ end }}{{ end }}
-              {{ if not $pubUrl }}{{ with .Params.url_source }}{{ if . }}{{ $pubUrl = . }}{{ end }}{{ end }}{{ end }}
-              {{ if not $pubUrl }}{{ with .Params.url_video }}{{ if . }}{{ $pubUrl = . }}{{ end }}{{ end }}{{ end }}
-              {{ if $pubUrl }}
-              <a class="project-pub-row" href="{{ $pubUrl }}" target="_blank" rel="noopener">
-              {{ else }}
-              <div class="project-pub-row">
+              {{ $typeLabel := "" }}
+              {{ $typeClass := "" }}
+              {{ with .Params.publication_types }}
+                {{ $t := index . 0 }}
+                {{ if eq $t "article-journal" }}{{ $typeLabel = "Journal" }}{{ $typeClass = "badge-journal" }}
+                {{ else if eq $t "paper-conference" }}{{ $typeLabel = "Conference" }}{{ $typeClass = "badge-conference" }}
+                {{ else if eq $t "chapter" }}{{ $typeLabel = "Workshop" }}{{ $typeClass = "badge-workshop" }}
+                {{ else if eq $t "manuscript" }}{{ $typeLabel = "Preprint" }}{{ $typeClass = "badge-preprint" }}
+                {{ end }}
               {{ end }}
-                <span class="project-pub-title">{{ .Title }}</span>
-                <span class="project-pub-meta">
-                  {{ with .Params.publication_types }}
-                    {{ $t := index . 0 }}
-                    {{ if eq $t "article-journal" }}Journal{{ else if eq $t "paper-conference" }}Conference{{ else if eq $t "chapter" }}Workshop{{ else if eq $t "manuscript" }}Preprint{{ end }}
-                  {{ end }}
-                  {{ $vs := .Params.venue_short_override | default .Params.venue_short }}
-                  {{ if $vs }} · {{ $vs }}{{ end }}
-                  {{ if .Date }} · {{ .Date.Format "2006" }}{{ end }}
-                </span>
-                {{ with .Params.publication }}<span class="project-pub-venue">{{ . | markdownify }}</span>{{ end }}
-              {{ if $pubUrl }}</a>{{ else }}</div>{{ end }}
+              {{ $primaryUrl := "" }}
+              {{ with .Params.url_pdf }}{{ if . }}{{ $primaryUrl = . }}{{ end }}{{ end }}
+              {{ if not $primaryUrl }}{{ with .Params.url_source }}{{ if . }}{{ $primaryUrl = . }}{{ end }}{{ end }}{{ end }}
+              {{ if not $primaryUrl }}{{ with .Params.url_video }}{{ if . }}{{ $primaryUrl = . }}{{ end }}{{ end }}{{ end }}
+              <article class="pub-entry project-pub-entry">
+                <div class="pub-body">
+                  <div class="pub-meta-top">
+                    {{ if $typeLabel }}<span class="pub-badge {{ $typeClass }}">{{ $typeLabel }}</span>{{ end }}
+                    {{ $vs := .Params.venue_short_override | default .Params.venue_short }}
+                    {{ if $vs }}<span class="venue-short-tag">{{ $vs }}</span>{{ end }}
+                    {{ with .Params.publication }}<span class="pub-venue">{{ . | markdownify }}</span>{{ end }}
+                  </div>
+                  <h3 class="pub-title">
+                    {{ if $primaryUrl }}<a href="{{ $primaryUrl }}" target="_blank" rel="noopener">{{ .Title }}</a>{{ else }}{{ .Title }}{{ end }}
+                  </h3>
+                  <p class="pub-authors">{{ with .Params.authors }}{{ delimit . ", " }}{{ end }}</p>
+                  <div class="pub-actions">
+                    {{ with .Params.url_pdf }}{{ if . }}<a href="{{ . }}" class="pub-btn pub-btn-pdf" target="_blank" rel="noopener">PDF</a>{{ end }}{{ end }}
+                    {{ with .Params.url_video }}{{ if . }}<a href="{{ . }}" class="pub-btn pub-btn-video" target="_blank" rel="noopener">Video</a>{{ end }}{{ end }}
+                    {{ with .Params.url_source }}{{ if . }}<a href="{{ . }}" class="pub-btn pub-btn-source" target="_blank" rel="noopener">Website</a>{{ end }}{{ end }}
+                  </div>
+                </div>
+              </article>
               {{ end }}
               {{ end }}
             </div>
