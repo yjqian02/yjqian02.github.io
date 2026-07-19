@@ -15,7 +15,7 @@ sections:
       text: |-
         <div class="homepage-hero">
           <div class="hero-left">
-            <img src="/media/alice-avatar.jpg" alt="Alice Qian" class="hero-avatar">
+            <img src="/media/alice-avatar.png" alt="Alice Qian" class="hero-avatar">
             <div class="hero-identity">
               <h1 class="hero-name">Alice Qian</h1>
               <p class="hero-role">Ph.D. Student · <a href="https://hcii.cmu.edu">CMU HCII</a></p>
