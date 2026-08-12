@@ -18,7 +18,7 @@ sections:
             <img src="/media/alice-avatar.png" alt="Alice Qian" class="hero-avatar">
             <div class="hero-identity">
               <h1 class="hero-name">Alice Qian</h1>
-              <p class="hero-role">Ph.D. Student · <a href="https://hcii.cmu.edu">CMU HCII</a></p>
+              <p class="hero-role">Ph.D. Student <a href="https://hcii.cmu.edu">CMU HCII</a></p>
             </div>
             <nav class="hero-links">
               <a href="mailto:aqzhang@andrew.cmu.edu">Email</a>
@@ -56,6 +56,7 @@ sections:
                       <span class="news-card-date">Jul 2026</span>
                       <p class="news-card-text">Organized a workshop "Where to Put the Human: Designing HITL vs. HOTL" and panel "Beyond the Algorithm: How AI Is Reshaping Trust & Safety Operations" at TrustCon 2026</p>
                       <div class="news-card-divider"></div>
+                      <span class="news-card-venue">TrustCon 2026</span>
                       <span class="news-card-location">🇺🇸 San Francisco, CA</span>
                     </div>
                   </div>
@@ -93,6 +94,7 @@ sections:
                   <span class="news-card-date">Jun 2026</span>
                   <p class="news-card-text">Attended my first FAccT, organizing a CRAFT workshop on ethical curation of data for foundation models</p>
                   <div class="news-card-divider"></div>
+                  <span class="news-card-venue">FAccT 2026</span>
                   <span class="news-card-location">🇨🇦 Montreal, Canada</span>
                 </div>
               </div>
@@ -101,6 +103,7 @@ sections:
                   <span class="news-card-date">Apr 2026</span>
                   <p class="news-card-text">Attended my first CHI, presenting a paper "Worker Discretion Advised" and organizing the HEARTS workshop</p>
                   <div class="news-card-divider"></div>
+                  <span class="news-card-venue">CHI 2026</span>
                   <span class="news-card-location">🇪🇸 Barcelona, Spain</span>
                 </div>
               </div>
@@ -109,6 +112,7 @@ sections:
                   <span class="news-card-date">Oct 2025</span>
                   <p class="news-card-text">Presented the AURA paper and organized a SIG at CSCW 2025</p>
                   <div class="news-card-divider"></div>
+                  <span class="news-card-venue">CSCW 2025</span>
                   <span class="news-card-location">🇳🇴 Bergen, Norway</span>
                 </div>
               </div>
@@ -117,6 +121,7 @@ sections:
                   <span class="news-card-date">Jun 2025</span>
                   <p class="news-card-text">Served as session chair at Alt FAccT 2025</p>
                   <div class="news-card-divider"></div>
+                  <span class="news-card-venue">Alt FAccT 2025</span>
                   <span class="news-card-location">🇺🇸 New York City, NY</span>
                 </div>
               </div>
@@ -125,6 +130,7 @@ sections:
                   <span class="news-card-date">May 2025</span>
                   <p class="news-card-text">Organized a red-teaming workshop for APS 2025</p>
                   <div class="news-card-divider"></div>
+                  <span class="news-card-venue">APS 2025</span>
                   <span class="news-card-location">🇺🇸 Washington, D.C.</span>
                 </div>
               </div>
@@ -133,6 +139,7 @@ sections:
                   <span class="news-card-date">Nov 2024</span>
                   <p class="news-card-text">Organized "The Human Factor in AI Red-Teaming" workshop at CSCW 2024</p>
                   <div class="news-card-divider"></div>
+                  <span class="news-card-venue">CSCW 2024</span>
                   <span class="news-card-location">🇨🇷 San José, Costa Rica</span>
                 </div>
               </div>
@@ -141,6 +148,7 @@ sections:
                   <span class="news-card-date">Oct 2024</span>
                   <p class="news-card-text">Selected to attend CAMLIS as part of NIST ARIA in collaboration with Humane Intelligence</p>
                   <div class="news-card-divider"></div>
+                  <span class="news-card-venue">CAMLIS 2024</span>
                   <span class="news-card-location">🇺🇸 Washington, D.C.</span>
                 </div>
               </div>
@@ -173,6 +181,7 @@ sections:
                   <span class="news-card-date">Oct 2023</span>
                   <p class="news-card-text">Attended my first CSCW, presenting the poster "#Pragmatic or #Clinical"</p>
                   <div class="news-card-divider"></div>
+                  <span class="news-card-venue">CSCW 2023</span>
                   <span class="news-card-location">🇺🇸 Minneapolis, MN</span>
                 </div>
               </div>
