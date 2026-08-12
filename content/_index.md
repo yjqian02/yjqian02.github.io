@@ -76,6 +76,15 @@ sections:
                       <span class="news-card-location">🇺🇸 Washington, D.C.</span>
                     </div>
                   </div>
+                  <div class="news-card upcoming-card">
+                    <div class="news-card-body">
+                      <span class="news-card-date">Nov 2026</span>
+                      <p class="news-card-text">Attending CSCW 2026</p>
+                      <div class="news-card-divider"></div>
+                      <span class="news-card-venue">CSCW 2026</span>
+                      <span class="news-card-location">🇺🇸 Salt Lake City, UT</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="news-subcol recent-col">
