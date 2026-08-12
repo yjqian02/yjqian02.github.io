@@ -65,7 +65,6 @@ sections:
                       <span class="news-card-date">Aug 2026</span>
                       <p class="news-card-text">Attending Mensch und Computer 2026</p>
                       <div class="news-card-divider"></div>
-                      <span class="news-card-venue">Mensch und Computer 2026</span>
                       <span class="news-card-location">🇩🇪 Duisburg, Germany</span>
                     </div>
                   </div>
@@ -74,7 +73,6 @@ sections:
                       <span class="news-card-date">Oct 2026</span>
                       <p class="news-card-text">Attending HCOMP 2026</p>
                       <div class="news-card-divider"></div>
-                      <span class="news-card-venue">HCOMP 2026</span>
                       <span class="news-card-location">🇺🇸 Washington, D.C.</span>
                     </div>
                   </div>
