@@ -59,6 +59,14 @@ sections:
                       <span class="news-card-location">🇺🇸 San Francisco, CA</span>
                     </div>
                   </div>
+                  <div class="news-card upcoming-card">
+                    <div class="news-card-body">
+                      <span class="news-card-date">Aug 2026</span>
+                      <p class="news-card-text">Attending Mensch und Computer 2026</p>
+                      <div class="news-card-divider"></div>
+                      <span class="news-card-location">🇩🇪 Duisburg, Germany</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="news-subcol recent-col">
