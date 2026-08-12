@@ -67,6 +67,14 @@ sections:
                       <span class="news-card-location">🇩🇪 Duisburg, Germany</span>
                     </div>
                   </div>
+                  <div class="news-card upcoming-card">
+                    <div class="news-card-body">
+                      <span class="news-card-date">Oct 2026</span>
+                      <p class="news-card-text">Attending HCOMP 2026</p>
+                      <div class="news-card-divider"></div>
+                      <span class="news-card-location">🇺🇸 Washington, D.C.</span>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="news-subcol recent-col">
