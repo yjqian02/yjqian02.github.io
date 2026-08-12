@@ -95,7 +95,7 @@ sections:
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Jul 2026</span>
-                  <p class="news-card-text">Started an internship with RC-Trust working with Jat Singh</p>
+                  <p class="news-card-text">Started an internship with Dr. Jat Singh in the Compliant and Accountable Systems Research Group</p>
                   <div class="news-card-divider"></div>
                   <span class="news-card-location">🇩🇪 Düsseldorf, Germany</span>
                 </div>
