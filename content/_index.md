@@ -18,7 +18,7 @@ sections:
             <img src="/media/alice-avatar.png" alt="Alice Qian" class="hero-avatar">
             <div class="hero-identity">
               <h1 class="hero-name">Alice Qian</h1>
-              <p class="hero-role">Ph.D. Student · <a href="https://hcii.cmu.edu">CMU HCII</a></p>
+              <p class="hero-role">Ph.D. Student <a href="https://hcii.cmu.edu">CMU HCII</a></p>
             </div>
             <nav class="hero-links">
               <a href="mailto:aqzhang@andrew.cmu.edu">Email</a>
@@ -56,7 +56,15 @@ sections:
                       <span class="news-card-date">Aug 2026</span>
                       <p class="news-card-text">Attending Mensch und Computer 2026</p>
                       <div class="news-card-divider"></div>
-                      <span class="news-card-venue">Mensch und Computer 2026</span>
+                      <span class="news-card-venue">TrustCon 2026</span>
+                      <span class="news-card-location">🇺🇸 San Francisco, CA</span>
+                    </div>
+                  </div>
+                  <div class="news-card upcoming-card">
+                    <div class="news-card-body">
+                      <span class="news-card-date">Aug 2026</span>
+                      <p class="news-card-text">Attending Mensch und Computer 2026</p>
+                      <div class="news-card-divider"></div>
                       <span class="news-card-location">🇩🇪 Duisburg, Germany</span>
                     </div>
                   </div>
@@ -65,17 +73,7 @@ sections:
                       <span class="news-card-date">Oct 2026</span>
                       <p class="news-card-text">Attending HCOMP 2026</p>
                       <div class="news-card-divider"></div>
-                      <span class="news-card-venue">HCOMP 2026</span>
                       <span class="news-card-location">🇺🇸 Washington, D.C.</span>
-                    </div>
-                  </div>
-                  <div class="news-card upcoming-card">
-                    <div class="news-card-body">
-                      <span class="news-card-date">Nov 2026</span>
-                      <p class="news-card-text">Attending CSCW 2026</p>
-                      <div class="news-card-divider"></div>
-                      <span class="news-card-venue">CSCW 2026</span>
-                      <span class="news-card-location">🇺🇸 Salt Lake City, UT</span>
                     </div>
                   </div>
                 </div>
@@ -83,15 +81,6 @@ sections:
               <div class="news-subcol recent-col">
                 <h3 class="bio-section-heading">Recent News</h3>
             <div class="news-scroll">
-              <div class="news-card">
-                <div class="news-card-body">
-                  <span class="news-card-date">Jul 2026</span>
-                  <p class="news-card-text">Organized a workshop "Where to Put the Human: Designing HITL vs. HOTL" and panel "Beyond the Algorithm: How AI Is Reshaping Trust & Safety Operations" at TrustCon 2026</p>
-                  <div class="news-card-divider"></div>
-                  <span class="news-card-venue">TrustCon 2026</span>
-                  <span class="news-card-location">🇺🇸 San Francisco, CA</span>
-                </div>
-              </div>
               <div class="news-card">
                 <div class="news-card-body">
                   <span class="news-card-date">Jul 2026</span>
