@@ -232,7 +232,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
-  max-height: 340px;
+  max-height: 220px;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--teal-soft) transparent;
