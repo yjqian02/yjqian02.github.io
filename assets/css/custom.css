@@ -232,6 +232,24 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
+  max-height: 340px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--teal-soft) transparent;
+  padding-right: 2px;
+}
+
+.news-upcoming-cards::-webkit-scrollbar {
+  width: 3px;
+}
+
+.news-upcoming-cards::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.news-upcoming-cards::-webkit-scrollbar-thumb {
+  background: var(--teal-soft);
+  border-radius: 2px;
 }
 
 .news-card.upcoming-card {
