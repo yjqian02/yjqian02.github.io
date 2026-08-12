@@ -53,8 +53,8 @@ sections:
                 <div class="news-upcoming-cards">
                   <div class="news-card upcoming-card">
                     <div class="news-card-body">
-                      <span class="news-card-date">Jul 2026</span>
-                      <p class="news-card-text">Organized a workshop "Where to Put the Human: Designing HITL vs. HOTL" and panel "Beyond the Algorithm: How AI Is Reshaping Trust & Safety Operations" at TrustCon 2026</p>
+                      <span class="news-card-date">Aug 2026</span>
+                      <p class="news-card-text">Attending Mensch und Computer 2026</p>
                       <div class="news-card-divider"></div>
                       <span class="news-card-venue">TrustCon 2026</span>
                       <span class="news-card-location">🇺🇸 San Francisco, CA</span>
